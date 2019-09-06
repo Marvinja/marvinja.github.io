@@ -1,0 +1,326 @@
+@font-face {
+  font-family: "Willowbody";
+  src: url("./fonts/willowbody_0-webfont.ttf") format("truetype");
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  border-top: 5px solid #0C90C1;
+  border-bottom: 5px solid #0C90C1;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Willowbody";
+  -webkit-text-stroke: 1.5px black;
+  color: white;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 2.2em;
+}
+
+canvas {
+  visibility: hidden;
+}
+
+.header {
+  background: #106695;
+  background: linear-gradient(0deg, #106695 0%, #034265 100%);
+}
+.header h2 {
+  text-shadow: -3px 3px 5px #0C90C1;
+  letter-spacing: -1px;
+}
+.header h2 span {
+  font-size: 0.4em;
+}
+
+.items {
+  background: #106695;
+  background: linear-gradient(0deg, #034265 0%, #106695 100%);
+}
+.items h2 {
+  text-shadow: -3px 3px 5px #0C90C1;
+  letter-spacing: -1px;
+}
+
+.content {
+  background-color: #102837;
+}
+
+.green {
+  color: #3AB119;
+}
+
+.blue {
+  color: #417CC1;
+}
+
+.purple {
+  color: #853DA4;
+}
+
+.orange {
+  color: #DEA42B;
+}
+
+.button {
+  text-align: center;
+  vertical-align: middle;
+  -webkit-clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);
+  clip-path: polygon(0% 20px, 20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.button-red {
+  background-color: #CD0104;
+}
+.button-red:hover {
+  background: #9a0103;
+}
+.button-red h3 {
+  color: #F7D21C;
+}
+
+.button-green {
+  background-color: #3AB119;
+}
+.button-green:hover {
+  background: #2b8413;
+}
+
+.button-blue {
+  background-color: #417CC1;
+}
+.button-blue:hover {
+  background: #33639c;
+}
+
+.button-purple {
+  background-color: #853DA4;
+}
+.button-purple:hover {
+  background: #672f7f;
+}
+
+.button-orange {
+  background-color: #DEA42B;
+}
+.button-orange:hover {
+  background: #b9871d;
+}
+
+#inventory h3 {
+  font-size: 1.5em;
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+}
+#inventory p {
+  font-family: "Willowbody";
+  -webkit-text-stroke: 0.5px black;
+  font-size: 1em;
+  color: white;
+}
+#inventory p b {
+  color: #74B0BA;
+  -webkit-text-stroke: 0.25px black;
+}
+
+#inventory-highlight h3 {
+  font-size: 1.5em;
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+#inventory-highlight h4 {
+  font-size: 1.2em;
+  -webkit-text-stroke: 1px black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+#inventory-highlight table {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+#inventory-highlight p {
+  font-family: "Willowbody";
+  -webkit-text-stroke: 0.5px black;
+  font-size: 1em;
+  color: white;
+}
+#inventory-highlight p b {
+  color: #74B0BA;
+  -webkit-text-stroke: 0.25px black;
+}
+
+.item td {
+  font-family: "Willowbody";
+  color: white;
+  border: 3px solid #1C1D22;
+  font-size: 0.9em;
+}
+.item tr, .item .gun-category {
+  background: #1C1D22;
+}
+.item .stats {
+  background: #313339;
+}
+.item .shootingModes td {
+  text-align: center;
+  color: #1C1D22;
+}
+.item .shootingModes .enabled {
+  color: white;
+}
+
+.item-background-green {
+  background: url("./img/item-background.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-green:hover {
+  background: url("./img/item-background-green.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item-background-blue {
+  background: url("./img/item-background.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-blue:hover {
+  background: url("./img/item-background-blue.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item-background-purple {
+  background: url("./img/item-background.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-purple:hover {
+  background: url("./img/item-background-purple.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item-background-orange {
+  background: url("./img/item-background.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-orange:hover {
+  background: url("./img/item-background-orange.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#Generate-Gun:hover {
+  content: url("./img/Generate Gun Highlight.png");
+}
+
+#Generate-Random-Gun:hover {
+  content: url("./img/Generate Random Gun Highlight.png");
+}
+
+.item-green h4 {
+  background: #3AB119;
+  padding: 0.5em;
+  margin-bottom: 0px;
+}
+.item-green h3 {
+  color: #3AB119;
+}
+.item-green table {
+  border: 10px solid #3AB119;
+  border-top: none;
+}
+
+.item-blue h4 {
+  background: #417CC1;
+  padding: 0.5em;
+  margin-bottom: 0px;
+}
+.item-blue h3 {
+  color: #417CC1;
+}
+.item-blue table {
+  border: 10px solid #417CC1;
+  border-top: none;
+}
+
+.item-purple h4 {
+  background: #853DA4;
+  padding: 0.5em;
+  margin-bottom: 0px;
+}
+.item-purple h3 {
+  color: #853DA4;
+}
+.item-purple table {
+  border: 10px solid #853DA4;
+  border-top: none;
+}
+
+.item-orange h4 {
+  background: #DEA42B;
+  padding: 0.5em;
+  margin-bottom: 0px;
+}
+.item-orange h3 {
+  color: #DEA42B;
+}
+.item-orange table {
+  border: 10px solid #DEA42B;
+  border-top: none;
+}
+
+#inventory-highlight {
+  min-height: 800px;
+}
+@media screen and (max-width: 1000px) {
+  #inventory-highlight {
+    min-height: 600px;
+  }
+}
+
+.form-control {
+  font-family: "Willowbody";
+  border-radius: 0px;
+  color: white;
+  background: #13548E;
+  border: black;
+  font-style: italic;
+  font-size: 1.5em;
+  text-shadow: -2px 2px 5px #0C90C1;
+  -webkit-text-stroke: 0.8px black;
+}
+.form-control:focus {
+  background: #13548E;
+  color: white;
+  border: 2px solid #EFE565;
+}
+.form-control option {
+  border: 1px solid #EFE565;
+}
+
+/*# sourceMappingURL=style.css.map */

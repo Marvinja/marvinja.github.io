@@ -1,0 +1,114 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Savage Borderlands Loot Generator</title>
+  <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="js/item.js"></script>
+  <script language="javascript" type="text/javascript" src="js/gun.js"></script>
+  <script language="javascript" type="text/javascript" src="js/pistol.js"></script>
+  <script language="javascript" type="text/javascript" src="js/smg.js"></script>
+  <script language="javascript" type="text/javascript" src="js/assaultrifle.js"></script>
+  <script language="javascript" type="text/javascript" src="js/sniperrifle.js"></script>
+  <script language="javascript" type="text/javascript" src="js/shotgun.js"></script>
+  <script language="javascript" type="text/javascript" src="js/rocketlauncher.js"></script>
+  <script language="javascript" type="text/javascript" src="js/grenade.js"></script>
+  <script language="javascript" type="text/javascript" src="js/shield.js"></script>
+  <script language="javascript" type="text/javascript" src="Loot_Generator.js"></script>
+  <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+    <div class="row header">
+        <div class="col-md-12"><h2 class="text-center my-5"><em>Savage Borderlands Loot Generator <span>v0.1</span> </em></h2></div>
+    </div>
+      <div class="row content">
+          <div class="offset-md-2 col-md-8">
+
+              <div class="row my-4 d-flex align-items-center">
+                <div class="col-md-6">
+                    <div class="row my-4 d-flex justify-content-end">
+                        <div class="col-md-6 mt-4">
+                          <select class="form-control" id="playerLevel">
+                            <option value="Novice">Novice</option>
+                            <option value="Seasoned">Seasoned</option>
+                            <option value="Veteran">Veteran</option>
+                            <option value="Heroic">Heroic</option>
+                            <option value="Legendary">Legendary</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 mt-4">
+                          <select class="form-control" id="category">
+                            <option value="Pistol">Pistol</option>
+                            <option value="SMG">SMG</option>
+                            <option value="Assault Rifle">Assault Rifle</option>
+                            <option value="Sniper Rifle">Sniper Rifle</option>
+                            <option value="Shotgun">Shotgun</option>
+                            <option value="Rocket Launcher">Rocket Launcher</option>
+                            <option value="Shield">Shield</option>
+                            <option value="Grenade">Grenade</option>
+                          </select>
+                        </div>
+                      <div class="col-md-12 mt-4">
+                          <a class="mx-auto d-block" onclick="Generate()"><img src="./img/Generate Gun.png" id="Generate-Gun" class="img-fluid"></a>
+                      </div>
+                      <div class="col-md-12 mt-4">
+                          <a class="mx-auto d-block" onclick="GenerateRandom()"><img src="./img/Generate Random Gun.png" id="Generate-Random-Gun" class="img-fluid"></a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row my-md-4 mb-sm-4 d-flex align-items-sm-start align-items-md-center" id="inventory-highlight">
+                  </div>
+                </div>
+              </div>
+
+              <!-- <h3 class="text-center my-4v">Item History</h3>
+
+              <div class="row my-4 overflow-auto" id="item-blocks">
+              </div>
+              <div class="row my-4" id="inventory">
+              </div> -->
+          </div>
+      </div>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row content items">
+          <div class="offset-md-2 col-md-8">
+
+              <h2 class="text-center my-4">Item History</h2>
+
+              <div class="row my-4 overflow-auto" id="item-blocks">
+                  <!-- <a  class="col-md-2 item-background-green"><img src="./img/categories/Pistol Green.png" class="img-fluid m-4 mx-auto d-block"></a> -->
+              </div>
+              <div class="row my-4" id="inventory">
+              </div>
+          </div>
+      </div>
+
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+    $('body').tooltip({
+    selector: '[data-toggle="tooltip"]'
+    });
+    </script>
+</body>
+</html>

@@ -65,6 +65,7 @@ class Item {
           `<a href="#inventory-highlight"><img src="./img/categories/${this.category} ${this.quality}.png" class="img-fluid m-4 mx-auto d-block" onclick="SetHighlight('${this.id}')"></a>`
       );
       itemBlock.addClass(`col-md-2 col-6 mt-4 item-background-${this.quality}`);
+      itemBlock.attribute('tabindex', items.length);
       itemBlock.parent(parent);
   }
 }

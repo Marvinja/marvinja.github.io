@@ -153,18 +153,22 @@ canvas {
 .item-background-green {
     background: url('./img/item-background.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
     &:hover { background: url('./img/item-background-green.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+    &:focus { background: url('./img/item-background-green.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
 }
 .item-background-blue {
     background: url('./img/item-background.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
     &:hover { background: url('./img/item-background-blue.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+    &:focus { background: url('./img/item-background-blue.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
 }
 .item-background-purple {
     background: url('./img/item-background.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
     &:hover { background: url('./img/item-background-purple.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+    &:focus { background: url('./img/item-background-purple.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
 }
 .item-background-orange {
     background: url('./img/item-background.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
     &:hover { background: url('./img/item-background-orange.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+    &:focus { background: url('./img/item-background-orange.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
 }
 
 #Generate-Gun:hover {

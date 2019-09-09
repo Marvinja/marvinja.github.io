@@ -194,6 +194,12 @@ canvas {
   background-repeat: no-repeat;
   background-position: center;
 }
+.item-background-green:focus {
+  background: url("./img/item-background-green.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .item-background-blue {
   background: url("./img/item-background.png");
@@ -202,6 +208,12 @@ canvas {
   background-position: center;
 }
 .item-background-blue:hover {
+  background: url("./img/item-background-blue.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-blue:focus {
   background: url("./img/item-background-blue.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -220,6 +232,12 @@ canvas {
   background-repeat: no-repeat;
   background-position: center;
 }
+.item-background-purple:focus {
+  background: url("./img/item-background-purple.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .item-background-orange {
   background: url("./img/item-background.png");
@@ -228,6 +246,12 @@ canvas {
   background-position: center;
 }
 .item-background-orange:hover {
+  background: url("./img/item-background-orange.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.item-background-orange:focus {
   background: url("./img/item-background-orange.png");
   background-size: contain;
   background-repeat: no-repeat;

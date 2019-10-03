@@ -83,7 +83,12 @@ canvas {
 .button-purple { background-color: $purple; &:hover { background: darken($purple,10%);} }
 .button-orange { background-color: $orange; &:hover { background: darken($orange,10%);} }
 
-
+.highlight {
+    background: rgb(16,102,149);
+    background: linear-gradient(0deg, rgba(60, 60, 60,1) 0%, rgba(0, 0, 0,1) 100%);
+    padding: 0.5em;
+    a { color: white; font-weight: bold; }
+}
 
 #inventory {
     h3 {

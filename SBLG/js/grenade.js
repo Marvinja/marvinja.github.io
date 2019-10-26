@@ -26,12 +26,12 @@ class Grenade extends Item {
             this.Improvements(this.RollX(20));
         }
 
-        //Initialise Name
+        //Initialise fullname
         if (this.specialDamageType != null) {
-            if (this.manufacturer == "Vladof") { this.name = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.name}`;  }
-            else { this.name = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.specialDamageType} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`; }
+            if (this.manufacturer == "Vladof") { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.fullname}`;  }
+            else { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.specialDamageType} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`; }
         } else {
-          this.name = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`;
+          this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`;
         }
 
         this.RemoveHTML();
@@ -59,9 +59,9 @@ class Grenade extends Item {
     }
 
     InitVladofSpecialDamage(num) {
-        if (num <= 2) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.name = "Cloud"; }
-        else if  (num > 2 && num <= 4) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.name = "Tesla"; }
-        else { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.name = "Fire Burst"; }
+        if (num <= 2) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.fullname = "Cloud"; }
+        else if  (num > 2 && num <= 4) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.fullname = "Tesla"; }
+        else { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.fullname = "Fire Burst"; }
     }
 
     InitSpecialProperties() {
@@ -156,7 +156,7 @@ class Grenade extends Item {
               `<h4 class="text-right">${this.playerLevel}</h4>
               <table width="100%" cellpadding="5">
                   <tr>
-                      <td colspan="3" align="center"><h3 class="${this.quality.toLowerCase()}">${this.name}</h3></td>
+                      <td colspan="3" align="center"><h3 class="${this.quality.toLowerCase()}">${this.fullname}</h3></td>
                   </tr>
                   <tr class="stats">
                       <td width="40%" align="center">${this.prefix}</td>

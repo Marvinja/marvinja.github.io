@@ -17,7 +17,7 @@ class Shotgun extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.name = `${this.manufacturer} ${this.prefix}`;
+    this.fullname = `${this.manufacturer} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -174,7 +174,7 @@ class Shotgun extends Gun {
         else { this.Improvements(7); }
       }
       else if (num > 16 && num <= 19) {
-        if (this.barrels < 4 && this.barrels < this.clip) { this.barrels ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Multi-barreled shotguns follow the standard rules for shotguns, but all the barrels must be fired at once. A shotgun can never have more barrels than its Clip Capacity."); } this.improvementList.push("Barrels"); }
+        if (this.barrels < 4 && this.barrels < this.clip) { this.barrels ++; this.rateOfFire ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Multi-barreled shotguns follow the standard rules for shotguns, but all the barrels must be fired at once. A shotgun can never have more barrels than its Clip Capacity."); } this.improvementList.push("Barrels"); }
         else if (this.rangeLimit < 2) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       }
@@ -212,7 +212,7 @@ class Shotgun extends Gun {
           <h4 class="text-right">${this.playerLevel}</h4>
           <table width="100%" cellpadding="5" >
               <tr>
-                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.name}</h3></td>
+                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.fullname}</h3></td>
               </tr>
               <tr class="stats">
                   <td colspan="2" width="33%" align="center">${this.model}</td>

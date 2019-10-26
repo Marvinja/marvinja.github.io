@@ -18,7 +18,7 @@ class AssaultRifle extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.name = `${this.manufacturer} ${this.prefix}`;
+    this.fullname = `${this.manufacturer} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -199,7 +199,7 @@ class AssaultRifle extends Gun {
         if (!this.specialDamageType) {
           this.InitialiseSpecialDamageType(num); this.improvementList.push(`Initialise Special Damage`);
         } else {
-          this.ImproveSpecialDamage(); this.improvementList.push("Special Damage");
+          this.ImproveSpecialDamage();
         }
       }
       else if (num > 12 && num <= 14) {
@@ -232,9 +232,9 @@ class AssaultRifle extends Gun {
   }
 
   ImproveSpecialDamage() {
-    if (this.specialDamageType == "Corrosive") { if (this.specialDamage < 3) { this.specialDamage ++; } else { this.Improvements(7); }}
-    if (this.specialDamageType == "Shock") { if (this.specialDamage < 3) { this.specialDamage ++; } else { this.Improvements(1); }}
-    if (this.specialDamageType == "Incendiary") { if (this.incendiaryDamageLevel < 3) { this.incendiaryDamageLevel ++; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); } else { this.Improvements(7); }}
+    if (this.specialDamageType == "Corrosive") { if (this.specialDamage < 3) { this.specialDamage ++; this.improvementList.push("Special Damage"); } else { this.Improvements(7); }}
+    if (this.specialDamageType == "Shock") { if (this.specialDamage < 3) { this.specialDamage ++; this.improvementList.push("Special Damage"); } else { this.Improvements(1); }}
+    if (this.specialDamageType == "Incendiary") { if (this.incendiaryDamageLevel < 3) { this.incendiaryDamageLevel ++; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.improvementList.push("Special Damage"); } else { this.Improvements(7); }}
     if (this.specialDamageType == "Slag" || this.specialDamageType == "Explosive" || this.specialProperties.includes("Heavy Weapon")) { this.Improvements(1); }
   }
 
@@ -260,7 +260,7 @@ class AssaultRifle extends Gun {
           <h4 class="text-right">${this.playerLevel}</h4>
           <table width="100%" cellpadding="5" >
               <tr>
-                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.name}</h3></td>
+                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.fullname}</h3></td>
               </tr>
               <tr class="stats">
                   <td colspan="2" width="33%" align="center">${this.model}</td>

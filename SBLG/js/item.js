@@ -6,7 +6,10 @@ class Item {
     this.manufacturer;
     this.model;
     this.prefix;
-    this.name;
+    this.fullname;
+    this.subPrefixArray = [];
+    this.subPrefix;
+    this.elementalSubPrefix;
     this.improvements = this.SetImprovements();
     this.improvementList = [];
     this.specialProperties = [];

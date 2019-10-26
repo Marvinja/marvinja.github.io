@@ -26,9 +26,9 @@ class Shield extends Item {
 
     //Initialise Name
     if (this.specialDamageType != null) {
-      this.name = this.specialDamageType + " " + this.manufacturer + " " + this.prefix;
+      this.fullname = this.specialDamageType + " " + this.manufacturer + " " + this.prefix;
     } else {
-      this.name = this.manufacturer + " " + this.prefix;
+      this.fullname = this.manufacturer + " " + this.prefix;
     }
 
     this.RemoveHTML();
@@ -38,7 +38,7 @@ class Shield extends Item {
 
   display(x, y) {
     fill(255);
-    text("Name: " + this.name, x, y);
+    text("Name: " + this.fullname, x, y);
     text("Type: " + this.category, x, y+10);
 
     //Stats
@@ -297,7 +297,7 @@ class Shield extends Item {
           `<h4 class="text-right">${this.playerLevel}</h4>
           <table width="100%" cellpadding="5">
               <tr>
-                  <td colspan="3" align="center"><h3 class="${this.quality.toLowerCase()}">${this.name}</h3></td>
+                  <td colspan="3" align="center"><h3 class="${this.quality.toLowerCase()}">${this.fullname}</h3></td>
               </tr>
               <tr class="stats">
                   <td width="33%" align="center">${this.quality}</td>

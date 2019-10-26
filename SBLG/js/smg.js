@@ -16,7 +16,7 @@ class SMG extends Gun {
     for (var i = 0; i < this.improvements; i ++) {
         this.Improvements(this.RollX(20));
     }
-    this.name = `${this.specialDamageType ? this.InitialiseSpecialDamageName() : "" } ${this.manufacturer} ${this.prefix}`;
+    this.fullname = `${this.specialDamageType ? this.InitialiseSpecialDamageName() : "" } ${this.manufacturer} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -229,7 +229,7 @@ class SMG extends Gun {
           <h4 class="text-right">${this.playerLevel}</h4>
           <table width="100%" cellpadding="5" >
               <tr>
-                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.name}</h3></td>
+                  <td colspan="6" align="center"><h3 class="${this.quality.toLowerCase()}">${this.fullname}</h3></td>
               </tr>
               <tr class="stats">
                   <td colspan="2" width="33%" align="center">${this.model}</td>

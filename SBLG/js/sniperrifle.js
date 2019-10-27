@@ -21,7 +21,11 @@ class SniperRifle extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.fullname = `${this.manufacturer} ${this.prefix}`;
+    if (this.specialDamageType && !this.elementalSubPrefix) {
+      this.AddSubPrefix(this.specialDamageType);
+    }
+    this.subPrefix = this.SelectSubPrefix();
+    this.fullname = `${!this.elementalSubPrefix ? "" : this.elementalSubPrefix} ${this.subPrefix} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -132,22 +136,22 @@ class SniperRifle extends Gun {
 
   Improvements(num) {
       if (num <= 2) {
-        if (this.damageLimit < 12) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamage(this.damageLevel); this.improvementList.push("Damage"); }
+        if (this.damageLimit < 12) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamage(this.damageLevel); this.improvementList.push("Damage"); this.AddSubPrefix("Damage"); }
         else if (this.criticalLevel < 4) { this.Improvements(13); }
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 2 && num <= 4) {
-          if (this.rangeLevel < 11) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); }
+          if (this.rangeLevel < 11) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); this.AddSubPrefix("Range"); }
           else if (this.criticalLevel < 4) { this.Improvements(13); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 4 && num <= 6) {
-          if (this.clipLevel < 1) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip");}
+          if (this.clipLevel < 1) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip"); this.AddSubPrefix("Clip"); }
           else if (this.ShootingModeLevel < 2) { this.Improvements(18); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 6 && num <= 8) {
-        if(this.apLimit < 4) { this.ap ++; this.improvementList.push("AP"); }
+        if(this.apLimit < 4) { this.ap ++; this.improvementList.push("AP"); this.AddSubPrefix("AP"); }
         else if (this.damageLimit < 2) { this.Improvements(9); }
         else if (this.criticalDamage < 4) { this.Improvements(3); }
         else { this.Improvements(this.RollX(20)); }
@@ -164,7 +168,7 @@ class SniperRifle extends Gun {
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 12 && num <= 17) {
-        if (this.criticalLevel < 4) { this.criticalLevel ++; this.critical = this.SetCritical(this.criticalLevel); this.improvementList.push("Critical"); }
+        if (this.criticalLevel < 4) { this.criticalLevel ++; this.critical = this.SetCritical(this.criticalLevel); this.improvementList.push("Critical"); this.AddSubPrefix("Critical");  }
         else if (this.rangeLimit < 2) { this.Improvements(3); }
         else { this.Improvements(this.RollX(20)); }
       }
@@ -176,11 +180,12 @@ class SniperRifle extends Gun {
           }
           this.AddShootingMode(this.shootingModeLevel);
           this.improvementList.push("Shooting Mode");
+          this.AddSubPrefix("Shooting Mode");
         } else if (this.clipLevel < 1) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       }
       else {
-        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); }
+        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); this.AddSubPrefix("Bayonet");  }
         else { this.Improvements(this.RollX(20)); }
       }
   }
@@ -194,11 +199,11 @@ class SniperRifle extends Gun {
   }
 
   InitialiseSpecialDamageType(num) {
-    if (num <= 4) { this.specialDamageType = "Corrosive"; this.specialDamage = 1;}
-    else if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; }
-    else if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); }
-    else if (num > 12 && num <= 16) { this.specialDamageType = "Slag"; }
-    else { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor.") }
+    if (num <= 4) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
+    else if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    else if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
+    else if (num > 12 && num <= 16) { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
+    else { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor."); this.AddSubPrefix("Heavy Weapon");  }
   }
 
   SniperRifleStatBlock() {
@@ -292,6 +297,77 @@ class SniperRifle extends Gun {
     div.id(`item-highlight`);
     var inventory = select('#inventory-highlight');
     div.parent(inventory);
+  }
+
+  AddSubPrefix(improvement) {
+    if (["AP", "Damage", "Heavy Weapon"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Pacifying"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Auditing"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Skookum"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Barking"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Gromky"); }
+    } else if (improvement = "Bayonet") {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Cartel"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Contingent"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Ti'kope"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Sublime"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Britva"); }
+    } else if (improvement == "Clip") {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Operational"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Resource"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Hyiu"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Monstrous"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Bolshy"); }
+    } else if (improvement == "Critical") {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Night"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Venture"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Tumtum"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Gentleman's"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Razrez"); }
+    } else if (improvement == "Corrosive") {
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Nerve"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Residual"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Bumblebroth"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Splodge"; }
+    } else if (improvement == "Incendiary") {
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Phosphor"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Thermogenic"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Scarlet"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Phospher"; }
+    } else if (improvement == "Shock") {
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Shock"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Energy"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Zooks"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Strack"; }
+    } else if (improvement == "Slag") {
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Diffusion"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Deueed"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Bolnoy"; }
+    } else if (improvement == "Range") {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Surgical"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Longitudinal"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Siah-siah"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Dandy"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Zammeehat"); }
+    } else if (improvement == "Shooting Mode") {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Suppressive"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Operational"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Klook"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Branbury"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Skorry"); }
+    } else {
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Liquid"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Cohesion"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Chikamin"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Fashionable"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Dobby"); }
+    }
+  }
+
+  SelectSubPrefix() {
+    var s_prefix = this.subPrefixArray[int(random()*this.subPrefixArray.length-1)];
+    console.log(s_prefix);
+    return s_prefix ? s_prefix : "";
   }
 
 } //End

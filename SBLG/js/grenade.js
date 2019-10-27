@@ -27,11 +27,15 @@ class Grenade extends Item {
         }
 
         //Initialise fullname
-        if (this.specialDamageType != null) {
-            if (this.manufacturer == "Vladof") { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.fullname}`;  }
-            else { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.specialDamageType} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`; }
+        if (this.manufacturer == "Bandit") {
+          this.ConvertToBandit();
         } else {
-          this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`;
+          if (this.specialDamageType != null) {
+              if (this.manufacturer == "Vladof") { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.fullname}`;  }
+              else { this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.specialDamageType} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`; }
+          } else {
+            this.fullname = `${this.specialProperties[2] == "Sticky" ? "Sticky" : ""} ${this.delivery == "Standard"? "Lobbed" : this.delivery} ${this.prefix}`;
+          }
         }
 
         this.RemoveHTML();
@@ -141,6 +145,34 @@ class Grenade extends Item {
             else if (this.aoeLevel < 3){ this.Improvements(5); }
             else { this.Improvements(this.RollX(20)); }
         }
+    }
+
+    ConvertToBandit() {
+      var stickylobbed;
+      if (this.specialProperties[2] == "Sticky" && this.delivery == "Standard") {
+        stickylobbed = "Throw'n Stik";
+      } else if (this.specialProperties[2] != "Sticky" && this.delivery == "Standard") {
+        stickylobbed = "Throwin";
+      } else if (this.specialProperties[2] == "Sticky" && this.delivery != "Standard") {
+        stickylobbed = "Stiky";
+      } else {
+        stickylobbed = "";
+      }
+      if (this.specialDamageType != null) {
+        var banditSpecDamageType;
+          if (this.specialDamageType == "Corrosive") {
+            banditSpecDamageType = "Asidy";
+          } else if (this.specialDamageType == "Incendiary") {
+            banditSpecDamageType = "burnin";
+          } else if (this.specialDamageType == "Shock") {
+            banditSpecDamageType = "Lectrik";
+          } else {
+            banditSpecDamageType = "Sluj";
+          }
+          this.fullname = `${banditSpecDamageType} ${stickylobbed}  ${this.delivery != "Standard" ? this.delivery : ""} ${this.prefix}`;
+      } else {
+        this.fullname = `${stickylobbed} ${this.delivery != "Standard" ? this.delivery : ""} ${this.prefix}`;
+      }
     }
 
     GrenadeStatBlock() {

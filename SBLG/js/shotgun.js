@@ -17,7 +17,11 @@ class Shotgun extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.fullname = `${this.manufacturer} ${this.prefix}`;
+    if (this.specialDamageType && !this.elementalSubPrefix) {
+      this.AddSubPrefix(this.specialDamageType);
+    }
+    this.subPrefix = this.SelectSubPrefix();
+    this.fullname = `${!this.elementalSubPrefix ? "" : this.elementalSubPrefix} ${this.subPrefix} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -134,22 +138,22 @@ class Shotgun extends Gun {
 
   Improvements(num) {
       if (num <= 4) {
-        if (this.damageLevel < 3) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageShotgun(this.damageLevel); this.improvementList.push("Damage"); }
+        if (this.damageLevel < 3) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageShotgun(this.damageLevel); this.improvementList.push("Damage"); this.AddSubPrefix("Damage"); }
         else if (this.barrels < 4) { this.Improvements(17); }
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 4 && num <= 6) {
-          if (this.rangeLimit < 2) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); }
+          if (this.rangeLimit < 2) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); this.AddSubPrefix("Range"); }
           else if (this.aimLevel < 1) { this.Improvements(15); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num == 7) {
-          if (this.clipLevel < 3) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip");}
+          if (this.clipLevel < 3) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip"); this.AddSubPrefix("Clip"); }
           else if (this.barrels < 4) { this.Improvements(17); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 7 && num <= 9) {
-        if(this.criticalLevel < 4) { this.criticalLevel ++; this.critical = this.SetCritical(this.criticalLevel);this.improvementList.push("Critical"); }
+        if(this.criticalLevel < 4) { this.criticalLevel ++; this.critical = this.SetCritical(this.criticalLevel);this.improvementList.push("Critical"); this.AddSubPrefix("Critical"); }
         else if (this.damageLimit < 3) { this.Improvements(1); }
         else { this.Improvements(this.RollX(20)); }
       }
@@ -161,25 +165,25 @@ class Shotgun extends Gun {
         }
       }
       else if (num > 11 && num <= 13) {
-        if (!this.specialProperties.includes("Auto Shotgun")) { this.specialProperties.push("Auto Shotgun", "This shotgun can now use the rapid attack manoeuver."); this.improvementList.push("Auto Shotgun");}
+        if (!this.specialProperties.includes("Auto Shotgun")) { this.specialProperties.push("Auto Shotgun", "This shotgun can now use the rapid attack manoeuver."); this.improvementList.push("Auto Shotgun"); this.AddSubPrefix("Auto"); }
         else { this.Improvements(7); }
       }
       else if (num > 13 && num <= 15) {
-        if (this.aimLevel < 1) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); }
+        if (this.aimLevel < 1) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); this.AddSubPrefix("Aiming"); }
         else if (this.rangeLimit < 2) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num == 16) {
-        if (!this.specialProperties.includes("Rapid Reload")) { this.specialProperties.push("Rapid Reload", "A weapon that receives this Improvement allows its user to ignore any multi-action penalty that may be caused by reloading it."); this.improvementList.push("Rapid Reload"); }
+        if (!this.specialProperties.includes("Rapid Reload")) { this.specialProperties.push("Rapid Reload", "A weapon that receives this Improvement allows its user to ignore any multi-action penalty that may be caused by reloading it."); this.improvementList.push("Rapid Reload"); this.AddSubPrefix("Rapid Reload"); }
         else { this.Improvements(7); }
       }
       else if (num > 16 && num <= 19) {
-        if (this.barrels < 4 && this.barrels < this.clip) { this.barrels ++; this.rateOfFire ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Multi-barreled shotguns follow the standard rules for shotguns, but all the barrels must be fired at once. A shotgun can never have more barrels than its Clip Capacity."); } this.improvementList.push("Barrels"); }
+        if (this.barrels < 4 && this.barrels < this.clip) { this.barrels ++; this.rateOfFire ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Multi-barreled shotguns follow the standard rules for shotguns, but all the barrels must be fired at once. A shotgun can never have more barrels than its Clip Capacity."); } this.improvementList.push("Barrels"); this.AddSubPrefix("Barrels"); }
         else if (this.rangeLimit < 2) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       }
       else {
-        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); }
+        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); this.AddSubPrefix("Bayonet"); }
         else { this.Improvements(this.RollX(20)); }
       }
   }
@@ -193,10 +197,10 @@ class Shotgun extends Gun {
 
   InitialiseSpecialDamageType(num) {
     if (num <= 12) { this.specialDamageType = "Explosive"; }
-    else if (num > 12 && num <= 14) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; }
-    else if (num > 14 && num <= 16) { this.specialDamageType = "Shock"; this.specialDamage = 1; }
-    else if (num > 16 && num <= 18) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); }
-    else { this.specialDamageType = "Slag"; }
+    else if (num > 12 && num <= 14) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
+    else if (num > 14 && num <= 16) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    else if (num > 16 && num <= 18) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
+    else { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
   }
 
   ShotgunStatBlock() {
@@ -293,6 +297,74 @@ class Shotgun extends Gun {
 
     var inventory = select('#inventory-highlight');
     div.parent(inventory);
+  }
+
+  AddSubPrefix(improvement) {
+    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Sketer"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Potential"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Huntin'"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Original"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Potent"); }
+    } else if (["AP", "Damage", "Shooting Mode"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Asssault"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Practicable"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Rustler's"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Gentle"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Casual"); }
+    } else if (improvement == "Bayonet") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Slising"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Restructuring"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Barbed"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Swiss"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Bad Touch"); }
+    } else if (improvement == "Clip") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Drumed"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Scalable"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Sidewinder"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Extra Large"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Desperate"); }
+    } else if (improvement == "Critical") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Critikal Hit"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Critical"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Doc's"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Royal"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Juicy"); }
+    } else if (improvement == "Corrosive") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Crudy"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Industrial"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Spring Time"; }
+    } else if (improvement == "Incendiary") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Fire Fire"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Clement"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Sunny"; }
+    } else if (improvement == "Shock") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Zapper"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Conductive"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Blue Light"; }
+    } else if (improvement == "Slag") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
+      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Negative"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Boosted"; }
+    } else if (improvement == "Rapid Reload") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Quik Loader"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Reactive"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Texas"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Basic"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Impetuous"); }
+    } else {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Redy Stedy"); }
+      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Social"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Well Kept"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("New and Improved"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Sinewy"); }
+    }
+  }
+
+  SelectSubPrefix() {
+    var s_prefix = this.subPrefixArray[int(random()*this.subPrefixArray.length-1)];
+    console.log(s_prefix);
+    return s_prefix ? s_prefix : "";
   }
 
 } //End

@@ -22,7 +22,11 @@ class RocketLauncher extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.fullname = `${this.manufacturer} ${this.prefix}`;
+    if (this.specialDamageType && !this.elementalSubPrefix) {
+      this.AddSubPrefix(this.specialDamageType);
+    }
+    this.subPrefix = this.SelectSubPrefix();
+    this.fullname = `${!this.elementalSubPrefix ? "" : this.elementalSubPrefix} ${this.subPrefix} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -136,17 +140,17 @@ class RocketLauncher extends Gun {
 
   Improvements(num) {
       if (num <= 4) {
-        if (this.damageLimit < 1) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageRocket(this.damageLevel); this.improvementList.push("Damage"); }
+        if (this.damageLimit < 1) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageRocket(this.damageLevel); this.improvementList.push("Damage"); this.AddSubPrefix("Damage"); }
         else if (this.bayonetLevel < 2) { this.Improvements(20); }
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 4 && num <= 6) {
-          if (this.rangeLimit < 2) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); }
+          if (this.rangeLimit < 2) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); this.AddSubPrefix("Range"); }
           else if ((this.specialDamageType == "Corrosive" && this.specialDamage < 1) || (this.specialDamageType == "Shock" && this.specialDamage < 2) || (this.specialDamageType == "Incendiary" && this.incendiaryDamageLevel < 2) || (this.specialDamageType == "Slag")) { this.Improvements(11); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 6 && num <= 8) {
-          if (this.clipLevel < 1) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip");}
+          if (this.clipLevel < 1) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip"); this.AddSubPrefix("Clip"); }
           else if (this.aimLevel < 2) { this.Improvements(13); }
           else if (this.barrels < 2) { this.Improvements(17); }
           else { this.Improvements(this.RollX(20)); }
@@ -159,7 +163,7 @@ class RocketLauncher extends Gun {
         }
       }
       else if (num > 12 && num <= 16) {
-        if (this.aimLevel < 2) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); }
+        if (this.aimLevel < 2) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); this.AddSubPrefix("Aiming"); }
         else if (this.rangeLimit < 2) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       }
@@ -167,7 +171,7 @@ class RocketLauncher extends Gun {
         if (this.barrels < 2) { this.barrels ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Each damage roll gets a +1 bonus. The number of ammo spent per shot is doubled. These effects are cumulative with any shooting mode the weapon may have."); } this.improvementList.push("Barrels"); }
       }
       else {
-        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); }
+        if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); this.AddSubPrefix("Bayonet"); }
         else { this.Improvements(this.RollX(20)); }
       }
   }
@@ -180,10 +184,10 @@ class RocketLauncher extends Gun {
   }
 
   InitialiseSpecialDamageType(num) {
-    if (num <= 5) { this.specialDamageType = "Corrosive"; }
-    else if (num > 5 && num <= 10) { this.specialDamageType = "Shock"; this.specialDamage = 1; }
-    else if (num > 10 && num <= 15) { this.specialDamageType = "Incendiary"; this.specialDamage = 1; }
-    else { this.specialDamageType = "Slag"; }
+    if (num <= 5) { this.specialDamageType = "Corrosive"; this.AddSubPrefix("Corrosive"); }
+    else if (num > 5 && num <= 10) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    else if (num > 10 && num <= 15) { this.specialDamageType = "Incendiary"; this.specialDamage = 1; this.AddSubPrefix("Incendiary"); }
+    else { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
   }
 
   RocketLauncherStatBlock() {
@@ -278,6 +282,72 @@ class RocketLauncher extends Gun {
 
     var inventory = select('#inventory-highlight');
     div.parent(inventory);
+  }
+
+  AddSubPrefix(improvement) {
+    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Snyper"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Pertinent"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Ultraprecise"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("gaa dunk ga"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Victorious"); }
+    } else if (improvemtn == "Bayonet") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("gratutius"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Proximate"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Multi-Use"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("pokee doke"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Revolt"); }
+    } else if (improvement == "Clip") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Roket Pawket"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Plentious"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Bonus"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Deep a"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Worker's"); }
+    } else if (improvement == "Damage") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Big"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Puissant"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Large"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("derp"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Rugged"); }
+    } else if (improvement == "Corrosive") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "corodoc"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Paraquat"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Fungicide"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Virulent"; }
+    } else if (improvement == "Incendiary") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Hunka burning"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Pyroclastic"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Toasty"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Red"; }
+    } else if (improvement == "Shock") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Shoky"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Paraelectronomic"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Sparking"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Shock"; }
+    } else if (improvement == "Slag") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
+      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Purulence"; }
+      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Disinfecting"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Opposing"; }
+    } else if (improvement == "Range") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Speeedee"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Punitory"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Rocket Speed"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Fidle Dee"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Partisan"); }
+    } else {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Rappid"); }
+      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Predacious"); }
+      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Bustling"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("dumpa"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Turbulent"); }
+    }
+  }
+
+  SelectSubPrefix() {
+    var s_prefix = this.subPrefixArray[int(random()*this.subPrefixArray.length-1)];
+    console.log(s_prefix);
+    return s_prefix ? s_prefix : "";
   }
 
 } //End

@@ -18,7 +18,11 @@ class AssaultRifle extends Gun {
         this.Improvements(this.RollX(20));
     }
 
-    this.fullname = `${this.manufacturer} ${this.prefix}`;
+    if (this.specialDamageType && !this.elementalSubPrefix) {
+      this.AddSubPrefix(this.specialDamageType);
+    }
+    this.subPrefix = this.SelectSubPrefix();
+    this.fullname = `${!this.elementalSubPrefix ? "" : this.elementalSubPrefix} ${this.subPrefix} ${this.prefix}`;
 
     this.RemoveHTML();
     // this.ConvertToHTML();
@@ -171,27 +175,27 @@ class AssaultRifle extends Gun {
   Improvements(num) {
       if (num <= 2) {
         if (this.model !== "Grenade Launcher") {
-          if (this.damageLimit < 12) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamage(this.damageLevel); this.improvementList.push("Damage"); }
+          if (this.damageLimit < 12) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamage(this.damageLevel); this.improvementList.push("Damage"); this.AddSubPrefix("Damage"); }
           else if (this.ShootingModeLevel < 5) { this.Improvements(17); }
           else { this.Improvements(this.RollX(20)); }
         } else {
-          if (this.damageLimit < 7) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageGrenade(this.damageLevel); this.improvementList.push("Damage"); }
+          if (this.damageLimit < 7) { this.damageLimit ++; this.damageLevel ++; this.damage = this.SetDamageGrenade(this.damageLevel); this.improvementList.push("Damage"); this.AddSubPrefix("Damage"); }
           else if (this.ShootingModeLevel < 5) { this.Improvements(17); }
           else { this.Improvements(this.RollX(20)); }
         }
       }
       else if (num > 2 && num <= 4) {
-          if (this.rangeLimit < 3) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); }
+          if (this.rangeLimit < 3) { this.rangeLimit ++; this.rangeLevel ++; this.range = this.SetRange(this.rangeLevel); this.improvementList.push("Range"); console.log("Adding Sub-prefix: Shooting Mode"); this.AddSubPrefix("Range"); }
           else if (this.aimLevel < 2) { this.Improvements(15); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 4 && num <= 6) {
-          if (this.clipLevel < 3) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip");}
+          if (this.clipLevel < 3) { this.clipLevel ++; this.ImproveClip(this.clipLevel); this.improvementList.push("Clip"); this.AddSubPrefix("Clip"); }
           else if (this.ShootingModeCount() < 6) { this.Improvements(17); }
           else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 6 && num <= 10) {
-        if(this.apLimit < 2) { this.ap ++; this.improvementList.push("AP"); }
+        if(this.apLimit < 2) { this.ap ++; this.improvementList.push("AP"); this.AddSubPrefix("AP"); }
         else if (this.damageLimit < 2) { this.Improvements(1); }
         else { this.Improvements(this.RollX(20)); }
       }
@@ -203,22 +207,24 @@ class AssaultRifle extends Gun {
         }
       }
       else if (num > 12 && num <= 14) {
-        if (!this.specialProperties.includes("Stability")) { this.specialProperties.push("Stability", "This Improvement improves the accuracy of weapons when firing rapidly."); this.improvementList.push("Stability");}
+        if (!this.specialProperties.includes("Stability")) { this.specialProperties.push("Stability", "This Improvement improves the accuracy of weapons when firing rapidly."); this.improvementList.push("Stability"); this.AddSubPrefix("Stability"); }
         else { this.Improvements(3); }
       }
       else if (num > 14 && num <= 16) {
-        if (this.aimLevel < 2) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); }
+        if (this.aimLevel < 2) { this.aimLevel ++; this.aim = this.SetAim(this.aimLevel); this.improvementList.push("Aim"); this.AddSubPrefix("Aiming"); }
         else if (this.rangeLimit < 3) { this.Improvements(3); }
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 16 && num <= 18) {
-        if (this.shootingModeLevel < 5 || this.manufacturer != "Jakobs") {
+        if ((this.shootingModeLevel < 5) || (this.manufacturer != "Jakobs")) {
           this.shootingModeLevel ++;
           if (this.shootingMode[this.shootingModeLevel-1] != null) {
             this.shootingModeLevel ++;
           }
           this.AddShootingMode(this.shootingModeLevel);
           this.improvementList.push("Shooting Mode");
+          console.log("Adding Sub-prefix: Shooting Mode");
+          this.AddSubPrefix("Shooting Mode");
         } else if (this.clipLevel < 3) { this.Improvements(5); }
         else { this.Improvements(this.RollX(20)); }
       } else if (num == 19) {
@@ -226,7 +232,7 @@ class AssaultRifle extends Gun {
           else { this.Improvements(1); }
           if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Each damage roll gets a +1 bonus. The number of ammo spent per shot is doubled. These effects are cumulative with any shooting mode the weapon may have."); }
       } else {
-          if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); }
+          if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); this.AddSubPrefix("Bayonet"); }
           else { this.Improvements(this.RollX(20)); }
       }
   }
@@ -239,12 +245,12 @@ class AssaultRifle extends Gun {
   }
 
   InitialiseSpecialDamageType(num) {
-    if (num <= 4) { this.specialDamageType = "Corrosive"; this.specialDamage = 1;}
-    else if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; }
-    else if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); }
-    else if (num > 12 && num <= 14) { this.specialDamageType = "Slag"; }
+    if (num <= 4) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
+    else if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    else if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
+    else if (num > 12 && num <= 14) { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
     else if (num > 14 && num <= 18) { this.specialDamageType = "Explosive"; }
-    else { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor.") }
+    else { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor."); this.AddSubPrefix("Heavy Weapon"); }
   }
 
   AssaultRifleStatBlock() {
@@ -338,6 +344,74 @@ class AssaultRifle extends Gun {
     div.id(`item-highlight`);
     var inventory = select('#inventory-highlight');
     div.parent(inventory);
+  }
+
+  AddSubPrefix(improvement) {
+    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Akurate"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Scout"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Deadshot"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Rigorous"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Severe"); }
+    } else if (["AP", "Damage", "Heavy Weapon"].indexOf(improvement) >= 0) {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Naasty"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Attack"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Boss"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Nasty"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Ferocious"); }
+    } else if (improvement == "Bayonet") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Nifed"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Breach"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Razor"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Stabbing"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Skewering"); }
+    } else if (improvement == "Clip") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Expandifide"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Onslaught"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Flush"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Plump"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Expansive"); }
+    } else if (improvement == "Corrosive") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Crudy"; }
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Corrosive"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Corrosive"; }
+    } else if (improvement == "Incendiary") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Fire Fire"; }
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Incendiary"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Hot"; }
+    } else if (improvement == "Shock") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Zapper"; }
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Sapping"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Sapping"; }
+    } else if (improvement == "Slag") {
+      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
+      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Amp"; }
+      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Slag"; }
+    } else if (improvement == "Range") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Fast Bulets"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Deep"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Cowboy"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Slippery"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Swift"); }
+    } else if (improvement == "Shooting Mode") {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Wyld Asss"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Feral"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Wild"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Wild"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Rabid"); }
+    } else {
+      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Taktikal"); }
+      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Patrol"); }
+      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Horse"); }
+      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Rhythmic"); }
+      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Resolute"); }
+    }
+  }
+
+  SelectSubPrefix() {
+    var s_prefix = this.subPrefixArray[int(random()*this.subPrefixArray.length-1)];
+    console.log(s_prefix);
+    return s_prefix ? s_prefix : "";
   }
 
 } //End

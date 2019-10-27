@@ -291,7 +291,7 @@ class RocketLauncher extends Gun {
       if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Ultraprecise"); }
       if (this.manufacturer == "Torgue") { this.subPrefixArray.push("gaa dunk ga"); }
       if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Victorious"); }
-    } else if (improvemtn == "Bayonet") {
+    } else if (improvement == "Bayonet") {
       if (this.manufacturer == "Bandit") { this.subPrefixArray.push("gratutius"); }
       if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Proximate"); }
       if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Multi-Use"); }

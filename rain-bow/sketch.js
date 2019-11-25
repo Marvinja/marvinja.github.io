@@ -46,7 +46,7 @@ class RainDrop {
     this.x = random(width);
     this.y = random(-height, 0);
     this.speed = 0;
-    this.acceleration = random(0.1, 0.5);
+    this.acceleration = random(0.1, 0.3);
     this.length = map(this.acceleration, 0.1, 0.5, 10, 50);
     this.width = map(this.acceleration, 0.1, 0.5, 0.1, 5);
     this.opac = map(this.y, 0, 100, 100, 0);
@@ -65,7 +65,7 @@ class RainDrop {
   }
 
   move() {
-    this.speed = constrain(this.speed, 0,5);
+    this.speed = constrain(this.speed, 0,2);
     this.speed += this.acceleration;
     this.y += this.speed;
     this.reset();

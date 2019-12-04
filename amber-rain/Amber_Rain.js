@@ -2,14 +2,14 @@ var diamonds = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  colorMode(HSB, 360, 100, 100);
+  colorMode(HSL, 360, 100, 100);
 
-  for (var i = 0; i < width/40; i ++) {
-      for (var j = 0; j < height/40; j ++) {
+  for (var i = 0; i < width/60; i ++) {
+      for (var j = 0; j < height/60; j ++) {
           if (j % 2 == 0) {
-              diamonds.push(new Diamond(i * 40, j * 40));
+              diamonds.push(new Diamond(i * 60, j * 60));
           } else {
-              diamonds.push(new Diamond(20 + i * 40, j * 40));
+              diamonds.push(new Diamond(30 + i * 60, j * 60));
           }
       }
   }
@@ -27,12 +27,12 @@ function draw() {
 class Diamond {
   constructor(_x, _y) {
     this.position = createVector(_x, _y);
-    this.offset = 10;
+    this.offset = 9;
     //Colour: #A86F3D 28 47 45;
-    this.yellow = color(28, 47, 45);
+    this.yellow = color(34, 35, 38);
     //Colour: #2F1F12 27 45 13;
-    this.darkyellow = color(27, 45, 13);
-    this.speed = 0.5;
+    this.darkyellow = color(35, 26, 14);
+    this.speed = 0.3;
   }
 
   display() {

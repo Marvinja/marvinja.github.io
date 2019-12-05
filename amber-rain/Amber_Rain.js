@@ -27,12 +27,15 @@ function draw() {
 class Diamond {
   constructor(_x, _y) {
     this.position = createVector(_x, _y);
-    this.offset = 9;
     //Colour: #A86F3D 28 47 45;
     this.yellow = color(34, 35, 38);
     //Colour: #2F1F12 27 45 13;
     this.darkyellow = color(35, 26, 14);
-    this.speed = 0.3;
+    this.speed = random(-1, 1);
+    this.offset = 7.5;
+    this.pulseSpeed = random(-0.2, 0.2);
+    this.minOffset = 5;
+    this.maxOffset = 10;
   }
 
   display() {
@@ -49,9 +52,17 @@ class Diamond {
   }
 
   update() {
+      //Move down
       this.position.y += this.speed;
-      if (this.position.y > height + this.offset) {
-          this.position.y = 0;
+      //When below the screen, reset back to the top
+      if (this.position.y > height + 10) {
+          this.position.y = -10;
+      }
+
+      //Pulse
+      this.offset += this.pulseSpeed;
+      if (this.offset > this.maxOffset || this.offset < this.minOffset) {
+          this.pulseSpeed *= -1;
       }
   }
 

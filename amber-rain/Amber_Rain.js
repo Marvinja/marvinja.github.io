@@ -31,7 +31,7 @@ class Diamond {
     this.yellow = color(34, 35, 38);
     //Colour: #2F1F12 27 45 13;
     this.darkyellow = color(35, 26, 14);
-    this.speed = random(-1, 1);
+    this.speed = random(-0.5, 0.5);
     this.offset = 7.5;
     this.pulseSpeed = random(-0.2, 0.2);
     this.minOffset = 5;

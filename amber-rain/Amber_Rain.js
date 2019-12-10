@@ -2,8 +2,8 @@ var diamonds = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  colorMode(HSL, 360, 100, 100);
-
+  colorMode(HSL, 360, 100, 100, 100);
+  background(0);
   for (var i = 0; i < width/60; i ++) {
       for (var j = 0; j < height/60; j ++) {
           if (j % 2 == 0) {

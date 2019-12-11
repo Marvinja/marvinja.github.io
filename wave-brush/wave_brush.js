@@ -1,5 +1,6 @@
 let orb;
 let orb2;
+let col;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -7,15 +8,17 @@ function setup() {
   //initialise object
   orb = new Orb(random(width), random(height));
   orb2 = new Orb(random(width), random(height));
+  col = setColour();
 }
 
 
 function draw() {
     blendMode(NORMAL);
-  if (second() % 20 == 0) {
-  fill(0, 20);
-  noStroke();
-  rect(-width/2, 0, width*2, height);
+  if (second() % 10 == 0) {
+      fill(0, 20);
+      noStroke();
+      rect(-width/2, 0, width*2, height);
+      col = setColour();
   }
   translate(width/2, 0);
   orb.display();
@@ -24,11 +27,15 @@ function draw() {
   orb2.update();
   blendMode(ADD);
   strokeWeight(2);
-  stroke(0, 100, 200, 30);
+  stroke(col);
   if (dist(orb.position.x, orb.position.y, orb2.position.x, orb2.position.y)) {
     line(orb.position.x, orb.position.y, orb2.position.x, orb2.position.y);
     line(-orb.position.x, orb.position.y, -orb2.position.x, orb2.position.y);
   }
+}
+
+function setColour() {
+    return color(random(255), random(255), random(255), 30);
 }
 
 class Orb {

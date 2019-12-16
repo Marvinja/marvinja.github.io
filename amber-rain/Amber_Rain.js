@@ -1,9 +1,22 @@
 var diamonds = [];
 
+//URL Param
+var bground = [];
+var color1 = [];
+var color2 = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   colorMode(HSL, 360, 100, 100, 100);
-  background(0);
+  //URL Parameters Initialisation
+  var param = getURLParams();
+  console.log(param);
+  param.hasOwnProperty('bg') ? bground = param.bg.split(",") : bground = [0,0,0];
+  param.hasOwnProperty('color1') ? color1 = param.color1.split(",") : color1 = [34, 35, 38];
+  param.hasOwnProperty('color2') ?color2 = param.color2.split(",") : color2 = [35, 26, 14];
+
+  //Object Initialisation
   for (var i = 0; i < width/60; i ++) {
       for (var j = 0; j < height/60; j ++) {
           if (j % 2 == 0) {
@@ -13,11 +26,13 @@ function setup() {
           }
       }
   }
+
+
 }
 
 
 function draw() {
-  background(0);
+  background(bground[0], bground[1], bground[2]);
   for (var i = 0; i < diamonds.length; i ++) {
       diamonds[i].display();
       diamonds[i].update();
@@ -28,9 +43,9 @@ class Diamond {
   constructor(_x, _y) {
     this.position = createVector(_x, _y);
     //Colour: #A86F3D 28 47 45;
-    this.yellow = color(34, 35, 38);
+    this.yellow = color(color1[0], color1[1], color1[2]);
     //Colour: #2F1F12 27 45 13;
-    this.darkyellow = color(35, 26, 14);
+    this.darkyellow = color(color2[0], color2[1], color2[2]);
     this.speed = random(-0.5, 0.5);
     this.offset = 7.5;
     this.pulseSpeed = random(-0.2, 0.2);

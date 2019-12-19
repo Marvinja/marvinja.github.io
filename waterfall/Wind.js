@@ -8,24 +8,30 @@ var particle = [];
 
 var flowfield;
 
+var frameRate = 60;
 
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	cols = floor(width / scl);
 	rows = floor(height / scl);
-	
+
 	flowfield = new Array(cols * rows);
-	
+
 	for (var i = 0; i < 1024; i ++) {
 		particle[i] = new Particle();
 	}
-	
-	background(255);
+
+	frameRate(frameRate);
+
+	background(0);
 }
 
 function draw() {
-	background(0, 1);
+	if (frameCount % 600 == 0) {
+		background(0, 10);
+		console.log("Activated");
+	}
 	var yoff = 0;
 	for (var y = 0; y < rows; y ++) {
 		xoff = 0;
@@ -48,20 +54,20 @@ function draw() {
 		yoff += inc;
 		zoff += 0.0003;
 	}
-	
-	
+
+
 	//Drawing Particles
 	for (var i = 0; i < particle.length; i ++) {
 		particle[i].follow(flowfield);
 		particle[i].update();
 		particle[i].edges();
-		
+
 		colorMode(HSB, 360, 100, 100, 100);
 		blendMode(ADD);
 		// var col = map(spectrum[i], 0, 255, 128, 0);
 		// var size = map(spectrum[i], 0, 255, 0, 20);
-		stroke(200, 50, 90, 10);
-		strokeWeight(5)
+		stroke(200, 50, 90, 5);
+		strokeWeight(2);
 		particle[i].show();
 	}
 	blendMode(NORMAL);

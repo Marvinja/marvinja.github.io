@@ -3,16 +3,16 @@ function Particle() {
 	this.vel = p5.Vector.random2D();
 	this.acc = createVector(0, 0);
 	this.maxspeed = 1;
-	
+
 	this.prePos = this.pos.copy();
-	
+
 	this.update = function() {
 		this.vel.add(this.acc);
 		this.vel.limit(this.maxspeed);
 		this.pos.add(this.vel);
 		this.acc.mult(0);
 	}
-	
+
 	this.follow = function(vectors) {
 		var x = floor(this.pos.x / scl);
 		var y = floor(this.pos.y / scl);
@@ -20,23 +20,23 @@ function Particle() {
 		var force = vectors[index];
 		this.applyForce(force);
 	}
-	
+
 	this.applyForce = function(force) {
 		this.acc.add(force);
 	}
-	
+
 	this.show = function() {
 		// stroke(0,10);
 		// strokeWeight(2);
 		line(this.pos.x, this.pos.y, this.prePos.x, this.prePos.y);
 		this.updatePrev();
 	}
-	
+
 	this.updatePrev = function() {
 		this.prePos.x = this.pos.x;
 		this.prePos.y = this.pos.y;
 	}
-	
+
 	this.edges = function() {
 		if (this.pos.x > width) {
 			// this.pos.x = mouseX;
@@ -44,27 +44,27 @@ function Particle() {
 			this.pos.x = 0;
 			this.updatePrev();
 		}
-		
+
 		if (this.pos.x < 0) {
 			// this.pos.x = mouseX;
 			// this.pos.y = mouseY;
 			this.pos.x = width;
 			this.updatePrev();
 		}
-		
+
 		if (this.pos.y > height) {
 			// this.pos.x = mouseX;
 			// this.pos.y = mouseY;
 			this.pos.y = 0;
 			this.updatePrev();
 		}
-		
+
 		if (this.pos.y < 0) {
 			// this.pos.x = mouseX;
 			// this.pos.y = mouseY;
 			this.pos.y = height;
 			this.updatePrev();
 		}
-		
+
 	}
 }

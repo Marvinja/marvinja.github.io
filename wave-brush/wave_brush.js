@@ -7,6 +7,7 @@ let mode;
 let bground;
 let urlCol;
 let blend;
+let sec;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -21,6 +22,8 @@ function setup() {
   param.hasOwnProperty('blend') ?
     param.blend == "MULTIPLY" ? blend = MULTIPLY : null
   : blend = ADD;
+  param.hasOwnProperty('s') ? sec = param.sec : sec = 10;
+
 
   //initialise object
   orb = new Orb(random(width), random(height));
@@ -34,7 +37,7 @@ function setup() {
 
 function draw() {
   blendMode(NORMAL);
-  if (frameCount % (60*10) == 0) {
+  if (frameCount % (60*sec) == 0) {
       fill(bground[0], bground[1], bground[2]);
       noStroke();
       rect(-width/2, 0, width*2, height);

@@ -62,8 +62,8 @@ class Orb {
   constructor(_x, _y) {
     this.position = createVector(_x, _y);
     this.easing = random(0.01, 0.06);
-    this.targetPosition = createVector(random(-width/2, width/2), random(height));
-    this.targetPosition2 = createVector(random(-width/2, width/2), random(height));
+    this.targetPosition = createVector(random(-width/2, width/2), random(-height/4, height + height/4));
+    this.targetPosition2 = createVector(random(-width/2, width/2), random(-height/4, height + height/4));
   }
 
   display() {
@@ -78,7 +78,7 @@ class Orb {
     this.targetPosition.x += (this.targetPosition2.x - this.targetPosition.x) * this.easing;
     this.targetPosition.y += (this.targetPosition2.y - this.targetPosition.y) * this.easing;
     if (dist(this.targetPosition.x, this.targetPosition.y, this.targetPosition2.x, this.targetPosition2.y) < 100) {
-      this.targetPosition2 = createVector(random(-width/2, width/2), random(height));
+      this.targetPosition2 = createVector(random(-width/2, width/2), random(-height/4, height + height/4));
     }
   }
 }

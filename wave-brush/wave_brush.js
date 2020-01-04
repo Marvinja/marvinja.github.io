@@ -22,7 +22,7 @@ function setup() {
   param.hasOwnProperty('blend') ?
     param.blend == "MULTIPLY" ? blend = MULTIPLY : null
   : blend = ADD;
-  param.hasOwnProperty('s') ? sec = param.sec : sec = 10;
+  param.hasOwnProperty('s') ? sec = param.s : sec = 10;
 
 
   //initialise object

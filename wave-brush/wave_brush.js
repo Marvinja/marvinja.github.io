@@ -2,30 +2,53 @@ let orb;
 let orb2;
 let col;
 
+//URL Param
+let mode;
+let bground;
+let urlCol;
+let blend;
+let sec;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(0);
+  frameRate(60);
+
+  //URL Parameters Initialisation
+  let param = getURLParams();
+  console.log(param);
+  // param.hasOwnProperty('bg') || param.hasOwnProperty('col') || param.hasOwnProperty('blend') ? mode = 1 : mode = 0;
+  param.hasOwnProperty('bg') ? bground = param.bg.split(",") : bground = [0, 0, 0, 20];
+  param.hasOwnProperty('col') ? urlCol = param.col.split(",") : null;
+  param.hasOwnProperty('blend') ?
+    param.blend == "MULTIPLY" ? blend = MULTIPLY : null
+  : blend = ADD;
+  param.hasOwnProperty('s') ? sec = param.s : sec = 10;
+
+
   //initialise object
   orb = new Orb(random(width), random(height));
   orb2 = new Orb(random(width), random(height));
-  col = setColour();
+
+
+  param.hasOwnProperty('col') ? col = setColour(urlCol[0], urlCol[1], urlCol[2], 30) : col = setColour(random(255), random(255), random(255), 30)
+  background(bground[0], bground[1], bground[2]);
 }
 
 
 function draw() {
-    blendMode(NORMAL);
-  if (second() % 10 == 0) {
-      fill(0, 20);
+  blendMode(NORMAL);
+  if (frameCount % (60*sec) == 0) {
+      fill(bground[0], bground[1], bground[2]);
       noStroke();
       rect(-width/2, 0, width*2, height);
-      col = setColour();
+      urlCol ? col = setColour(urlCol[0], urlCol[1], urlCol[2], 30) : col = setColour(random(255), random(255), random(255), 30);
   }
   translate(width/2, 0);
   orb.display();
   orb.update();
   orb2.display();
   orb2.update();
-  blendMode(ADD);
+  blendMode(blend);
   strokeWeight(2);
   stroke(col);
   if (dist(orb.position.x, orb.position.y, orb2.position.x, orb2.position.y)) {
@@ -34,8 +57,8 @@ function draw() {
   }
 }
 
-function setColour() {
-    return color(random(255), random(255), random(255), 30);
+function setColour(r,g,b,a) {
+    return color(r, g, b, a);
 }
 
 class Orb {

@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900&display=swap");
+html,
+body {
+  scroll-behavior: smooth;
+  background: #0b0b0b;
+  font-family: "Raleway", sans-serif;
+  color: white;
+  /* Handle */
+  /* Handle on hover */
+}
+html ::-webkit-scrollbar,
+body ::-webkit-scrollbar {
+  width: 5px;
+}
+html ::-webkit-scrollbar-thumb,
+body ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+html ::-webkit-scrollbar-thumb:hover,
+body ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.heading {
+  height: 900px;
+}
+.heading h1 {
+  font-size: 3.5em;
+  font-weight: 700;
+}
+.heading h2 {
+  font-size: 1.6em;
+  font-weight: 700;
+}
+.heading a {
+  color: white;
+  transition: text-shadow 0.2s;
+}
+.heading a:hover {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5), 0 2px 2px rgba(255, 255, 255, 0.5), 1px 4px 4px rgba(255, 255, 255, 0.5), 2px 8px 8px rgba(255, 255, 255, 0.5);
+}
+
+.content {
+  background: #242424;
+}
+.content h1 {
+  font-size: 3.2em;
+  font-weight: 700;
+  border-bottom: 3px white solid;
+  display: inline-block;
+}
+.content h2 {
+  font-size: 1.6em;
+  font-weight: 700;
+}
+.content .item {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12), 0 32px 32px rgba(0, 0, 0, 0.12);
+}
+
+.footer p {
+  font-size: 1.2em;
+}
+.footer a {
+  color: white;
+  transition: text-shadow 0.2s;
+}
+.footer a:hover {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5), 0 2px 2px rgba(255, 255, 255, 0.5), 1px 4px 4px rgba(255, 255, 255, 0.5), 2px 8px 8px rgba(255, 255, 255, 0.5);
+}
+
+/*# sourceMappingURL=style.css.map */

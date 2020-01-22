@@ -6,7 +6,6 @@
 //Colours
 $black: #242424;
 
-
 html,
 body {
   scroll-behavior: smooth;
@@ -22,8 +21,8 @@ body {
 
 .heading {
   height: 100vh;
-  h1 { font-size: 3.5em; font-weight: 700; }
-  h2 { font-size: 1.6em; font-weight: 700; }
+  h1 { font-size: 2.4em; font-weight: 700; }
+  h2 { font-size: 1em; font-weight: 700; }
   a {
     color: white;
     transition: text-shadow 0.2s;
@@ -44,8 +43,8 @@ body {
 
 .content {
   background: lighten($black, 0%);
-  h1 { font-size: 3.2em; font-weight: 700; border-bottom: 3px white solid; display: inline-block;}
-  h2 { font-size: 2.8em; font-weight: 700; }
+  h1 { font-size: 3.2em; font-weight: 700; border-bottom: 3px white solid; display: inline-block; }
+  h2 { font-size: 2.0em; font-weight: 700; }
 
   .item {
     box-shadow: 0 1px 1px rgba(0,0,0,0.12),
@@ -71,6 +70,28 @@ body {
                 1px 4px 4px rgba(255,255,255,0.50),
                 2px 8px 8px rgba(255,255,255,0.50);
     }
+  }
+
+}
+
+//Landscape Phones 576px and up
+@media (min-width: 576px) {
+  .heading {
+    h1 { font-size: 2.4em; font-weight: 700; }
+    h2 { font-size: 1em; font-weight: 700; }
+  }
+}
+
+//Tablets 768px and up
+@media (min-width: 768px) {
+
+  .heading {
+    height: 100vh;
+    h1 { font-size: 3.5em; font-weight: 700; }
+    h2 { font-size: 1.6em; font-weight: 700; }
+  }
+  .content {
+    h2 { font-size: 2.8em; font-weight: 700; }
   }
 
 }

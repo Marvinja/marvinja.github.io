@@ -69,6 +69,18 @@ body ::-webkit-scrollbar-thumb:hover {
 .content .item:hover {
   transform: scale(1.04);
 }
+.content #wave-brush:hover {
+  content: url("./img/wave-brush.gif");
+}
+.content #amber-rain:hover {
+  content: url("./img/amber-rain.gif");
+}
+.content #rain-bow:hover {
+  content: url("./img/rain-bow.gif");
+}
+.content #waterfall:hover {
+  content: url("./img/waterfall.gif");
+}
 
 .footer p {
   font-size: 1.2em;

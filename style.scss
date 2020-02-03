@@ -53,16 +53,24 @@ body {
               0 8px 8px rgba(0,0,0,0.12),
               0 16px 16px rgba(0,0,0,0.12),
               0 32px 32px rgba(0,0,0,0.12);
-    transition: transform 0.2s;
-    &:hover {
-      transform: scale(1.04);
-    }
   }
 
   #wave-brush:hover { content: url('./img/wave-brush.gif'); }
   #amber-rain:hover { content: url('./img/amber-rain.gif'); }
   #rain-bow:hover { content: url('./img/rain-bow.gif'); }
   #waterfall:hover { content: url('./img/waterfall.gif'); }
+
+  .piece {
+    .static {
+      position:absolute;
+      transition: opacity 0.2s;
+      &:hover { opacity: 0; }
+    }
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
 
 }
 

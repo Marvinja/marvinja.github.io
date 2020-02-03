@@ -64,10 +64,6 @@ body ::-webkit-scrollbar-thumb:hover {
 }
 .content .item {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12), 0 32px 32px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s;
-}
-.content .item:hover {
-  transform: scale(1.04);
 }
 .content #wave-brush:hover {
   content: url("./img/wave-brush.gif");
@@ -80,6 +76,19 @@ body ::-webkit-scrollbar-thumb:hover {
 }
 .content #waterfall:hover {
   content: url("./img/waterfall.gif");
+}
+.content .piece {
+  transition: transform 0.2s;
+}
+.content .piece .static {
+  position: absolute;
+  transition: opacity 0.2s;
+}
+.content .piece .static:hover {
+  opacity: 0;
+}
+.content .piece:hover {
+  transform: scale(1.04);
 }
 
 .footer p {

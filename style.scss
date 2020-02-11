@@ -110,6 +110,22 @@ body {
     h2 { font-size: 2.8em; font-weight: 700; }
   }
 }
+
+@media (max-height: 768px) {
+    .heading {
+        h1 { font-size: 5vh !important; font-weight: 700; }
+        h2 { font-size: 3vh !important; font-weight: 700; }
+        a {
+          color: white;
+          transition: text-shadow 0.2s;
+          &:hover {
+            text-shadow: 0 10px 0 rgba(255,255,255,0.5),
+                     0 -10px 0 rgba(255,255,255,0.5);
+          }
+        }
+    }
+}
+
 .btn {
     line-height: 50px;
     height: 50px;

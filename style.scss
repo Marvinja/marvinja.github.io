@@ -27,11 +27,12 @@ body {
     color: white;
     transition: text-shadow 0.2s;
     &:hover {
-      text-shadow: 0 1px 1px rgba(255,255,255,0.50),
-                0 2px 2px rgba(255,255,255,0.50),
-                1px 4px 4px rgba(255,255,255,0.50),
-                2px 8px 8px rgba(255,255,255,0.50);
+      text-shadow: 0 20px 0 rgba(255,255,255,0.5),
+               0 -20px 0 rgba(255,255,255,0.5);
     }
+  }
+  img {
+      width: 75vh;
   }
   #arrow {
       position: absolute;
@@ -82,10 +83,8 @@ body {
     color: white;
     transition: text-shadow 0.2s;
     &:hover {
-      text-shadow: 0 1px 1px rgba(255,255,255,0.50),
-                0 2px 2px rgba(255,255,255,0.50),
-                1px 4px 4px rgba(255,255,255,0.50),
-                2px 8px 8px rgba(255,255,255,0.50);
+      text-shadow: 5px 5px 10px rgba(255,255,255,0.50),
+                -5px -5px 10px rgba(255,255,255,0.50);
     }
   }
 
@@ -110,4 +109,49 @@ body {
   .content {
     h2 { font-size: 2.8em; font-weight: 700; }
   }
+}
+.btn {
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+    color: #FFF !important;
+}
+
+.btn-three {
+    color: #FFF;
+    position: relative;
+}
+.btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+}
+.btn-three:hover::before {
+    opacity: 0;
+    transform: scale(1.1,1.1);
+}
+.btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.5);
+    transform: scale(1,1);
+}
+.btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1.1,1.1);
 }

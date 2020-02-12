@@ -26,10 +26,7 @@ function setup() {
           }
       }
   }
-
-
 }
-
 
 function draw() {
   background(bground[0], bground[1], bground[2]);

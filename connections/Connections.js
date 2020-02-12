@@ -1,5 +1,5 @@
 let particles = [];
-let numParticles = 200;
+let numParticles = 100;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -24,6 +24,11 @@ function draw() {
 			distance < 100 ? line(pi.position.x, pi.position.y, pj.position.x, pj.position.y) : null;
 		}
 	}
-
+	blendMode(ADD);
 	particles.forEach(function(part) { part.display(); });
+	blendMode(BLEND);
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
 }

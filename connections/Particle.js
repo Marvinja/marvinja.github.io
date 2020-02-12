@@ -1,9 +1,10 @@
 class Particle {
 	constructor() {
 		this.position = createVector(random(width), random(height));
-		this.speed = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
+		this.speed = createVector(random(-1, 1), random(-1, 1));
 		this.size = random(5);
-		this.color = color(random(255),random(255),random(255), 50);
+		colorMode(HSL, 360, 100, 100, 100);
+		this.color = color(random(360) , 50, 40, 50);
 	}
 
 	display() {

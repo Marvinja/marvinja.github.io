@@ -1,24 +1,12 @@
-var font, fontSize = 32;
-var home = "Home";
 var particles = 1000;
 var rain = [];
 
-function preload() {
-  font = loadFont("./fonts/Raleway-Regular.ttf");
-}
-
 function setup() {
-  var canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent('container');
+  createCanvas(windowWidth, windowHeight);
 
   for (var i = 0; i < particles; i ++) {
     rain[i] = new RainDrop();
   }
-
-  //Font setup
-  textFont(font);
-  textSize(fontSize);
-  textAlign(CENTER, CENTER);
 }
 
 function draw() {
@@ -31,10 +19,6 @@ function draw() {
 
   fill(0);
   noStroke();
-
-  // var opac = map(dist(mouseX, mouseY, width/2, height/2+height*0.2), 0, width*0.2, 255, 0);
-  // fill(255, opac);
-  // text(home, width/2, height/2+height*0.2);
 }
 
 function windowResized() {
@@ -46,10 +30,9 @@ class RainDrop {
     this.x = random(width);
     this.y = random(-height, 0);
     this.speed = 0;
-    this.acceleration = random(0.1, 0.3);
-    this.length = map(this.acceleration, 0.1, 0.5, 10, 50);
-    this.width = map(this.acceleration, 0.1, 0.5, 0.1, 5);
-    this.opac = map(this.y, 0, 100, 100, 0);
+    this.acceleration = random(0.01, 0.05);
+    this.length = map(this.acceleration, 0.01, 0.05, 10, 50);
+    this.width = map(this.acceleration, 0.01, 0.05, 1, 2);
     this.colSaturation = random(25,75);
     this.floor = height + 100 + random(200);
   }
@@ -58,14 +41,14 @@ class RainDrop {
     colorMode(HSB, 360, 100, 100, 100);
     var mouseDist = dist(mouseX, mouseY, this.x, this.y);
     var colHue = map(this.x, 0, width, 0, 360);
-    this.opac = map(this.y, 0, height + 500, 100, 0);
+    this.opac = map(this.y, 0, height + 100, 100, 0);
     stroke(colHue, this.colSaturation, 100, this.opac);
     strokeWeight(this.width);
     line(this.x, this.y, this.x, this.y - this.length);
   }
 
   move() {
-    this.speed = constrain(this.speed, 0,2);
+    this.speed = constrain(this.speed, 0, 9.8);
     this.speed += this.acceleration;
     this.y += this.speed;
     this.reset();
@@ -73,7 +56,7 @@ class RainDrop {
 
   respawn() {
     this.x = random(width);
-    this.y = random(-height, 0);
+    this.y = random(-height, -height/2);
     this.floor = height + random(200);
     this.speed = 0;
   }

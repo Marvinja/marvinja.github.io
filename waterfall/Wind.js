@@ -1,5 +1,5 @@
-var inc = 0.1;
-var scl = 80;
+var inc = 0.5;
+var scl = 16;
 var cols, rows;
 
 var zoff = 0;
@@ -37,8 +37,8 @@ function draw() {
 		xoff = 0;
 		for (var x = 0; x < cols; x ++) {
 			var index = x + y * cols;
-			var angle = noise(xoff, yoff, zoff) * TWO_PI * 0.1;
-			var v = p5.Vector.fromAngle(angle + PI*0.4);
+			var angle = noise(xoff, yoff, zoff) * TWO_PI * 0.4;
+			var v = p5.Vector.fromAngle(angle + PI*0.1);
 			v.setMag(1);
 			flowfield[index] = v;
 			xoff += inc;
@@ -66,9 +66,14 @@ function draw() {
 		blendMode(ADD);
 		// var col = map(spectrum[i], 0, 255, 128, 0);
 		// var size = map(spectrum[i], 0, 255, 0, 20);
-		stroke(200, 50, 90, 5);
+		stroke(200, 50, 90, 3);
 		strokeWeight(2);
 		particle[i].show();
 	}
 	blendMode(NORMAL);
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+	background(0);
 }

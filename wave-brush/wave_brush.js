@@ -1,3 +1,5 @@
+let canvas;
+
 let orb;
 let orb2;
 let col;
@@ -10,7 +12,7 @@ let blend;
 let sec;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight);
   frameRate(60);
 
   //URL Parameters Initialisation

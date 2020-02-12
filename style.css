@@ -2,7 +2,6 @@
 html,
 body {
   scroll-behavior: smooth;
-  background: #0b0b0b;
   font-family: "Raleway", sans-serif;
   color: white;
   /* Handle */
@@ -23,6 +22,7 @@ body ::-webkit-scrollbar-thumb:hover {
 
 .heading {
   height: 100vh;
+  background: #0b0b0b;
 }
 .heading h1 {
   font-size: 2.4em;

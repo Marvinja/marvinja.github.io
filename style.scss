@@ -9,7 +9,7 @@ $black: #242424;
 html,
 body {
   scroll-behavior: smooth;
-  background: darken($black, 10%);
+
   font-family: 'Raleway', sans-serif;
   color: white;
   ::-webkit-scrollbar { width: 5px; }
@@ -21,6 +21,7 @@ body {
 
 .heading {
   height: 100vh;
+  background: darken($black, 10%);
   h1 { font-size: 2.4em; font-weight: 700; }
   h2 { font-size: 1em; font-weight: 700; }
   a {

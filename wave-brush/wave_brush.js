@@ -63,6 +63,11 @@ function setColour(r,g,b,a) {
     return color(r, g, b, a);
 }
 
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    background(0);
+}
+
 class Orb {
   constructor(_x, _y) {
     this.position = createVector(_x, _y);

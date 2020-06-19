@@ -38,17 +38,22 @@ class Item {
 
   SetImprovements() {
       var numImprovements = 0;
-      if (this.playerLevel == "Novice") { numImprovements += 0; }
-      if (this.playerLevel == "Seasoned") { numImprovements += 1; }
-      if (this.playerLevel == "Veteran") { numImprovements += 2; }
-      if (this.playerLevel == "Heroic") { numImprovements += 3; }
-      if (this.playerLevel == "Legendary") { numImprovements += 4; }
 
-      if (this.quality == "White") { numImprovements += 0; }
-      if (this.quality == "Green") { numImprovements += 1; }
-      if (this.quality == "Blue") { numImprovements += 2; }
-      if (this.quality == "Purple") { numImprovements += 3; }
-      if (this.quality == "Orange") { numImprovements += 4; }
+      switch (this.playerLevel) {
+          case "Novice": numImprovements += 0; break;
+          case "Seasoned": numImprovements += 1; break;
+          case "Veteran": numImprovements += 2; break;
+          case "Heroic": numImprovements += 3; break;
+          case "Legendary": numImprovements += 4; break;
+      }
+
+      switch (this.quality) {
+          case "White": numImprovements += 0; break;
+          case "Green": numImprovements += 1; break;
+          case "Blue": numImprovements += 2; break;
+          case "Purple": numImprovements += 3; break;
+          case "Orange": numImprovements += 4; break;
+      }
 
       return numImprovements;
   }

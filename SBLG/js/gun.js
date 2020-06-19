@@ -3,7 +3,7 @@ class Gun extends Item {
     super(playerLevel, quality, category);
 
     //Initialisation
-    this.rangeLevel
+    this.rangeLevel;
     this.range;
     this.rateOfFire;
     this.damageLevel;

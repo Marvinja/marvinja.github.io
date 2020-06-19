@@ -15,38 +15,43 @@ function setup() {
 }
 
 function Generate() {
-  var pl = select("#playerLevel").value();
+  playerLevel = select("#playerLevel").value();
   quality = randomQuality();
   var cat = select("#category").value();
-    if (cat === "Pistol") { items.push(new Pistol(pl, quality)); }
-    if (cat === "SMG") { items.push(new SMG(pl, quality)); }
-    if (cat === "Assault Rifle") { items.push(new AssaultRifle(pl, quality)); }
-    if (cat === "Sniper Rifle") { items.push(new SniperRifle(pl, quality)); }
-    if (cat === "Shotgun") { items.push(new Shotgun(pl, quality)); }
-    if (cat === "Rocket Launcher") { items.push(new RocketLauncher(pl, quality)); }
-    if (cat === "Shield") { items.push(new Shield(pl, quality)); }
-    if (cat === "Grenade"){ items.push(new Grenade(pl, quality)); }
+  console.log(`Generating ${playerLevel} ${quality} ${cat}`);
+    switch (cat) {
+        case 'Pistol': items.push(new Pistol(playerLevel, quality)); break;
+        case 'SMG': items.push(new SMG(playerLevel, quality)); break;
+        case 'Assault Rifle': items.push(new AssaultRifle(playerLevel, quality)); break;
+        case 'Sniper Rifle': items.push(new SniperRifle(playerLevel, quality)); break;
+        case 'Shotgun': items.push(new Shotgun(playerLevel, quality)); break;
+        case 'Rocket Launcher': items.push(new RocketLauncher(playerLevel, quality)); break;
+        case 'Shield': items.push(new Shield(playerLevel, quality)); break;
+        case 'Grenade': items.push(new Grenade(playerLevel, quality)); break;
+        default: console.log("Invalid Category Found!");
+    }
 }
 
 function GenerateRandom() {
-  var pl = select("#playerLevel").value();
+  playerLevel = select("#playerLevel").value();
   quality = randomQuality();
-  RandomItem(RollX(20), pl, quality);
+  console.log(`Generating Random Item: ${playerLevel} ${quality}`);
+  RandomItem(RollX(20), playerLevel, quality);
 }
 
 function RollX(num) {
     return Math.floor(Math.random()*num + 1);
 }
 
-function RandomItem(num, playerLevel, qual) {
-  if (num <= 4) { items.push(new Pistol(playerLevel, qual)); }
-  else if (num > 4 && num <= 6) { items.push(new SMG(playerLevel, qual)); }
-  else if (num > 6 && num <= 8) { items.push(new AssaultRifle(playerLevel, qual)); }
-  else if (num > 8 && num <= 10) { items.push(new SniperRifle(playerLevel, qual)); }
-  else if (num > 10 && num <= 12) { items.push(new Shotgun(playerLevel, qual)); }
-  else if (num == 13) { items.push(new RocketLauncher(playerLevel, qual)); }
-  else if (num > 13 && num <= 15) { items.push(new Grenade(playerLevel, qual)); }
-  else { items.push(new Shield(playerLevel, qual)); }
+function RandomItem(num, pl, qual) {
+  if (num <= 4) { items.push(new Pistol(pl, qual)); }
+  else if (num > 4 && num <= 6) { items.push(new SMG(pl, qual)); }
+  else if (num > 6 && num <= 8) { items.push(new AssaultRifle(pl, qual)); }
+  else if (num > 8 && num <= 10) { items.push(new SniperRifle(pl, qual)); }
+  else if (num > 10 && num <= 12) { items.push(new Shotgun(pl, qual)); }
+  else if (num == 13) { items.push(new RocketLauncher(pl, qual)); }
+  else if (num > 13 && num <= 15) { items.push(new Grenade(pl, qual)); }
+  else { items.push(new Shield(pl, qual)); }
 }
 
 // function draw() {
@@ -67,17 +72,17 @@ function RandomItem(num, playerLevel, qual) {
 
 function randomQuality() {
     var num = Math.floor(Math.random()*20 + 1);
-    console.log("Quality Roll: " + num);
     if (num <= 12) {
+        console.log(`Choosing Quality: Green (${num})`);
         return "Green";
     } else if ((num > 12) && (num <= 17)) {
-        console.log("Quality: Blue");
+        console.log(`Choosing Quality: Blue (${num})`);
         return "Blue";
     } else if ((num > 17) && (num <= 19)) {
-        console.log("Quality: Purple");
+        console.log(`Choosing Quality: Purple (${num})`);
         return "Purple";
     } else {
-        console.log("Quality: Orange");
+        console.log(`Choosing Quality: Orange (${num})`);
         return "Orange";
     }
 }

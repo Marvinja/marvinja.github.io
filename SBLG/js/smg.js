@@ -102,45 +102,29 @@ class SMG extends Gun {
   }
 
   InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
+    switch (this.manufacturer) {
+      case "Bandit": this.SetBandit(); break;
+      case "Dahl": this.SetDahl(); break;
+      case "Jakobs": this.SetJakobs(); break;
+      case "Maliwan": this.SetMaliwan(); break;
+      case "Tediore": this.SetTediore(); break;
+      case "Hyperion": this.SetHyperion(); break;
+      case "Torgue": this.SetTorgue(); break;
+      case "Vladof": this.SetVladof(); break;
+      default: console.log("Manufacturer not found"); break;
+    }
   }
 
   InitialiseSpecialDamageName() {
-    if (this.specialDamageType == "Corrosive") {
-      if (this.manufacturer == "Dahl") { return `Scorpion`; }
-      if (this.manufacturer == "Bandit") { return `Barfy`; }
-      if (this.manufacturer == "Hyperion") { return `Weisenheimer`; }
-      if (this.manufacturer == "Maliwan") { return `Venom`; }
-      if (this.manufacturer == "Tediore") { return `Green`;}
-    }
-    if (this.specialDamageType == "Shock") {
-      if (this.manufacturer == "Bandit") { return `Shoky`; }
-      if (this.manufacturer == "Dahl") { return `Eel`; }
-      if (this.manufacturer == "Hyperion") { return `Storm`; }
-      if (this.manufacturer == "Maliwan") { return `Vexation`; }
-      if (this.manufacturer == "Tediore") { return `Spark`;}
-    }
-    if (this.specialDamageType == "Incendiary") {
-      if (this.manufacturer == "Bandit") { return `Burny`; }
-      if (this.manufacturer == "Dahl") { return `Beetle`; }
-      if (this.manufacturer == "Hyperion") { return `Backburner`; }
-      if (this.manufacturer == "Maliwan") { return `Provocateur`; }
-      if (this.manufacturer == "Tediore") { return `Kindle`;}
-    }
-    if (this.specialDamageType == "Slag") {
-      if (this.manufacturer == "Bandit") { return `Slagy`; }
-      if (this.manufacturer == "Dahl") { return `Jackal`; }
-      if (this.manufacturer == "Hyperion") { return `Wellness`; }
-      if (this.manufacturer == "Maliwan") { return `Revenant`; }
-      if (this.manufacturer == "Tediore") { return `Chaff`;}
-    }
+    let specialDamageArr = ["Corrosive", "Shock", "Incendiary", "Slag"];
+    let manufacturerArr = ["Dahl", "Bandit", "Hyperion", "Maliwan", "Tediore"];
+    let nameArr = [
+      ["Scorpion", "Barfy", "Weisenheimer", "Venom", "Green"],
+      ["Eel","Shoky","Storm","Vexation","Spark"],
+      ["Beetle", "Burny", "Backburner", "Provocateur", "Kindle"],
+      ["Slagy", "Jackal", "Wellness", "Revenant", "Chaff"]
+    ];
+    return nameArr[specialDamage.indexOf(this.specialDamageType)][manufacturerArr.indexOf(this.manufacturer)];
   }
 
   Improvements(num) {

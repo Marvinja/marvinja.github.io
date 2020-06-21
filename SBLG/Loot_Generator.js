@@ -6,11 +6,6 @@ var item;
 var items = [];
 
 function setup() {
-  // var canvasDiv = document.getElementById("canvas");
-  // var width = canvasDiv.clientWidth - canvasDiv.style.paddingLeft - canvasDiv.style.paddingRight;
-  // var canvas = createCanvas(width, 400);
-  // canvas.parent("canvas");
-  // background(0);
   noCanvas();
 }
 
@@ -54,22 +49,6 @@ function RandomItem(num, pl, qual) {
   else { items.push(new Shield(pl, qual)); }
 }
 
-// function draw() {
-//   background(0);
-//   fill(255);
-//
-//   if (item != null) {
-//       item.display(10, 100);
-//   }
-//
-// }
-//
-// function windowResized() {
-//   var canvasDiv = document.getElementById("canvas");
-//   var width = canvasDiv.clientWidth - canvasDiv.style.paddingLeft - canvasDiv.style.paddingRight;
-//   resizeCanvas(width, 400)
-// }
-
 function randomQuality() {
     var num = Math.floor(Math.random()*20 + 1);
     if (num <= 12) {
@@ -93,4 +72,16 @@ function SetHighlight(id) {
       items[i].RemoveHTML();
     }
   }
+}
+
+function CalculateRoll(numOfDice, diceType, modifiers)  {
+  let total = 0;
+  let makeRoll = dt => {
+    const roll = Math.floor(Math.random()*dt + 1);
+    return roll == dt ? roll + makeRoll(dt) : roll;
+  }
+  for (let i = 0; i < numOfDice; i ++) {
+    total += makeRoll(diceType);
+  }
+  return total + modifiers;
 }

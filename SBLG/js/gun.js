@@ -31,12 +31,8 @@ class Gun extends Item {
   }
 
   AddShootingMode(num) {
-      if (num == 1) { this.shootingMode[num-1] = "Semi-automatic"; }
-      if (num == 2) { this.shootingMode[num-1] = "3 round burst"; }
-      if (num == 3) { this.shootingMode[num-1] = "Full auto - RoF 2"; }
-      if (num == 4) { this.shootingMode[num-1] = "Full auto - RoF 3"; }
-      if (num == 5) { this.shootingMode[num-1] = "Full auto - RoF 4"; }
-      if (num == 6) { this.shootingMode[num-1] = "Full auto - RoF 6"; }
+    let arr = ["Semi-automatic", "3 round burst", "Full auto - RoF 2", "Full auto - RoF 3", "Full auto - RoF 4", "Full auto - RoF 5"];
+    this.shootingMode[num-1] = arr[num-1];
   }
 
 //Setting Manufacturers
@@ -122,67 +118,35 @@ class Gun extends Item {
 
 
 //Setting Stats
-  SetAim(num) {
-      if (num == 1) { return "Zoom"; }
-      else { return "Scope"; }
+  SetAim(num) { return num == 1 ? 'Zoom' : 'Scope'; }
+
+  SetBayonet(num) { return num == 1 ? "Bayonet (Str+d8)" : "Super-bayonet (Str+d10)"; }
+
+  SetCritical(num) {
+    let arr = ['d6', 'd8', 'd10', 'd12'];
+    return arr[num-1];
   }
 
-  SetBayonet(num) {
-    if (num == 1) { return "Bayonet (Str+d8)"; }
-    if (num == 2) { return "Super-bayonet (Str+d10)"; }
-  }
-  SetCritical(num) {
-    if (num == 1) { return "d6"; }
-    if (num == 2) { return "d8"; }
-    if (num == 3) { return "d10"; }
-    if (num == 4) { return "d12"; }
-  }
   SetDamage(num) {
-      if (num == 1) { return "2d6-1"; }
-      if (num == 2) { return "2d6"; }
-      if (num == 3) { return "2d6+1"; }
-      if (num == 4) { return "2d8"; }
-      if (num == 5) { return "2d8+1"; }
-      if (num == 6) { return "2d10"; }
-      if (num == 7) { return "2d10+1"; }
-      if (num == 8) { return "2d12"; }
+    let arr = ["2d6-1", "2d6", "2d6+1", "2d8", "2d8+1", "2d10", "2d10+1", "2d12"];
+    return arr[num-1];
   }
   SetDamageShotgun(num) {
-      if (num == 1) { return "3d6/2d6/1d6"; }
-      if (num == 2) { return "3d6+1/2d6+1/1d6+1"; }
-      if (num == 3) { return "3d8/2d8/1d8"; }
+    let arr = ["3d6/2d6/1d6", "3d6+1/2d6+1/1d6+1", "3d8/2d8/1d8"];
+    return arr[num-1];
   }
   SetDamageGrenade(num) {
-      if (num == 1) { return "3d6"; }
-      if (num == 2) { return "3d6+1"; }
-      if (num == 3) { return "3d6+2"; }
-      if (num == 4) { return "3d8"; }
-      if (num == 5) { return "3d8+1"; }
-      if (num == 6) { return "3d8+2"; }
-      if (num == 7) { return "3d10"; }
+    let arr = ["3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2", "3d10"];
+    return arr[num-1];
   }
   SetDamageRocket(num) {
-      if (num == 1) { return "2d10"; }
-      if (num == 2) { return "3d6"; }
-      if (num == 3) { return "3d6+1"; }
-      if (num == 4) { return "3d6+2"; }
-      if (num == 5) { return "3d8"; }
-      if (num == 6) { return "3d8+1"; }
-      if (num == 7) { return "3d8+2"; }
+    let arr = ["2d10", "3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2"];
+    return arr[num-1];
   }
 
   SetRange(num) {
-      if (num == 1) { return "2/4/8"; }
-      if (num == 2) { return "3/6/12"; }
-      if (num == 3) { return "5/10/20"; }
-      if (num == 4) { return "10/20/40"; }
-      if (num == 5) { return "12/24/48"; }
-      if (num == 6) { return "15/30/60"; }
-      if (num == 7) { return "20/40/80"; }
-      if (num == 8) { return "24/48/96"; }
-      if (num == 9) { return "30/60/120"; }
-      if (num == 10) { return "40/80/160"; }
-      if (num == 11) { return "50/100/200"; }
+    let arr = ["2/4/8", "3/6/12", "5/10/20", "10/20/40", "12/24/48", "15/30/60", "20/40/80", "24/48/96", "30/60/120", "40/80/160", "50/100/200"];
+    return arr[num-1];
   }
 
   SetSpecialDamage(num) {

@@ -332,7 +332,7 @@ class Pistol extends Gun {
   AddSubPrefix(improvement) {
       console.log(`Adding Sub Prefix: ${improvement}`);
       const manufacturerArr = ["Bandit", "Dahl", "Hyperion", "Jakobs", "Maliwan", "Tediore", "Torgue", "Vladof"];
-      const improvementArr = ["Aiming", "Range", "AP", "Damage", "Heavy Weapon", "Bayonet", "Clip", "Corrosive", "Incendiary", "Shock", "Barrels", "Shooting Mode", "Rapid Reload", "Stability"];
+      const improvementArr = ["Aiming", "Range", "AP", "Damage", "Heavy Weapon", "Bayonet", "Clip", "Corrosive", "Incendiary", "Shock", "Slag", "Barrels", "Shooting Mode", "Rapid Reload", "Stability"];
       const subPrefixArr = [
           ['misles', 'misles', "murduerer's", "murduerer's", "murduerer's", "Baynaneted", "Extendified", "Crudy", "Fire Fire", "Zapper", "Slaged", "Dubble", "Rapider", "Rapider",  "Marxmans"],
           ['Floated', 'Floated', "Neutralizing", "Neutralizing", "Neutralizing", "Close Quarters", "Loaded", "Corrosive", "Incendiary", "Sapping", "Amped", "Twin", "React", "React", "Tactical"],
@@ -343,11 +343,9 @@ class Pistol extends Gun {
           ["Explicit", "Explicit", "Hard", "Hard", "Hard", "Thrusting", "Crammed", "", "", "", "", "Double Penetrating", "Intense", "Intense", "Stiff"],
           ["Righteous", "Righteous", "Purging", "Purging", "Purging", "Patriot's", "Unending", "Caustic", "Burning", "Discharge", "Slag", "Dva", "Vengeful", "Vengeful", "Resolute"]
       ];
-      if (!["Corrosive", "Incendiary", "Shock"].includes(improvement)) {
-        console.log("Not Elemental: " + subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
+      if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
         this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
       } else {
-        console.log("Elemental: " + subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
         this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
       };
   }

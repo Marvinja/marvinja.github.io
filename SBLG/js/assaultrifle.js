@@ -162,14 +162,14 @@ class AssaultRifle extends Gun {
 
 
   InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
+      switch (this.manufacturer) {
+          case "Bandit":  this.SetBandit(); break;
+          case "Dahl":  this.SetDahl(); break;
+          case "Jakobs":  this.SetJakobs(); break;
+          case "Torgue":  this.SetTorgue(); break;
+          case "Vladof":  this.SetVladof(); break;
+          default: console.log("Manufacturer not found"); break;
+      }
   }
 
   Improvements(num) {
@@ -347,65 +347,20 @@ class AssaultRifle extends Gun {
   }
 
   AddSubPrefix(improvement) {
-    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Akurate"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Scout"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Deadshot"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Rigorous"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Severe"); }
-    } else if (["AP", "Damage", "Heavy Weapon"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Naasty"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Attack"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Boss"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Nasty"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Ferocious"); }
-    } else if (improvement == "Bayonet") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Nifed"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Breach"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Razor"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Stabbing"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Skewering"); }
-    } else if (improvement == "Clip") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Expandifide"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Onslaught"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Flush"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Plump"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Expansive"); }
-    } else if (improvement == "Corrosive") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Crudy"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Corrosive"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Corrosive"; }
-    } else if (improvement == "Incendiary") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Fire Fire"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Incendiary"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Hot"; }
-    } else if (improvement == "Shock") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Zapper"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Sapping"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Sapping"; }
-    } else if (improvement == "Slag") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Amp"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Slag"; }
-    } else if (improvement == "Range") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Fast Bulets"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Deep"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Cowboy"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Slippery"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Swift"); }
-    } else if (improvement == "Shooting Mode") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Wyld Asss"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Feral"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Wild"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Wild"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Rabid"); }
-    } else {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Taktikal"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Patrol"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Horse"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Rhythmic"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Resolute"); }
-    }
+      const manufacturerArr =["Bandit", "Dahl", "Jakobs", "Torgue", "Vladof"];
+      const improvementArr =["Aiming", "Range", "AP", "Damage", "Heavy Weapon", "Bayonet", "Clip", "Corrosive", "Incendiary", "Shock", "Slag", "Range", "Shooting Mode", "Stability"];
+      const subPrefixArr =[
+          ["Akurate", "Akurate", "Nassty", "Nassty", "Nassty", "Nifed", "Expandifide", "Crudy" , "Fire Fire", "Zapper", "Slaged", "Fast Bulets", "Wyld Asss", "Taktikal"],
+          ["Scout", "Scout", "Attack", "Attack", "Attack", "Breach", "Onslaught", "Corrosive" , "Incendiary", "Sapping", "Amp", "Deep", "Feral", "Patrol"],
+          ["Deadshot", "Deadshot", "Boss", "Boss", "Boss", "Razor", "Flush", "" , "", "", "", "Cowboy", "Wild", "Horse"],
+          ["Rigorous", "Rigorous", "Nasty", "Nasty", "Nasty", "Stabbing", "Plump", "" , "", "", "", "Slippery", "Wild", "Rhythmic"],
+          ["Severe", "Severe", "Ferocious", "Ferocious", "Ferocious", "Skewering", "Expansive", "Corrosive" , "Hot", "Sapping", "Slag", "Swift", "Rabid", "Resolute"]
+      ];
+      if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
+        this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
+      } else {
+        this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
+      }
   }
 
   SelectSubPrefix() {

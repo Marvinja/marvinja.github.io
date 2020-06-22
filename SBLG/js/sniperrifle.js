@@ -124,14 +124,14 @@ class SniperRifle extends Gun {
   }
 
   InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
+      switch (this.manufacturer) {
+          case "Dahl":  this.SetDahl(); break;
+          case "Hyperion":  this.SetHyperion(); break;
+          case "Jakobs":  this.SetJakobs(); break;
+          case "Maliwan":  this.SetMaliwan(); break;
+          case "Vladof":  this.SetVladof(); break;
+          default: console.log("Manufacturer not found"); break;
+      }
   }
 
   Improvements(num) {
@@ -300,68 +300,20 @@ class SniperRifle extends Gun {
   }
 
   AddSubPrefix(improvement) {
-    if (["AP", "Damage", "Heavy Weapon"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Pacifying"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Auditing"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Skookum"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Barking"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Gromky"); }
-    } else if (improvement = "Bayonet") {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Cartel"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Contingent"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Ti'kope"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Sublime"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Britva"); }
-    } else if (improvement == "Clip") {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Operational"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Resource"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Hyiu"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Monstrous"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Bolshy"); }
-    } else if (improvement == "Critical") {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Night"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Venture"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Tumtum"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Gentleman's"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Razrez"); }
-    } else if (improvement == "Corrosive") {
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Nerve"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Residual"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Bumblebroth"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Splodge"; }
-    } else if (improvement == "Incendiary") {
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Phosphor"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Thermogenic"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Scarlet"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Phospher"; }
-    } else if (improvement == "Shock") {
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Shock"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Energy"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Zooks"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Strack"; }
-    } else if (improvement == "Slag") {
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Diffusion"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Deueed"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Bolnoy"; }
-    } else if (improvement == "Range") {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Surgical"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Longitudinal"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Siah-siah"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Dandy"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Zammeehat"); }
-    } else if (improvement == "Shooting Mode") {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Suppressive"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Operational"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Klook"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Branbury"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Skorry"); }
-    } else {
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Liquid"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Cohesion"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Chikamin"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Fashionable"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Dobby"); }
-    }
+      const manufacturerArr =["Dahl", "Hyperion", "Jakobs", "Maliwan", "Vladof"];
+      const improvementArr =["AP", "Damage", "Heavy Weapon", "Bayonet", "Clip", "Critical", "Corrosive", "Incendiary", "Shock", "Slag", "Range", "Shooting Mode", "Stability"];
+      const subPrefixArr =[
+          ["Pacifying", "Pacifying", "Pacifying","Cartel", "Operational", "Night", "Nerve", "Phosphor", "Shock" , "", "Surgical", "Suppressive", "Liquid"],
+          ["Auditing", "Auditing", "Auditing", "Contingent", "Resource", "Venture", "Residual", "Thermogenic", "Energy" , "Diffusion", "Longitudinal", "Operational", "Cohesion"],
+          ["Skookum", "Skookum", "Skookum", "TI'kope", "Hyiu", "Tumtum", "", "", "" , "", "Siah-Siah", "Klook", "Chickamin"],
+          ["Barking", "Barking", "Barking", "Sublime", "Monstrous", "Gentleman's", "Bumblebroth", "Scarlet", "Zooks" , "Deuced", "Dandy", "Banbury", "Fashionable"],
+          ["Gromky", "Gromky", "Gromky", "Britva", "Bolshy", "Razrez", "Splodge", "Phospher", "Strack" , "Bolnoy", "Zammechat", "Skorry", "Dobby"]
+      ];
+      if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
+        this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
+      } else {
+        this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
+      }
   }
 
   SelectSubPrefix() {

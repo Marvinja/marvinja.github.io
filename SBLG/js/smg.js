@@ -115,17 +115,17 @@ class SMG extends Gun {
     }
   }
 
-  InitialiseSpecialDamageName() {
-    let specialDamageArr = ["Corrosive", "Shock", "Incendiary", "Slag"];
-    let manufacturerArr = ["Dahl", "Bandit", "Hyperion", "Maliwan", "Tediore"];
-    let nameArr = [
-      ["Scorpion", "Barfy", "Weisenheimer", "Venom", "Green"],
-      ["Eel","Shoky","Storm","Vexation","Spark"],
-      ["Beetle", "Burny", "Backburner", "Provocateur", "Kindle"],
-      ["Slagy", "Jackal", "Wellness", "Revenant", "Chaff"]
-    ];
-    return nameArr[specialDamage.indexOf(this.specialDamageType)][manufacturerArr.indexOf(this.manufacturer)];
-  }
+  // InitialiseSpecialDamageName() {
+  //   let specialDamageArr = ["Corrosive", "Shock", "Incendiary", "Slag"];
+  //   let manufacturerArr = ["Dahl", "Bandit", "Hyperion", "Maliwan", "Tediore"];
+  //   let nameArr = [
+  //     ["Scorpion", "Barfy", "Weisenheimer", "Venom", "Green"],
+  //     ["Eel","Shoky","Storm","Vexation","Spark"],
+  //     ["Beetle", "Burny", "Backburner", "Provocateur", "Kindle"],
+  //     ["Slagy", "Jackal", "Wellness", "Revenant", "Chaff"]
+  //   ];
+  //   return nameArr[specialDamage.indexOf(this.specialDamageType)][manufacturerArr.indexOf(this.manufacturer)];
+  // }
 
   Improvements(num) {
       if (num <= 2) {
@@ -301,67 +301,20 @@ class SMG extends Gun {
   }
 
   AddSubPrefix(improvement) {
-    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Akurate"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Deft"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Analytical"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Guileless"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Guaranteed"); }
-    } else if (["AP", "Damage"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Murduring"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Stopping"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Rightsizing"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Consummate"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Hefty"); }
-    } else if (improvement == "Bayonet") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Cuting"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Bladed"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Cutting Edge"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Acuminous"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Perma-Sharp"); }
-    } else if (improvement == "Corrosive") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Crudy"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Corrosive"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Base"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Caustic"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Peppermint"; }
-    } else if (improvement == "Incendiary") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Fire Fire"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Incendiary"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Hot Button"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Fervid"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Toasty"; }
-    } else if (improvement == "Shock") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Zapper"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Sapping"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Energizing"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Storming"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Sparkling"; }
-    } else if (improvement = "Slag") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
-      if (this.manufacturer == "Dahl") { this.elementalSubPrefix = "Amp"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Amplified"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Feculent"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Biodegradable"; }
-    } else if (improvement == "Shooting Mode") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Boolets go Zoom"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Flying"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Proactive"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Impetuous"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Brisk"); }
-    } else if (improvement == "Rapid Reload") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Agresive"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Skirmish"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Social"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Apt"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Refill"); }
-    } else {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Ballanced"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Stoic"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Corporate"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Lucid"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Quality"); }
-    }
+      const manufacturerArr = ["Bandit", "Dahl", "Hyperion", "Maliwan", "Tediore"];
+      const improvementArr = ["Aiming", "Range", "AP", "Damage", "Bayonet", "Corrosive", "Incendiary", "Shock", "Slag", "Shooting Mode", "Rapid Reload", "Stability"];
+      const subPrefixArr = [
+          ["Akurate", "Akurate", "Murduring", "Murduring", "Cuting", "Crudy", "Fire Fire", "Zapper", "Slaged", "Bulets Go Fasterified" , "Agresive", "Ballansed"],
+          ["Deft", "Deft", "Stopping", "Stopping", "Bladed", "Corrosive", "Incendiary", "Sapping", "Amp", "Flying" , "Skirmish", "Stoic"],
+          ["Analytical", "Analytical", "Rightsizing", "Rightsizing", "Cutting Edge", "Base", "Hot Button", "Energizing", "Amplified", "Proactive" , "Social", "Corporate"],
+          ["Guileless", "Guileless", "Consummate", "Consummate", "Acuminous", "Caustic", "Fervid", "Storming", "Feculent", "Impetuous" , "Apt", "Lucid"],
+          ["Guaranteed", "Guaranteed", "Hefty", "Hefty", "Perma-Sharp", "Perpperment", "Toasty", "Sparkling", "Biodegradable", "Brisk" , "Refill", "Quality"]
+      ];
+      if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
+        this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
+      } else {
+        this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
+      }
   }
 
   SelectSubPrefix() {

@@ -168,7 +168,7 @@ class RocketLauncher extends Gun {
         else { this.Improvements(this.RollX(20)); }
       }
       else if (num > 16 && num <= 19) {
-        if (this.barrels < 2) { this.barrels ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Each damage roll gets a +1 bonus. The number of ammo spent per shot is doubled. These effects are cumulative with any shooting mode the weapon may have."); } this.improvementList.push("Barrels"); }
+        if (this.barrels < 2) { this.barrels ++; if (!this.specialProperties.includes("Barrels")) { this.specialProperties.push("Barrels", "Each damage roll gets a +1 bonus. The number of ammo spent per shot is doubled. These effects are cumulative with any shooting mode the weapon may have."); } this.improvementList.push("Barrels"); this.AddSubPrefix("Barrels"); }
       }
       else {
         if (this.bayonetLevel < 2) { this.bayonetLevel ++; this.bayonet = this.SetBayonet(this.bayonetLevel); this.improvementList.push("Bayonet"); this.AddSubPrefix("Bayonet"); }
@@ -285,62 +285,20 @@ class RocketLauncher extends Gun {
   }
 
   AddSubPrefix(improvement) {
-    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Snyper"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Pertinent"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Ultraprecise"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("gaa dunk ga"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Victorious"); }
-    } else if (improvement == "Bayonet") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("gratutius"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Proximate"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Multi-Use"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("pokee doke"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Revolt"); }
-    } else if (improvement == "Clip") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Roket Pawket"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Plentious"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Bonus"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Deep a"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Worker's"); }
-    } else if (improvement == "Damage") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Big"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Puissant"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Large"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("derp"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Rugged"); }
-    } else if (improvement == "Corrosive") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "corodoc"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Paraquat"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Fungicide"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Virulent"; }
-    } else if (improvement == "Incendiary") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Hunka burning"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Pyroclastic"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Toasty"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Red"; }
-    } else if (improvement == "Shock") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Shoky"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Paraelectronomic"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Sparking"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Shock"; }
-    } else if (improvement == "Slag") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
-      if (this.manufacturer == "Maliwan") { this.elementalSubPrefix = "Purulence"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Disinfecting"; }
-      if (this.manufacturer == "Vladof") { this.elementalSubPrefix = "Opposing"; }
-    } else if (improvement == "Range") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Speeedee"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Punitory"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Rocket Speed"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Fidle Dee"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Partisan"); }
+    const manufacturerArr =["Bandit", "Maliwan", "Tediore", "Torgue", "Vladof"];
+    const improvementArr =["Aiming", "Range", "Bayonet", "Clip", "Damage", "Corrosive", "Incendiary", "Shock", "Slag", "Range", "Barrels"];
+    const subPrefixArr =[
+        ["Snyper", "Snyper", "gratutius", "Roket Pawket", "Big", "corodoc", "Hunka burning", "Shoky", "Slaged", "Speeedee", "Rappid"], // Bandit
+        ["Pertinent", "Pertinent", "Proximate", "Plentious", "Puissant", "Paraquat", "Hunka Pyroclastic", "Paraelectronomic", "Purulence", "Punitory", "Predacious"],  // Maliwan
+        ["Ultraprecise", "Ultraprecise", "Multi-Use", "Bonus", "Large", "Fungicide", "Toasty", "Shoky", "Slaged", "Speeedee", "Rappid"],  // Tediore
+        ["gaa dunk ga", "gaa dunk ga", "pokee doke", "Deep a", "derp", "", "", "", "", "Fidle dee", "dumpa"], // Torgue
+        ["Victorious", "Victorious", "Revolt", "Worker's", "Rugged", "Virulent", "Red", "Shock", "Opposing", "Partisan", "Turbulent"]  // Vladof
+
+    ];
+    if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
+      this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
     } else {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Rappid"); }
-      if (this.manufacturer == "Maliwan") { this.subPrefixArray.push("Predacious"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Bustling"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("dumpa"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Turbulent"); }
+      this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
     }
   }
 

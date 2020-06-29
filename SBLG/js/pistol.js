@@ -148,14 +148,16 @@ class Pistol extends Gun {
   }
 
   InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
+    switch (this.manufacturer) {
+      case "Bandit": this.SetBandit(); break;
+      case "Dahl": this.SetDahl(); break;
+      case "Jakobs": this.SetJakobs(); break;
+      case "Maliwan": this.SetMaliwan(); break;
+      case "Tediore": this.SetTediore(); break;
+      case "Torgue": this.SetTorgue(); break;
+      case "Vladof": this.SetVladof(); break;
+      default: console.log("Manufacturer not found"); break;
+    }
   }
 
   Improvements(num) {

@@ -126,14 +126,14 @@ class Shotgun extends Gun {
   }
 
   InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
+    switch (this.manufacturer) {
+      case "Bandit": this.SetBandit(); break;
+      case "Hyperion": this.SetHyperion(); break;
+      case "Jakobs": this.SetJakobs(); break;
+      case "Tediore": this.SetTediore(); break;
+      case "Torgue": this.SetTorgue(); break;
+      default: console.log("Manufacturer not found"); break;
+    }
   }
 
   Improvements(num) {
@@ -300,64 +300,20 @@ class Shotgun extends Gun {
   }
 
   AddSubPrefix(improvement) {
-    if (["Aiming", "Range"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Sketer"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Potential"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Huntin'"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Original"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Potent"); }
-    } else if (["AP", "Damage", "Shooting Mode"].indexOf(improvement) >= 0) {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Asssault"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Practicable"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Rustler's"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Gentle"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Casual"); }
-    } else if (improvement == "Bayonet") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Slising"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Restructuring"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Barbed"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Swiss"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Bad Touch"); }
-    } else if (improvement == "Clip") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Drumed"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Scalable"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Sidewinder"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Extra Large"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Desperate"); }
-    } else if (improvement == "Critical") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Critikal Hit"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Critical"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Doc's"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Royal"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Juicy"); }
-    } else if (improvement == "Corrosive") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Crudy"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Industrial"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Spring Time"; }
-    } else if (improvement == "Incendiary") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Fire Fire"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Clement"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Sunny"; }
-    } else if (improvement == "Shock") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Zapper"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Conductive"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Blue Light"; }
-    } else if (improvement == "Slag") {
-      if (this.manufacturer == "Bandit") { this.elementalSubPrefix = "Slaged"; }
-      if (this.manufacturer == "Hyperion") { this.elementalSubPrefix = "Negative"; }
-      if (this.manufacturer == "Tediore") { this.elementalSubPrefix = "Boosted"; }
-    } else if (improvement == "Rapid Reload") {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Quik Loader"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Reactive"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Texas"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Basic"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Impetuous"); }
+    const manufacturerArr =["Bandit", "Hyperion", "Jakobs", "Tediore", "Torgue"];
+    const improvementArr =["Aiming", "Range", "AP", "Damage", "Shooting Mode", "Bayonet", "Clip", "Critical", "Corrosive", "Incendiary", "Shock", "Slag", "Rapid Reload", "Stability"];
+    const subPrefixArr =[
+        ["Sketer", "Sketer", "Asssault", "Asssault", "Asssault", "Slising", "Drumed", "Critikal Hit", "Crudy", "Fire Fire", "Zapper" , "Slaged", "Quik Loader", "Redy Stedy"], // Bandit
+        ["Potential", "Potential", "Practicable", "Practicable", "Practicable", "Restructuring", "Scalable", "Critical", "Industrial", "Clement", "Conductive" , "Negative", "Reactive", "Social"], // Hyperion
+        ["Huntin'", "Huntin'", "Rustler's", "Rustler's", "Rustler's", "Barbed", "Sidewinder", "Doc's", "", "", "" , "", "Texas", "Well Kept"], // Jakobs
+        ["Original", "Original", "Gentle", "Gentle", "Gentle", "Swiss", "Extra Large", "Royal", "Spring Time", "Sunny", "Blue Light" , "Boosted", "Basic", "New and Improved"], // Tediore
+        ["Potent", "Potent", "Casual", "Casual", "Casual", "Bad Touch", "Desperate", "Juicy", "", "", "" , "", "Impetuous", "Sinewy"]  // Torgue
+
+    ];
+    if (!["Corrosive", "Incendiary", "Shock", "Slag"].includes(improvement)) {
+      this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)]);
     } else {
-      if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Redy Stedy"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Social"); }
-      if (this.manufacturer == "Jakobs") { this.subPrefixArray.push("Well Kept"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("New and Improved"); }
-      if (this.manufacturer == "Torgue") { this.subPrefixArray.push("Sinewy"); }
+      this.elementalSubPrefix = subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)];
     }
   }
 

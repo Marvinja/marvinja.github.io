@@ -472,217 +472,37 @@ class Shield extends Item {
   }
 
   AddSubPrefix(improvement) {
-     if (improvement == "Capacity") {
-      if (this.playerLevel == "Novice") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Terminal"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Meate"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Brigworthy"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Downsized"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Frail"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Quaggy"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Cracked"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("My First"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Wussified"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Junked Up"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Traitorous"); }
+      const manufacturerArr =["Anshin", "Bandit", "Dahl", "Hyperion", "Maliwan Nova", "Maliwan Spike", "Pangolin", "Tediore", "Torgue Nova", "Torgue Spike", "Vladof"];
+      const playerLevelArr =["Novice", "Seasoned", "Veteran", "Heroic", "Legendary"];
+      const improvementArr =["Capacity", "Delay", "Rate"];
+      const subPrefixArr =[
+          ["Stable", ["Terminal", "Inferior", "Maximal", "Superior", "Diagnostic"], ["Ligated", "Occluded", "Patent", "Hyper", "Vital"], ["Anemic", "Dilatory", "Augmented", "Intensified", "Invasive"]], // Anshin
+          ["", ["Meate", "Crumy", "Tuff", "Stoppiest", "Biger"], ["Y So Lonng", "Waite-ee", "Quik Startr", "Gow Nowe", "Less Waite"], ["Slo", "Whish Fastr", "Charje Fasst", "Spazz", "Gud Charjer"]], // Bandit
+          ["Doughboy", ["Brigworthy", "Improvised", "Bulletproof", "Phalanx", "Roughneck"], ["Goat Rope", "Thumbsticking", "Frosty", "Low Drag", "Wide Eyed"], ["NO-GO", "Slow Mover", "Double Time", "Blitz", "PDQ"]], // Dahl
+          ["Synergistic", ["Downsized", "Outsourced", "Commendable", "Maximized", "Consolidated"], ["Tabled", "Bureaucratic", "Efficient", "Incentivized", "Competent"], ["Recessive", "Deliberate", "Expeditious", "Agile", "Streamlined"]], // Hyperion
+          ["Elegant", ["Frail", "Feeble", "Unwavering", "Steadfast", "Majestic"], ["Inert", "Supine", "Pressing", "Paramount", "Eager"], ["Listless", "Lethargic", "Winged", "Mecurial", "Fleet"]], // Maliwan Nova
+          ["Cultured", ["Quaggy", "Delicate", "Inflexible", "Adamantine", "Majestic"], ["Loitering", "Dawdling", "Dashing", "Exigent", "Ardent"], ["Ponderous", "Cautious", "Brisk", "Rapid", "Lively"]], // Maliwan Spike
+          ["Symmetrical", ["Cracked", "Brittle", "Chitinous", "Carapaced", "Armoured"], ["Dormant", "Hibernating", "Snapping", "Pouncing", "Anxious"], ["Plodding", "Sluggish", "Nimble", "Sprinting", "Spry"]], // Pangolin
+          ["Classic", ["My First", "Kiddie", "Supersized", "Jumbo", "Expanded"], ["Leaden", "Steady", "Quick", "Instant", "Fast Acting"], ["Cut Rate", "Leisurely", "Speedy", "Express", "Quick Charge"]], // Tediore
+          ["Totally Adequate", ["Wussified", "Tore Up", "Macho", "Monster", "Chiseled"], ["First Gear", "Slow Lane", "Turbo", "Hi Octane", "Supercharged"], ["Elderly", "Slow-Ass", "Acceleratin'", "Screamin'", "Haulin'"]], // Torgue Nova
+          ["Evened Up", ["Junked Up", "Jacked Up", "Manned Up", "Stoked Up", "Beefed Up"], ["Slackin'", "Slumpin'", "Rockin'", "Ragin'", "Rollin'"], ["Crawlin'", "Slowin'", "Pumpin'", "Racin'", "Cruisin'"]], // Torgue Spike
+          ["Socialized", ["Traitorous", "Meek", "Righteous", "Unyeilding", "Unbroken"], ["Apathetic", "Torpid", "Ever-Alert", "Vigilant", "Watchful"], ["Cowardly", "Timid", "Momentous", "Revolutionary", "Mobilized"]], // Vladof
+      ];
+
+      if (improvementArr.includes(improvement)) {
+          if(!["Maliwan", "Torgue"].includes(this.manufacturer)) {
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)][playerLevelArr.indexOf(this.playerLevel)]);
+          } else {
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(`${this.manufacturer} ${this.prefix}`)][improvementArr.indexOf(improvement)][playerLevelArr.indexOf(this.playerLevel)]);
+          }
+      } else {
+          if(!["Maliwan", "Torgue"].includes(this.manufacturer)) {
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][0]);
+          } else {
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(`${this.manufacturer} ${this.prefix}`)][0]);
+          }
       }
-      if (this.playerLevel == "Seasoned") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Inferior"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Crumy"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Improvised"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Outsourced"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Feeble"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Delicate"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Brittle"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Kiddie"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Tore Up"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Jacked Up"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Meek"); }
-      }
-      if (this.playeLevel == "Veteran") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Maximal"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Tuff"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Bulletproof"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Commendable"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Unwavering"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Inflexible"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Chitinous"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Supersized"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Macho"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Manned Up"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Righteous"); }
-      }
-      if (this.playerLevel == "Heroic") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Superior"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Stoppiest"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Phalanx"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Maximized"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Steadfast"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Adamantine"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Carapaced"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Jumbo"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Monster"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Stoked Up"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Unyeilding"); }
-      }
-      if (this.playerLevel == "Legendary") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Diagnostic"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Biger"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Roughneck"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Consolidated"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Majestic"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Majestic"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Armored"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Expanded"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Chiseled"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Beefed Up"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Unbroken"); }
-      }
-    } else if (improvement == "Delay") {
-      if (this.playerLevel == "Novice") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Ligated"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Y So Lonng"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Goat Rope"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Tabled"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Inert"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Loitering"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Dormant"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Leaden"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("First Gear"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Slackin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Apathetic"); }
-      }
-      if (this.playerLevel == "Seasoned") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Occluded"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Waite-ee"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Thumbsucking"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Bureaucratic"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Supine"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Dawdling"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Hibernating"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Steady"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Slow Lane"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Slumpin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Torpid"); }
-      }
-      if (this.playeLevel == "Veteran") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Patent"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Qik Startr"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Frosty"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Efficient"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Pressing"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Dashing"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Snapping"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Quick"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Turbo"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Rockin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Ever-Alert"); }
-      }
-      if (this.playerLevel == "Heroic") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Hyper"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Go Nowe"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Low Drag"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Incentivized"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Paramount"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Exigent"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Pouncing"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Instant"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Hi Octane"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Ragin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Vigilant"); }
-      }
-      if (this.playerLevel == "Legendary") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Vital"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Less Waite"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Wide Eyed"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Competent"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Eager"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Ardent"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Anxious"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Fast Acting"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Supercharged"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Rollin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Watchful"); }
-      }
-    } else if (improvement == "Rate") {
-      if (this.playerLevel == "Novice") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Anemic"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Slo"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("NO-GO"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Recessive"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Listless"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Ponderous"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Plodding"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Cut Rate"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Elderly"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Crawlin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Cowardly"); }
-      }
-      if (this.playerLevel == "Seasoned") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Dilatory"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Whish Fastr"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Slow Mover"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Deliberate"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Lethargic"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Cautious"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Sluggish"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Leisurely"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Slow-Ass"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Slowin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Timid"); }
-      }
-      if (this.playeLevel == "Veteran") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Augmented"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Charje Fasst"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Double Time"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Expeditious"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Winged"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Brisk"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Nimble"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Speedy"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Acceleratin'"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Pumpin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Momentous"); }
-      }
-      if (this.playerLevel == "Heroic") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Intensified"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Spazz"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Blitz"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Agile"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Mercurial"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Rapid"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Sprinting"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Express"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Screamin'"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Racin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Revolutionary"); }
-      }
-      if (this.playerLevel == "Legendary") {
-        if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Invasive"); }
-        if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Gud Charjer"); }
-        if (this.manufacturer == "Dahl") { this.subPrefixArray.push("PDQ"); }
-        if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Streamlined"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Fleet"); }
-        if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Lively"); }
-        if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Spry"); }
-        if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Quick Charge"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Haulin'"); }
-        if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Cruisin'"); }
-        if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Mobilized"); }
-      }
-    } else {
-      if (this.manufacturer == "Anshin") { this.subPrefixArray.push("Stable"); }
-      // if (this.manufacturer == "Bandit") { this.subPrefixArray.push("Pertinent"); }
-      if (this.manufacturer == "Dahl") { this.subPrefixArray.push("Doughboy"); }
-      if (this.manufacturer == "Hyperion") { this.subPrefixArray.push("Synergistic"); }
-      if (this.manufacturer == "Maliwan" && this.prefix == "Nova") { this.subPrefixArray.push("Elegant"); }
-      if (this.manufacturer == "Maliwan" && this.prefix == "Spike") { this.subPrefixArray.push("Cultured"); }
-      if (this.manufacturer == "Pangolin") { this.subPrefixArray.push("Symmetrical"); }
-      if (this.manufacturer == "Tediore") { this.subPrefixArray.push("Classic"); }
-      if (this.manufacturer == "Torgue" && this.prefix == "Nova") { this.subPrefixArray.push("Totally Adequate"); }
-      if (this.manufacturer == "Torgue" && this.prefix == "Spike") { this.subPrefixArray.push("Evened Up"); }
-      if (this.manufacturer == "Vladof") { this.subPrefixArray.push("Socialized"); }
-    }
+      
   }
 
   SelectSubPrefix() {

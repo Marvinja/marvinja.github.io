@@ -474,22 +474,22 @@ class Shield extends Item {
   AddSubPrefix(improvement) {
       const manufacturerArr =["Anshin", "Bandit", "Dahl", "Hyperion", "Maliwan Nova", "Maliwan Spike", "Pangolin", "Tediore", "Torgue Nova", "Torgue Spike", "Vladof"];
       const playerLevelArr =["Novice", "Seasoned", "Veteran", "Heroic", "Legendary"];
-      const improvementArr =["Capacity", "Delay", "Rate"];
+      const improvementArr =["Special Property", "Capacity", "Delay", "Rate"];
       const subPrefixArr =[
-          ["Stable", ["Terminal", "Inferior", "Maximal", "Superior", "Diagnostic"], ["Ligated", "Occluded", "Patent", "Hyper", "Vital"], ["Anemic", "Dilatory", "Augmented", "Intensified", "Invasive"]], // Anshin
-          ["", ["Meate", "Crumy", "Tuff", "Stoppiest", "Biger"], ["Y So Lonng", "Waite-ee", "Quik Startr", "Gow Nowe", "Less Waite"], ["Slo", "Whish Fastr", "Charje Fasst", "Spazz", "Gud Charjer"]], // Bandit
-          ["Doughboy", ["Brigworthy", "Improvised", "Bulletproof", "Phalanx", "Roughneck"], ["Goat Rope", "Thumbsticking", "Frosty", "Low Drag", "Wide Eyed"], ["NO-GO", "Slow Mover", "Double Time", "Blitz", "PDQ"]], // Dahl
-          ["Synergistic", ["Downsized", "Outsourced", "Commendable", "Maximized", "Consolidated"], ["Tabled", "Bureaucratic", "Efficient", "Incentivized", "Competent"], ["Recessive", "Deliberate", "Expeditious", "Agile", "Streamlined"]], // Hyperion
-          ["Elegant", ["Frail", "Feeble", "Unwavering", "Steadfast", "Majestic"], ["Inert", "Supine", "Pressing", "Paramount", "Eager"], ["Listless", "Lethargic", "Winged", "Mecurial", "Fleet"]], // Maliwan Nova
-          ["Cultured", ["Quaggy", "Delicate", "Inflexible", "Adamantine", "Majestic"], ["Loitering", "Dawdling", "Dashing", "Exigent", "Ardent"], ["Ponderous", "Cautious", "Brisk", "Rapid", "Lively"]], // Maliwan Spike
-          ["Symmetrical", ["Cracked", "Brittle", "Chitinous", "Carapaced", "Armoured"], ["Dormant", "Hibernating", "Snapping", "Pouncing", "Anxious"], ["Plodding", "Sluggish", "Nimble", "Sprinting", "Spry"]], // Pangolin
-          ["Classic", ["My First", "Kiddie", "Supersized", "Jumbo", "Expanded"], ["Leaden", "Steady", "Quick", "Instant", "Fast Acting"], ["Cut Rate", "Leisurely", "Speedy", "Express", "Quick Charge"]], // Tediore
-          ["Totally Adequate", ["Wussified", "Tore Up", "Macho", "Monster", "Chiseled"], ["First Gear", "Slow Lane", "Turbo", "Hi Octane", "Supercharged"], ["Elderly", "Slow-Ass", "Acceleratin'", "Screamin'", "Haulin'"]], // Torgue Nova
-          ["Evened Up", ["Junked Up", "Jacked Up", "Manned Up", "Stoked Up", "Beefed Up"], ["Slackin'", "Slumpin'", "Rockin'", "Ragin'", "Rollin'"], ["Crawlin'", "Slowin'", "Pumpin'", "Racin'", "Cruisin'"]], // Torgue Spike
-          ["Socialized", ["Traitorous", "Meek", "Righteous", "Unyeilding", "Unbroken"], ["Apathetic", "Torpid", "Ever-Alert", "Vigilant", "Watchful"], ["Cowardly", "Timid", "Momentous", "Revolutionary", "Mobilized"]], // Vladof
+          [["Stable"], ["Terminal", "Inferior", "Maximal", "Superior", "Diagnostic"], ["Ligated", "Occluded", "Patent", "Hyper", "Vital"], ["Anemic", "Dilatory", "Augmented", "Intensified", "Invasive"]], // Anshin
+          [[""], ["Meate", "Crumy", "Tuff", "Stoppiest", "Biger"], ["Y So Lonng", "Waite-ee", "Quik Startr", "Gow Nowe", "Less Waite"], ["Slo", "Whish Fastr", "Charje Fasst", "Spazz", "Gud Charjer"]], // Bandit
+          [["Doughboy"], ["Brigworthy", "Improvised", "Bulletproof", "Phalanx", "Roughneck"], ["Goat Rope", "Thumbsticking", "Frosty", "Low Drag", "Wide Eyed"], ["NO-GO", "Slow Mover", "Double Time", "Blitz", "PDQ"]], // Dahl
+          [["Synergistic"], ["Downsized", "Outsourced", "Commendable", "Maximized", "Consolidated"], ["Tabled", "Bureaucratic", "Efficient", "Incentivized", "Competent"], ["Recessive", "Deliberate", "Expeditious", "Agile", "Streamlined"]], // Hyperion
+          [["Elegant"], ["Frail", "Feeble", "Unwavering", "Steadfast", "Majestic"], ["Inert", "Supine", "Pressing", "Paramount", "Eager"], ["Listless", "Lethargic", "Winged", "Mecurial", "Fleet"]], // Maliwan Nova
+          [["Cultured"], ["Quaggy", "Delicate", "Inflexible", "Adamantine", "Majestic"], ["Loitering", "Dawdling", "Dashing", "Exigent", "Ardent"], ["Ponderous", "Cautious", "Brisk", "Rapid", "Lively"]], // Maliwan Spike
+          [["Symmetrical"], ["Cracked", "Brittle", "Chitinous", "Carapaced", "Armoured"], ["Dormant", "Hibernating", "Snapping", "Pouncing", "Anxious"], ["Plodding", "Sluggish", "Nimble", "Sprinting", "Spry"]], // Pangolin
+          [["Classic"], ["My First", "Kiddie", "Supersized", "Jumbo", "Expanded"], ["Leaden", "Steady", "Quick", "Instant", "Fast Acting"], ["Cut Rate", "Leisurely", "Speedy", "Express", "Quick Charge"]], // Tediore
+          [["Totally Adequate"], ["Wussified", "Tore Up", "Macho", "Monster", "Chiseled"], ["First Gear", "Slow Lane", "Turbo", "Hi Octane", "Supercharged"], ["Elderly", "Slow-Ass", "Acceleratin'", "Screamin'", "Haulin'"]], // Torgue Nova
+          [["Evened Up"], ["Junked Up", "Jacked Up", "Manned Up", "Stoked Up", "Beefed Up"], ["Slackin'", "Slumpin'", "Rockin'", "Ragin'", "Rollin'"], ["Crawlin'", "Slowin'", "Pumpin'", "Racin'", "Cruisin'"]], // Torgue Spike
+          [["Socialized"], ["Traitorous", "Meek", "Righteous", "Unyeilding", "Unbroken"], ["Apathetic", "Torpid", "Ever-Alert", "Vigilant", "Watchful"], ["Cowardly", "Timid", "Momentous", "Revolutionary", "Mobilized"]], // Vladof
       ];
 
-      if (improvementArr.includes(improvement)) {
+      if (["Capacity", "Delay", "Rate"].includes(improvement)) {
           if(!["Maliwan", "Torgue"].includes(this.manufacturer)) {
               this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][improvementArr.indexOf(improvement)][playerLevelArr.indexOf(this.playerLevel)]);
           } else {
@@ -497,12 +497,12 @@ class Shield extends Item {
           }
       } else {
           if(!["Maliwan", "Torgue"].includes(this.manufacturer)) {
-              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][0]);
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(this.manufacturer)][0][0]);
           } else {
-              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(`${this.manufacturer} ${this.prefix}`)][0]);
+              this.subPrefixArray.push(subPrefixArr[manufacturerArr.indexOf(`${this.manufacturer} ${this.prefix}`)][0][0]);
           }
       }
-      
+
   }
 
   SelectSubPrefix() {

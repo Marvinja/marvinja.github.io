@@ -1,6 +1,7 @@
 var quality;
 var categorySel, category;
 var playerLevelSel, playerLevel;
+var playerLevelArr = ["Novice", "Seasoned", "Veteran", "Heroic", "Legendary"];
 
 var item;
 var items = [];
@@ -72,16 +73,4 @@ function SetHighlight(id) {
       items[i].RemoveHTML();
     }
   }
-}
-
-function CalculateRoll(numOfDice, diceType, modifiers)  {
-  let total = 0;
-  let makeRoll = dt => {
-    const roll = Math.floor(Math.random()*dt + 1);
-    return roll == dt ? roll + makeRoll(dt) : roll;
-  }
-  for (let i = 0; i < numOfDice; i ++) {
-    total += makeRoll(diceType);
-  }
-  return total + modifiers;
 }

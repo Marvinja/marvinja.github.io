@@ -169,4 +169,33 @@ class Gun extends Item {
       if (num == 2) { this.clip = Math.floor(this.initialClip*2);}
       if (num == 3) { this.clip = Math.floor(this.initialClip*3);}
   }
+
+  CalculateAttackRoll(diceType, modifiers) {
+    let roll = Math.floor(Math.random()*diceType + 1);
+    console.log(roll);
+    return roll === diceType ? roll + CalculateAttackRoll(diceType) + modifiers: roll;
+  }
+
+  CalculateDamageRoll(numOfDice, diceType, modifiers)  {
+    let total = 0;
+    let makeRoll = dt => {
+      const roll = Math.floor(Math.random()*dt + 1);
+      return roll == dt ? roll + makeRoll(dt) : roll;
+    }
+    for (let i = 0; i < numOfDice; i ++) {
+      total += makeRoll(diceType);
+    }
+    return total + modifiers;
+  }
+
+  MakeAttack() {
+    const diceTypes = ["d4", "d6", "d8", "d10", "d12"];
+    let attackRollArr = [CalculateAttackRoll(6,0)];
+    //Semi auto
+    attackRollArr.push(CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)]), 0);
+    //3 Round Burst
+    attackRollArr.push(CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)]), 1);
+    //Full Auto
+
+  }
 }

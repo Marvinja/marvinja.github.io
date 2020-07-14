@@ -173,7 +173,7 @@ class Gun extends Item {
   CalculateAttackRoll(diceType, modifiers) {
     let roll = Math.floor(Math.random()*diceType + 1);
     console.log(roll);
-    return roll === diceType ? roll + CalculateAttackRoll(diceType) + modifiers: roll;
+    return roll === diceType ? roll + this.CalculateAttackRoll(diceType) + modifiers: roll;
   }
 
   CalculateDamageRoll(numOfDice, diceType, modifiers)  {
@@ -189,13 +189,22 @@ class Gun extends Item {
   }
 
   MakeAttack() {
-    const diceTypes = ["d4", "d6", "d8", "d10", "d12"];
-    let attackRollArr = [CalculateAttackRoll(6,0)];
-    //Semi auto
-    attackRollArr.push(CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)]), 0);
-    //3 Round Burst
-    attackRollArr.push(CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)]), 1);
-    //Full Auto
+    const diceTypes = [4, 6, 8, 10, 12];
+    let attackRollArr = [this.CalculateAttackRoll(6,0)];
+    let firingMode = this.shootingMode.filter(x => x != null).pop();
+    let damageArr = this.damage.split(/d|\+|\-/g).map(x => parseInt(x));
+    switch (firingMode) {
+        default:
+            console
+            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)],0));
+            attackRollArr.sort((a,b) => b-a).pop();
+            console.log(`Attack Roll Array: ${attackRollArr}`);
+            attackRollArr.forEach(x => {
+                x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+                x >=4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+            });
+            break;
+    }
 
   }
 }

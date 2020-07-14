@@ -172,8 +172,7 @@ class Gun extends Item {
 
   CalculateAttackRoll(diceType, modifiers) {
     let roll = Math.floor(Math.random()*diceType + 1);
-    console.log(roll);
-    return roll === diceType ? roll + this.CalculateAttackRoll(diceType) + modifiers: roll;
+    return roll === diceType ? roll + this.CalculateAttackRoll(diceType, modifiers) : roll + modifiers;
   }
 
   CalculateDamageRoll(numOfDice, diceType, modifiers)  {
@@ -192,18 +191,87 @@ class Gun extends Item {
     const diceTypes = [4, 6, 8, 10, 12];
     let attackRollArr = [this.CalculateAttackRoll(6,0)];
     let firingMode = this.shootingMode.filter(x => x != null).pop();
-    let damageArr = this.damage.split(/d|\+|\-/g).map(x => parseInt(x));
+    console.log(`Shooting Mode: ${firingMode}`);
+    let damageArr = this.damage.match(/\d+|(\+|\-)\d+/g).map(x => parseInt(x));
+    // let arr = ["Semi-automatic", "3 round burst", "Full auto - RoF 2", "Full auto - RoF 3", "Full auto - RoF 4", "Full auto - RoF 5"];
     switch (firingMode) {
+        case "Semi-automatic":
+          console.log("Attacking Semi-Auto");
+          attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)],0));
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], damageArr[2] || 0) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], damageArr[2] || 0)}`) : console.log("Miss");
+          });
+          break;
+        case "3 round burst":
+          console.log("Attacking 3 Round Burst");
+          attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)], 1));
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] + 1 || 1)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] + 1 || 1))}`) : console.log("Miss");
+          });
+          break;
+        case "Full auto - RoF 2":
+          console.log("Attacking Full Auto 2");
+          for (let i = 0; i < 2; i ++) {
+            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)], -2));
+          }
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+          });
+          break;
+        case "Full auto - RoF 3":
+          console.log("Attacking Full Auto 3");
+          for (let i = 0; i < 3; i ++) {
+            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)], -2));
+          }
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+          });
+          break;
+        case "Full auto - RoF 4":
+          console.log("Attacking Full Auto 4");
+          for (let i = 0; i < 4; i ++) {
+            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)], -2));
+          }
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+          });
+          break;
+        case "Full auto - RoF 5":
+          console.log("Attacking Full Auto 5");
+          for (let i = 0; i < 5; i ++) {
+            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)], -2));
+          }
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+          });
+          break;
         default:
-            console
-            attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)],0));
-            attackRollArr.sort((a,b) => b-a).pop();
-            console.log(`Attack Roll Array: ${attackRollArr}`);
-            attackRollArr.forEach(x => {
-                x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
-                x >=4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
-            });
-            break;
+          attackRollArr.push(this.CalculateAttackRoll(diceTypes[playerLevelArr.indexOf(this.playerLevel)],0));
+          attackRollArr.sort((a,b) => b-a).pop();
+          console.log(`Attack Roll Array: ${attackRollArr}`);
+          attackRollArr.forEach(x => {
+              x >= 8 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0)) + this.CalculateDamageRoll(1, 6, 0)}`) :
+              x >= 4 ? console.log(`Damage: ${this.CalculateDamageRoll(damageArr[0], damageArr[1], (damageArr[2] || 0))}`) : console.log("Miss");
+          });
+          break;
     }
 
   }

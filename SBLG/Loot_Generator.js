@@ -2,6 +2,7 @@ var quality;
 var categorySel, category;
 var playerLevelSel, playerLevel;
 var playerLevelArr = ["Novice", "Seasoned", "Veteran", "Heroic", "Legendary"];
+var itemQualityArr = ["White", "Green", "Blue", "Purple", "Orange"];
 
 var item;
 var items = [];
@@ -40,31 +41,22 @@ function RollX(num) {
 }
 
 function RandomItem(num, pl, qual) {
-  if (num <= 4) { items.push(new Pistol(pl, qual)); }
-  else if (num > 4 && num <= 6) { items.push(new SMG(pl, qual)); }
-  else if (num > 6 && num <= 8) { items.push(new AssaultRifle(pl, qual)); }
-  else if (num > 8 && num <= 10) { items.push(new SniperRifle(pl, qual)); }
-  else if (num > 10 && num <= 12) { items.push(new Shotgun(pl, qual)); }
-  else if (num == 13) { items.push(new RocketLauncher(pl, qual)); }
-  else if (num > 13 && num <= 15) { items.push(new Grenade(pl, qual)); }
-  else { items.push(new Shield(pl, qual)); }
+  if (num <= 4) { items.push(new Pistol(pl, qual)); return; }
+  if (num > 4 && num <= 6) { items.push(new SMG(pl, qual)); return; }
+  if (num > 6 && num <= 8) { items.push(new AssaultRifle(pl, qual)); return; }
+  if (num > 8 && num <= 10) { items.push(new SniperRifle(pl, qual)); return; }
+  if (num > 10 && num <= 12) { items.push(new Shotgun(pl, qual)); return; }
+  if (num == 13) { items.push(new RocketLauncher(pl, qual)); return; }
+  if (num > 13 && num <= 15) { items.push(new Grenade(pl, qual)); return; }
+  items.push(new Shield(pl, qual));
 }
 
 function randomQuality() {
-    var num = Math.floor(Math.random()*20 + 1);
-    if (num <= 12) {
-        console.log(`Choosing Quality: Green (${num})`);
-        return "Green";
-    } else if ((num > 12) && (num <= 17)) {
-        console.log(`Choosing Quality: Blue (${num})`);
-        return "Blue";
-    } else if ((num > 17) && (num <= 19)) {
-        console.log(`Choosing Quality: Purple (${num})`);
-        return "Purple";
-    } else {
-        console.log(`Choosing Quality: Orange (${num})`);
-        return "Orange";
-    }
+    var num = RollX(20);
+    if (num <= 12) { console.log(`Choosing Quality: %cGreen (${num})`, "color: green; font-weight: bold"); return "Green"; }
+    if ((num > 12) && (num <= 17)) { console.log(`Choosing Quality: %cBlue (${num})`, "color: blue; font-weight: bold"); return "Blue"; }
+    if ((num > 17) && (num <= 19)) { console.log(`Choosing Quality: %cPurple (${num})`, "color: purple; font-weight: bold"); return "Purple"; }
+    console.log(`Choosing Quality: %cOrange (${num})`, "color: orange; font-weight: bold"); return "Orange";
 }
 
 function SetHighlight(id) {

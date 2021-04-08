@@ -36,6 +36,20 @@ class Gun extends Item {
   }
 
 //Setting Manufacturers
+
+  SetManufacturer(m) {
+    switch(m): {
+      case "Bandit": SetBandit(); break;
+      case "Dahl": SetDahl(); break;
+      case "Hyperion": SetHyperion(); break;
+      case "Jakobs": SetJakobs(); break;
+      case "Maliwan": SetMaliwan(); break;
+      case "Tediore": SetTediore(); break;
+      case "Torgue": SetTorgue(); break;
+      case "Vladof": SetVladof(); break;
+      default: console.log("Manufacturer not found"); break;
+    }
+  }
   SetBandit() {
       this.initialClip *= 2;
       this.clip = this.initialClip;

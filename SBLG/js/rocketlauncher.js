@@ -9,7 +9,7 @@ class RocketLauncher extends Gun {
     this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor.")
     this.specialProperties.push("Rockets", "Unless specified otherwise, damage is dealt in a Medium Burst Template. Targets can try to dive for cover by making an Agility test at -2. If they want to do this, their Pace must allow them to get out of the Burst Template.");
 
-    this.InitialiseManufacturer();
+    this.SetManufacturer(this.manufacturer);
 
     //Improvement Variables
     this.snapfire = -2;

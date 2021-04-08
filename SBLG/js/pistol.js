@@ -3,7 +3,7 @@ class Pistol extends Gun {
     super(playerLevel, quality, "Pistol");
 
     this.InitialisePistol(this.RollX(20));
-    this.InitialiseManufacturer();
+    this.SetManufacturer(this.manufacturer);
     //Improvement Variables
     this.aimLevel = 0;
     this.aim = this.SetAim(this.aimLevel);
@@ -145,19 +145,6 @@ class Pistol extends Gun {
       this.strength = "-"
       this.ap  = 0;
       this.AddShootingMode(4);
-  }
-
-  InitialiseManufacturer() {
-    switch (this.manufacturer) {
-      case "Bandit": this.SetBandit(); break;
-      case "Dahl": this.SetDahl(); break;
-      case "Jakobs": this.SetJakobs(); break;
-      case "Maliwan": this.SetMaliwan(); break;
-      case "Tediore": this.SetTediore(); break;
-      case "Torgue": this.SetTorgue(); break;
-      case "Vladof": this.SetVladof(); break;
-      default: console.log("Manufacturer not found"); break;
-    }
   }
 
   Improvements(num) {

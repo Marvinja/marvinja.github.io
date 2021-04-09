@@ -2,8 +2,8 @@ class SMG extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "SMG");
 
-    this.InitialiseSMG(this.RollX(20));
-    this.InitialiseManufacturer();
+    this.InitialiseSMG(this.RollX(20),this.RollX(20));
+    this.SetManufacturer(this.manufacturer);
 
     //Improvement Variables
     this.barrels = 1;
@@ -28,21 +28,35 @@ class SMG extends Gun {
     this.AddItemBlock();
   }
 
-  InitialiseSMG(num) {
-      if (num <= 6) { this.model = "Subcompact MG"; this.InitialiseSubcompactMG(this.RollX(20)); }
-      else if (num > 7 && num <= 13) { this.model = "Special"; this.InitialiseSpecial(this.RollX(20)); }
-      else { this.model = "Ace"; this.InitialiseAce(this.RollX(20)); }
+  InitialiseSMG(smgNum, manufacturerNum) {
+      let smgTypeArr = ["Subcompact MG", "Special", "Ace"];
+      let manufacturerArr = ["Bandit", "Dahl", "Hyperion", "Maliwan", "Tediore"];
+      let prefixArr = [
+        ["smig", "SMG", "Projectile Convergence", "Submalevolent Grace", "Subcompact MG"],
+        ["rokgun", "Fox", "Presence", "Trance", "Special"],
+        ["smgg", "Falcon", "Transmudera", "Gospels", "Ace"]
+      ];
+
+      if (smgNum <= 6) { this.model = smgTypeArr[0]; }
+      if (smgNum > 7 && smgNum <= 13) { this.model = smgTypeArr[1]; }
+      if (smgNum > 13) { this.model = smgTypeArr[2]; }
+
+      if (manufacturerNum <= 4) { this.manufacturer = manufacturerArr[0]; this.prefix = "smig"; }
+      if (manufacturerNum > 4 && manufacturerNum <= 8) { this.manufacturer = manufacturerArr[1]; this.prefix = "SMG"; }
+      if (manufacturerNum > 8 && manufacturerNum <= 12) { this.manufacturer = manufacturerArr[2]; this.prefix = "Projectile Convergence"; }
+      if (manufacturerNum > 12 && manufacturerNum <= 16) { this.manufacturer = manufacturerArr[3]; this.prefix = "SubMalevolent Grace"; }
+      if (manufacturerNum > 16){ this.manufacturer = manufacturerArr[4]; this.prefix = "Subcompact MG"; }
+
+      this.prefix = prefixArr[smgTypeArr.indexOf(this.model)][manufacturerArr.indexOf(this.manufacturer)];
+
+      switch(this.model) {
+        case "Subcompact MG": this.InitialiseSubcompactMGStats(); break;
+        case "Special": this.InitialiseSpecialStats(); break;
+        case "Ace": this.InitialiseAceStats(); break;
+        default: console.log("%cThere was an error initialising the gun", "color: red"); break;
+      }
   }
 
-  InitialiseSubcompactMG(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "smig"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "SMG"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Hyperion"; this.prefix = "Projectile Convergence"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Maliwan"; this.prefix = "SubMalevolent Grace"; }
-      else { this.manufacturer = "Tediore"; this.prefix = "Subcompact MG"; }
-
-      this.InitialiseSubcompactMGStats();
-  }
   InitialiseSubcompactMGStats() {
       this.rangeLevel = 6;
       this.range = this.SetRange(this.rangeLevel);
@@ -55,15 +69,6 @@ class SMG extends Gun {
 
       this.aimLevel = 0;
       this.aim = this.SetAim(this.aimLevel);
-  }
-  InitialiseSpecial(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "rokgun"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Fox"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Hyperion"; this.prefix = "Presence"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Maliwan"; this.prefix = "Trance"; }
-      else { this.manufacturer = "Tediore"; this.prefix = "Special"; }
-
-      this.InitialiseSpecialStats();
   }
   InitialiseSpecialStats() {
       this.rangeLevel = 6;
@@ -78,15 +83,6 @@ class SMG extends Gun {
       this.aimLevel = 0;
       this.aim = this.SetAim(this.aimLevel);
   }
-  InitialiseAce(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "smgg"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Falcon"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Hyperion"; this.prefix = "Transmurdera"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Maliwan"; this.prefix = "Gospel"; }
-      else { this.manufacturer = "Tediore"; this.prefix = "Ace"; }
-
-      this.InitialiseAceStats();
-  }
   InitialiseAceStats() {
       this.rangeLevel = 7;
       this.range = this.SetRange(this.rangeLevel);
@@ -100,32 +96,6 @@ class SMG extends Gun {
       this.aimLevel = 1;
       this.aim = this.SetAim(this.aimLevel);
   }
-
-  InitialiseManufacturer() {
-    switch (this.manufacturer) {
-      case "Bandit": this.SetBandit(); break;
-      case "Dahl": this.SetDahl(); break;
-      case "Jakobs": this.SetJakobs(); break;
-      case "Maliwan": this.SetMaliwan(); break;
-      case "Tediore": this.SetTediore(); break;
-      case "Hyperion": this.SetHyperion(); break;
-      case "Torgue": this.SetTorgue(); break;
-      case "Vladof": this.SetVladof(); break;
-      default: console.log("Manufacturer not found"); break;
-    }
-  }
-
-  // InitialiseSpecialDamageName() {
-  //   let specialDamageArr = ["Corrosive", "Shock", "Incendiary", "Slag"];
-  //   let manufacturerArr = ["Dahl", "Bandit", "Hyperion", "Maliwan", "Tediore"];
-  //   let nameArr = [
-  //     ["Scorpion", "Barfy", "Weisenheimer", "Venom", "Green"],
-  //     ["Eel","Shoky","Storm","Vexation","Spark"],
-  //     ["Beetle", "Burny", "Backburner", "Provocateur", "Kindle"],
-  //     ["Slagy", "Jackal", "Wellness", "Revenant", "Chaff"]
-  //   ];
-  //   return nameArr[specialDamage.indexOf(this.specialDamageType)][manufacturerArr.indexOf(this.manufacturer)];
-  // }
 
   Improvements(num) {
       if (num <= 2) {

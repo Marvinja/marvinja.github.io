@@ -15,7 +15,7 @@ function Generate() {
   playerLevel = select("#playerLevel").value();
   quality = randomQuality();
   var cat = select("#category").value();
-  console.log(`Generating ${playerLevel} ${quality} ${cat}`);
+  console.log(`Generating ${playerLevel} %c${quality} %c${cat}`, `color: ${quality}; font-weight: bold`, `color: black` );
     switch (cat) {
         case 'Pistol': items.push(new Pistol(playerLevel, quality)); break;
         case 'SMG': items.push(new SMG(playerLevel, quality)); break;

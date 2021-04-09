@@ -28,25 +28,30 @@ class Gun extends Item {
     this.shootingMode = []; this.shootingMode.length = 6;
 
     this.hinderances = []; this.hinderances.length = 2;
+
+    this.criticalArr = ['d6', 'd8', 'd10', 'd12'];
+    this.damageArr = ["2d6-1", "2d6", "2d6+1", "2d8", "2d8+1", "2d10", "2d10+1", "2d12"];
+    this.shotgunDamageArr = ["3d6/2d6/1d6", "3d6+1/2d6+1/1d6+1", "3d8/2d8/1d8"];
+    this.grenadeDamageArr = ["3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2", "3d10"];
+    this.rocketDamageArr = ["2d10", "3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2"];
+    this.rangeArr = ["2/4/8", "3/6/12", "5/10/20", "10/20/40", "12/24/48", "15/30/60", "20/40/80", "24/48/96", "30/60/120", "40/80/160", "50/100/200"];
+    this.shootingModeArr = ["Semi-automatic", "3 round burst", "Full auto - RoF 2", "Full auto - RoF 3", "Full auto - RoF 4", "Full auto - RoF 5"];
   }
 
-  AddShootingMode(num) {
-    let arr = ["Semi-automatic", "3 round burst", "Full auto - RoF 2", "Full auto - RoF 3", "Full auto - RoF 4", "Full auto - RoF 5"];
-    this.shootingMode[num-1] = arr[num-1];
-  }
+  AddShootingMode(num) { this.shootingMode[num-1] = this.shootingModeArr[num-1]; }
 
 //Setting Manufacturers
 
   SetManufacturer(m) {
-    switch(m): {
-      case "Bandit": SetBandit(); break;
-      case "Dahl": SetDahl(); break;
-      case "Hyperion": SetHyperion(); break;
-      case "Jakobs": SetJakobs(); break;
-      case "Maliwan": SetMaliwan(); break;
-      case "Tediore": SetTediore(); break;
-      case "Torgue": SetTorgue(); break;
-      case "Vladof": SetVladof(); break;
+    switch(m) {
+      case "Bandit": this.SetBandit(); break;
+      case "Dahl": this.SetDahl(); break;
+      case "Hyperion": this.SetHyperion(); break;
+      case "Jakobs": this.SetJakobs(); break;
+      case "Maliwan": this.SetMaliwan(); break;
+      case "Tediore": this.SetTediore(); break;
+      case "Torgue": this.SetTorgue(); break;
+      case "Vladof": this.SetVladof(); break;
       default: console.log("Manufacturer not found"); break;
     }
   }
@@ -69,8 +74,8 @@ class Gun extends Item {
       //Damage
       this.damageLevel ++;
       if (this.category == "Shotgun") { this.SetDamageShotgun(this.damageLevel); }
-      else if (this.prefix == "Grenade Launcher") { this.SetDamageGrenade(this.damageLevel); }
-      else { this.damage = this.SetDamage(this.damageLevel); }
+      if (this.prefix == "Grenade Launcher") { this.SetDamageGrenade(this.damageLevel); }
+      if (this.category != "Shotgun" || this.prefix == "Grenade Launcher") { this.damage = this.SetDamage(this.damageLevel); }
       //AP
       this.ap ++;
       //Revolver
@@ -116,11 +121,9 @@ class Gun extends Item {
       this.shootingModeLevel ++;
       this.AddShootingMode(this.shootingModeLevel);
 
-
       if (this.prefix == "Droog") {
           this.AddShootingMode(3);
       }
-
       if (this.category == "Rocket Launcher") {
           this.initialClip *= 2;
           if (this.category = "Rocket Launcher") {
@@ -130,38 +133,15 @@ class Gun extends Item {
       }
   }
 
-
 //Setting Stats
   SetAim(num) { return num == 1 ? 'Zoom' : 'Scope'; }
-
   SetBayonet(num) { return num == 1 ? "Bayonet (Str+d8)" : "Super-bayonet (Str+d10)"; }
-
-  SetCritical(num) {
-    let arr = ['d6', 'd8', 'd10', 'd12'];
-    return arr[num-1];
-  }
-
-  SetDamage(num) {
-    let arr = ["2d6-1", "2d6", "2d6+1", "2d8", "2d8+1", "2d10", "2d10+1", "2d12"];
-    return arr[num-1];
-  }
-  SetDamageShotgun(num) {
-    let arr = ["3d6/2d6/1d6", "3d6+1/2d6+1/1d6+1", "3d8/2d8/1d8"];
-    return arr[num-1];
-  }
-  SetDamageGrenade(num) {
-    let arr = ["3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2", "3d10"];
-    return arr[num-1];
-  }
-  SetDamageRocket(num) {
-    let arr = ["2d10", "3d6", "3d6+1", "3d6+2", "3d8", "3d8+1", "3d8+2"];
-    return arr[num-1];
-  }
-
-  SetRange(num) {
-    let arr = ["2/4/8", "3/6/12", "5/10/20", "10/20/40", "12/24/48", "15/30/60", "20/40/80", "24/48/96", "30/60/120", "40/80/160", "50/100/200"];
-    return arr[num-1];
-  }
+  SetCritical(num) { return this.criticalArr[num-1]; }
+  SetDamage(num) { return this.damageArr[num-1]; }
+  SetDamageShotgun(num) { return this.shotgunDamageArr[num-1]; }
+  SetDamageGrenade(num) { return this.grenadeDamageArr[num-1]; }
+  SetDamageRocket(num) { return this.rocketDamageArr[num-1]; }
+  SetRange(num) { return this.rangeArr[num-1]; }
 
   SetSpecialDamage(num) {
     if (num == 1) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; }

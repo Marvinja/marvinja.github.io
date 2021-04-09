@@ -2,7 +2,7 @@ class Pistol extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "Pistol");
 
-    this.InitialisePistol(this.RollX(20));
+    this.InitialisePistol(this.RollX(20),this.RollX(20));
     this.SetManufacturer(this.manufacturer);
     //Improvement Variables
     this.aimLevel = 0;
@@ -27,25 +27,42 @@ class Pistol extends Gun {
     this.AddItemBlock();
   }
 
-  InitialisePistol(num) {
-      if (num <=4) { this.model = "Handgun"; this.InitialiseHandgun(this.RollX(20)); }
-      else if (num > 4 && num <= 8) { this.model = "Aimshot"; this.InitialiseAimshot(this.RollX(20)); }
-      else if (num > 8 && num <= 12) { this.model = "Powershot"; this.InitialisePowershot(this.RollX(20)); }
-      else if (num > 4 && num <= 16) { this.model = "Big Gun"; this.InitialiseBigGun(this.RollX(20)); }
-      else { this.model = "Quickshot"; this.InitialiseQuickshot(this.RollX(20)); }
-  }
+  InitialisePistol(pistolNum, manufacturerNum) {
 
-  InitialiseHandgun(num) {
-      if (num <= 3) { this.manufacturer = "Bandit"; this.prefix = "Pistal"; }
-      else if (num > 3 && num <= 6) { this.manufacturer = "Dahl"; this.prefix = "Repeater"; }
-      else if (num > 6 && num <= 9) { this.manufacturer = "Hyperion"; this.prefix = "Apparatus"; }
-      else if (num > 9 && num <= 11) { this.manufacturer = "Jakobs"; this.prefix = "Revolver"; }
-      else if (num > 11 && num <= 13) { this.manufacturer = "Maliwan"; this.prefix = "Aegis"; }
-      else if (num > 13 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Handgun"; }
-      else if (num > 16 && num <= 18) { this.manufacturer = "Torgue"; this.prefix = "Hand Cannon"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "TMP"; }
+      let pistolTypeArr = ["Handgun", "Aimshot", "Powershot", "Big Gun", "Quickshot"];
+      let manufacturerArr = ["Bandit", "Dahl", "Hyperion", "Jakobs", "Maliwan", "Tediore", "Torgue", "Vladof"];
+      let prefixArr = [
+        ["Pistal", "Repeater", "Apparatus", "Revolver", "Aegis", "Handgun", "Hand Cannon", "TMP"],
+        ["Hed Shoter!", "Anaconda", "Vision", "Longarm", "Phobia", "Aimshot", "Hole Puncher", "Assassin"],
+        ["Ass Beeter", "Peacemaker", "Leverage", "Iron", "Torment", "Powershot", "Rod", "Fighter"],
+        ["Magamum!", "Magnum", "Impact", "Widow Maker", "Animosity", "Biggun", "Slapper", "Troublemaker"],
+        ["Ratatater!", "Negotiator", "Synergy", "Wheelgun", "Umberage", "Quickshot", "Injector", "Anarchist"]
+      ];
+      if (pistolNum <= 4) { this.model = pistolTypeArr[0]; }
+      if (pistolNum > 4 && pistolNum <= 8) { this.model = pistolTypeArr[1]; }
+      if (pistolNum > 8 && pistolNum <= 12) { this.model = pistolTypeArr[2]; }
+      if (pistolNum > 4 && pistolNum <= 16) { this.model = pistolTypeArr[3]; }
+      if (pistolNum > 16) { this.model = pistolTypeArr[4]; }
 
-      this.InitialiseHandgunStats();
+      if (manufacturerNum <= 3) { this.manufacturer = manufacturerArr[0]; }
+      if (manufacturerNum > 3 && manufacturerNum <= 6) { this.manufacturer = manufacturerArr[1]; }
+      if (manufacturerNum > 6 && manufacturerNum <= 9) { this.manufacturer = manufacturerArr[2]; }
+      if (manufacturerNum > 9 && manufacturerNum <= 11) { this.manufacturer = manufacturerArr[3]; }
+      if (manufacturerNum > 11 && manufacturerNum <= 13) { this.manufacturer = manufacturerArr[4]; }
+      if (manufacturerNum > 13 && manufacturerNum <= 16) { this.manufacturer = manufacturerArr[5]; }
+      if (manufacturerNum > 16 && manufacturerNum <= 18) { this.manufacturer = manufacturerArr[6]; }
+      if (manufacturerNum > 18) { this.manufacturer = manufacturerArr[7]; }
+
+      this.prefix = prefixArr[pistolTypeArr.indexOf(this.model)][manufacturerArr.indexOf(this.manufacturer)];
+
+      switch(this.model) {
+        case "Handgun": this.InitialiseHandgunStats(); break;
+        case "Aimshot": this.InitialiseAimshotStats(); break;
+        case "Powershot": this.InitialisePowershotStats(); break;
+        case "Big Gun": this.InitialiseBigGunStats(); break;
+        case "Quickshot": this.InitialiseQuickshotStats(); break;
+        default: console.log("%cThere was an error initialising the gun", "color: red"); break;
+      }
   }
   InitialiseHandgunStats() {
       this.rangeLevel = 4;
@@ -57,18 +74,6 @@ class Pistol extends Gun {
       this.strength = "-"
       this.ap  = 0;
   }
-  InitialiseAimshot(num) {
-      if (num <= 3) { this.manufacturer = "Bandit"; this.prefix = "Hed Shoter!"; }
-      else if (num > 3 && num <= 6) { this.manufacturer = "Dahl"; this.prefix = "Anaconda"; }
-      else if (num > 6 && num <= 9) { this.manufacturer = "Hyperion"; this.prefix = "Vision"; }
-      else if (num > 9 && num <= 11) { this.manufacturer = "Jakobs"; this.prefix = "Longarm"; }
-      else if (num > 11 && num <= 13) { this.manufacturer = "Maliwan"; this.prefix = "Phobia"; }
-      else if (num > 13 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Aimshot"; }
-      else if (num > 16 && num <= 18) { this.manufacturer = "Torgue"; this.prefix = "Hole Puncher"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "Assassin"; }
-
-      this.InitialiseAimshotStats();
-  }
   InitialiseAimshotStats() {
       this.rangeLevel = 6;
       this.range = this.SetRange(this.rangeLevel);
@@ -78,18 +83,6 @@ class Pistol extends Gun {
       this.clip = this.initialClip = 13;
       this.strength = "-"
       this.ap  = 0;
-  }
-  InitialisePowershot(num) {
-      if (num <= 3) { this.manufacturer = "Bandit"; this.prefix = "Ass Beeter"; }
-      else if (num > 3 && num <= 6) { this.manufacturer = "Dahl"; this.prefix = "Peacemaker"; }
-      else if (num > 6 && num <= 9) { this.manufacturer = "Hyperion"; this.prefix = "Leverage"; }
-      else if (num > 9 && num <= 11) { this.manufacturer = "Jakobs"; this.prefix = "Iron"; }
-      else if (num > 11 && num <= 13) { this.manufacturer = "Maliwan"; this.prefix = "Torment"; }
-      else if (num > 13 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Powershot"; }
-      else if (num > 16 && num <= 18) { this.manufacturer = "Torgue"; this.prefix = "Rod"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "Fighter"; }
-
-      this.InitialisePowershotStats();
   }
   InitialisePowershotStats() {
       this.rangeLevel = 5;
@@ -101,18 +94,6 @@ class Pistol extends Gun {
       this.strength = "d6"
       this.ap  = 1;
   }
-  InitialiseBigGun(num) {
-      if (num <= 3) { this.manufacturer = "Bandit"; this.prefix = "Magamum!"; }
-      else if (num > 3 && num <= 6) { this.manufacturer = "Dahl"; this.prefix = "Magnum"; }
-      else if (num > 6 && num <= 9) { this.manufacturer = "Hyperion"; this.prefix = "Impact"; }
-      else if (num > 9 && num <= 11) { this.manufacturer = "Jakobs"; this.prefix = "Widow Maker"; }
-      else if (num > 11 && num <= 13) { this.manufacturer = "Maliwan"; this.prefix = "Animosity"; }
-      else if (num > 13 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Biggun"; }
-      else if (num > 16 && num <= 18) { this.manufacturer = "Torgue"; this.prefix = "Slapper"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "Troublemaker"; }
-
-      this.InitialiseBigGunStats();
-  }
   InitialiseBigGunStats() {
       this.rangeLevel = 4;
       this.range = this.SetRange(this.rangeLevel);
@@ -122,18 +103,6 @@ class Pistol extends Gun {
       this.clip = this.initialClip = 14;
       this.strength = "-"
       this.ap  = 1;
-  }
-  InitialiseQuickshot(num) {
-      if (num <= 3) { this.manufacturer = "Bandit"; this.prefix = "Ratatater!"; }
-      else if (num > 3 && num <= 6) { this.manufacturer = "Dahl"; this.prefix = "Negotiator"; }
-      else if (num > 6 && num <= 9) { this.manufacturer = "Hyperion"; this.prefix = "Synergy"; }
-      else if (num > 9 && num <= 11) { this.manufacturer = "Jakobs"; this.prefix = "Wheelgun"; }
-      else if (num > 11 && num <= 13) { this.manufacturer = "Maliwan"; this.prefix = "Umbrage"; }
-      else if (num > 13 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Quickshot"; }
-      else if (num > 16 && num <= 18) { this.manufacturer = "Torgue"; this.prefix = "Injector"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "Anarchist"; }
-
-      this.InitialiseQuickshotStats();
   }
   InitialiseQuickshotStats() {
       this.rangeLevel = 4;

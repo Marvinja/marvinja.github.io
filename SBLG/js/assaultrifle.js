@@ -2,7 +2,7 @@ class AssaultRifle extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "Assault Rifle");
 
-    this.InitialiseAssaultRifle(this.RollX(20));
+    this.InitialiseAssaultRifle(this.RollX(20), this.RollX(20));
     this.InitialiseManufacturer();
 
     //Improvement Variables
@@ -29,23 +29,40 @@ class AssaultRifle extends Gun {
     this.AddItemBlock();
   }
 
-  InitialiseAssaultRifle(num) {
-      if (num <= 4) { this.model = "AssaultRifle"; this.InitialiseAR(this.RollX(20)); }
-      else if (num > 4 && num <= 8) { this.model = "Scoped Assault Rifle"; this.InitialiseScopedAssaultRifle(this.RollX(20)); }
-      else if (num > 8 && num <= 12) { this.model = "Heavy Assault Rifle"; this.InitialiseHeavyAssaultRifle(this.RollX(20)); }
-      else if (num > 12 && num <= 16) { this.model = "Machinegun"; this.InitialiseMachinegun(this.RollX(20)); }
-      else { this.model = "Grenade Launcher"; this.InitialiseGrenadeLauncher(this.RollX(20)); }
+  InitialiseAssaultRifle(arNum, manufacturerNum) {
+    let assaultRifleTypeArr = ["AssaultRifle", "Scoped Assault Rifle", "Heavy Assault Rifle", "Machinegun", "Grenade Launcher"];
+    let manufacturerArr = ["Bandit", "Dahl", "Jakobs", "Torgue", "Vladof"];
+    let prefixArr = [
+      ["Mashine Gun", "Rifle", "Rifle", "Rifle", "Rifle"],
+      ["Carbene", "Carbine", "Scarab", "Root", "Renegade"],
+      ["Ass Beeter!", "Defender", "Rifle", "Lance", "Guerilla"],
+      ["Spinigun", "Minigun", "Gatling Gun", "Spitter", "Spinigun"],
+      ["Rokets!", "Grenadier", "Cannon", "Torpedo", "Rocketeer"]
+    ];
+    if (arNum <= 4) { this.model = assaultRifleTypeArr[0]; }
+    if (arNum > 4 && arNum <= 8) { this.model = assaultRifleTypeArr[1]; }
+    if (arNum > 8 && arNum <= 12) { this.model = assaultRifleTypeArr[2]; }
+    if (arNum > 12 && arNum <= 16) { this.model = assaultRifleTypeArr[3]; }
+    if (arNum > 16) { this.model = assaultRifleTypeArr[4]; }
+
+    if (manufacturerNum <= 4) { this.manufacturer = manufacturerArr[0]; }
+    if (manufacturerNum > 4 && manufacturerNum <= 8) { this.manufacturer = manufacturerArr[1]; }
+    if (manufacturerNum > 8 && manufacturerNum <= 12) { this.manufacturer = manufacturerArr[2]; }
+    if (manufacturerNum > 12 && manufacturerNum <= 16) { this.manufacturer = manufacturerArr[3]; }
+    if (manufacturerNum > 16) { this.manufacturer = manufacturerArr[4]; }
+
+    this.prefix = prefixArr[assaultRifleTypeArr.indexOf(this.model)][manufacturerArr.indexOf(this.manufacturer)];
+
+    switch (this.model) {
+      case "AssaultRifle" : this.InitialiseARStats(); break;
+      case "Scoped Assault Rifle" : this.InitialiseScopedAssaultRifleStats(); break;
+      case "Heavy Assault Rifle" : this.InitialiseHeavyAssaultRifleStats(); break;
+      case "Machinegun" : this.InitialiseMachinegunStats(); break;
+      case "Grenade Launcher" : this.InitialiseGrenadeLauncherStats(); break;
+      default: console.log("%cThere was an error initialising the gun", "color: red"); break;
+    }
   }
 
-  InitialiseAR(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Mashine Gun"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Rifle"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Rifle"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Rifle"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "Rifle"; }
-
-      this.InitialiseARStats();
-  }
   InitialiseARStats() {
       this.rangeLevel = 8;
       this.range = this.SetRange(this.rangeLevel);
@@ -60,15 +77,6 @@ class AssaultRifle extends Gun {
       this.shootingModeLevel = 1;
       this.AddShootingMode(1);
       this.AddShootingMode(3);
-  }
-  InitialiseScopedAssaultRifle(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Carbene"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Carbine"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Scarab"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Root"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Renegade"; }
-
-      this.InitialiseScopedAssaultRifleStats();
   }
   InitialiseScopedAssaultRifleStats() {
     this.rangeLevel = 8;
@@ -86,15 +94,6 @@ class AssaultRifle extends Gun {
     this.AddShootingMode(1);
     this.AddShootingMode(3);
   }
-  InitialiseHeavyAssaultRifle(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Ass Beeter!"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Defender"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Rifle"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Lance"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Guerilla"; }
-
-      this.InitialiseHeavyAssaultRifleStats();
-  }
   InitialiseHeavyAssaultRifleStats() {
     this.rangeLevel = 9;
     this.range = this.SetRange(this.rangeLevel);
@@ -110,16 +109,6 @@ class AssaultRifle extends Gun {
     this.AddShootingMode(1);
     this.AddShootingMode(3);
   }
-
-  InitialiseMachinegun(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Spinigun"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Minigun"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Gatling Gun"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Spitter"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Spinigun"; }
-
-      this.InitialiseMachinegunStats();
-  }
   InitialiseMachinegunStats() {
     this.rangeLevel = 8;
     this.range = this.SetRange(this.rangeLevel);
@@ -133,16 +122,6 @@ class AssaultRifle extends Gun {
     this.aimLevel = 0;
     this.shootingModeLevel = 4;
     this.AddShootingMode(4);
-  }
-
-  InitialiseGrenadeLauncher(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Rokets!"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Grenadier"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Cannon"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Torpedo"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Rocketeer"; }
-
-      this.InitialiseGrenadeLauncherStats();
   }
   InitialiseGrenadeLauncherStats() {
     this.rangeLevel = 8;
@@ -158,8 +137,6 @@ class AssaultRifle extends Gun {
     this.shootingModeLevel = 0;
     this.specialProperties.push("Grenade Launcher", "The Grenade launcher uses 3 ammo per shot and deals damage in a Small Burst Template.");
   }
-
-
 
   InitialiseManufacturer() {
       switch (this.manufacturer) {
@@ -246,11 +223,11 @@ class AssaultRifle extends Gun {
 
   InitialiseSpecialDamageType(num) {
     if (num <= 4) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
-    else if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
-    else if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
-    else if (num > 12 && num <= 14) { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
-    else if (num > 14 && num <= 18) { this.specialDamageType = "Explosive"; }
-    else { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor."); this.AddSubPrefix("Heavy Weapon"); }
+    if (num > 4 && num <= 8) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    if (num > 8 && num <= 12) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
+    if (num > 12 && num <= 14) { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
+    if (num > 14 && num <= 18) { this.specialDamageType = "Explosive"; }
+    if (num > 18) { this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor."); this.AddSubPrefix("Heavy Weapon"); }
   }
 
   AssaultRifleStatBlock() {

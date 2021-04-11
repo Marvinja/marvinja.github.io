@@ -2,6 +2,7 @@ class Pistol extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "Pistol");
 
+    console.log("%cRolling for Pistol Type...", consoleLogStyle);
     this.InitialisePistol(this.RollX(20),this.RollX(20));
     this.SetManufacturer(this.manufacturer);
     //Improvement Variables
@@ -14,6 +15,7 @@ class Pistol extends Gun {
     this.damageLimit = 0;
     this.rangeLimit = 0;
     this.apLimit = 0;
+    console.log(`%cRolling ${this.improvements} Pistol Improvements`, consoleLogStyle);
     for (var i = 0; i < this.improvements; i ++) {
         this.Improvements(this.RollX(20));
     }
@@ -28,7 +30,6 @@ class Pistol extends Gun {
   }
 
   InitialisePistol(pistolNum, manufacturerNum) {
-
       let pistolTypeArr = ["Handgun", "Aimshot", "Powershot", "Big Gun", "Quickshot"];
       let manufacturerArr = ["Bandit", "Dahl", "Hyperion", "Jakobs", "Maliwan", "Tediore", "Torgue", "Vladof"];
       let prefixArr = [

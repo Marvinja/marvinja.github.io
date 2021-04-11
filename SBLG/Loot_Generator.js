@@ -1,3 +1,5 @@
+var consoleLogStyle = "color: #a0a0a0; font-family: Willowbody";
+
 var quality;
 var categorySel, category;
 var playerLevelSel, playerLevel;
@@ -12,10 +14,11 @@ function setup() {
 }
 
 function Generate() {
+  var cat = select("#category").value();
+  console.log(`%cGenerating new ${cat}`, `color: #a0a0a0; font-family: Willowbody`);
   playerLevel = select("#playerLevel").value();
   quality = randomQuality();
-  var cat = select("#category").value();
-  console.log(`Generating ${playerLevel} %c${quality} %c${cat}`, `color: ${quality}; font-weight: bold`, `color: black` );
+  console.log(`Generating ${playerLevel} %c${quality}` + ` ${cat}`, `color: ${quality}; font-weight: bold; font-family: Willowbody`);
     switch (cat) {
         case 'Pistol': items.push(new Pistol(playerLevel, quality)); break;
         case 'SMG': items.push(new SMG(playerLevel, quality)); break;
@@ -53,10 +56,10 @@ function RandomItem(num, pl, qual) {
 
 function randomQuality() {
     var num = RollX(20);
-    if (num <= 12) { console.log(`Choosing Quality: %cGreen (${num})`, "color: green; font-weight: bold"); return "Green"; }
-    if ((num > 12) && (num <= 17)) { console.log(`Choosing Quality: %cBlue (${num})`, "color: blue; font-weight: bold"); return "Blue"; }
-    if ((num > 17) && (num <= 19)) { console.log(`Choosing Quality: %cPurple (${num})`, "color: purple; font-weight: bold"); return "Purple"; }
-    console.log(`Choosing Quality: %cOrange (${num})`, "color: orange; font-weight: bold"); return "Orange";
+    if (num <= 12) { console.log(`Choosing Quality: %cGreen (${num})`, "color: green; font-weight: bold; font-family: Willowbody"); return "Green"; }
+    if ((num > 12) && (num <= 17)) { console.log(`Choosing Quality: %cBlue (${num})`, "color: blue; font-weight: bold; font-family: Willowbody"); return "Blue"; }
+    if ((num > 17) && (num <= 19)) { console.log(`Choosing Quality: %cPurple (${num})`, "color: purple; font-weight: bold; font-family: Willowbody"); return "Purple"; }
+    console.log(`Randomising Quality: %cOrange (${num})`, "color: orange; font-weight: bold; font-family: Willowbody"); return "Orange";
 }
 
 function SetHighlight(id) {

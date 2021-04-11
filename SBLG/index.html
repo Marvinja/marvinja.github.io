@@ -55,7 +55,7 @@
                           </select>
                         </div>
                         <div class="col-md-6 mt-4">
-                          <select class="form-control" id="category">
+                          <select class="form-control" id="category" onchange="changeText(this)">
                             <option value="Pistol">Pistol</option>
                             <option value="SMG">SMG</option>
                             <option value="Assault Rifle">Assault Rifle</option>
@@ -67,7 +67,7 @@
                           </select>
                         </div>
                       <div class="col-md-12 mt-4">
-                          <a class="mx-auto d-block" onclick="Generate()"><img src="./img/Generate Gun.png" id="Generate-Gun" class="img-fluid"></a>
+                          <a class="mx-auto d-block" onclick="Generate()"><img src="./img/sblg-button.svg" id="Generate-Gun" class="img-fluid"></a>
                       </div>
                       <div class="col-md-12 mt-4">
                           <a class="mx-auto d-block" onclick="GenerateRandom()"><img src="./img/Generate Random Gun.png" id="Generate-Random-Gun" class="img-fluid"></a>
@@ -110,6 +110,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
+
+    function changeText() {
+      document.getElementById("itemType").innerHTML = document.getElementById("category").value;
+    }
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });

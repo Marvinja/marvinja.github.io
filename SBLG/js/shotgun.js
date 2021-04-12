@@ -2,8 +2,8 @@ class Shotgun extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "Shotgun");
 
-    this.InitialiseShotgun(this.RollX(20));
-    this.InitialiseManufacturer();
+    this.InitialiseShotgun(this.RollX(20), this.RollX(20));
+    this.SetManufacturer(this.manufacturer);
 
     //Improvement Variables
     this.criticalLevel = 1;
@@ -28,22 +28,38 @@ class Shotgun extends Gun {
     this.AddItemBlock();
   }
 
-  InitialiseShotgun(num) {
-      if (num <= 5) { this.model = "Basic"; this.InitialiseBasic(this.RollX(20)); }
-      else if (num > 5 && num <= 10) { this.model = "Accurate"; this.InitialiseAccurate(this.RollX(20)); }
-      else if (num > 10 && num <= 15) { this.model = "Double-barreled"; this.InitialiseDoubleBarreled(this.RollX(20)); }
-      else { this.model = "Triple-Barreled"; this.InitialiseTripleBarreled(this.RollX(20)); }
+  InitialiseShotgun(shotgunNum, manufacturerNum) {
+    let shotgunTypeArr = ["Basic", "Accurate", "Double-barreled", "Triple-Barreled"];
+    let manufacturerArr = ["Bandit", "Hyperion", "Jakobs", "Tediore", "Torgue"];
+    let prefixArr = [
+      ["Skatergun", "Projectile Diversification", "Scattergun", "Home Security", "Bangstick"],
+      ["Longer ragne kilier", "Thinking", "Longrider", "Sportsman", "Stalker"],
+      ["Stret Sweper", "Face Time", "Coach Gun", "Double Barrels!", "Double Lovin' Pounder"],
+      ["Room Clener", "Crowdsourcing", "Bushwack", "Triple Barrels!", "Three Way Hulk"]
+    ];
+
+    if (shotgunNum <= 5) { this.model = "Basic"; this.InitialiseBasic(this.RollX(20)); }
+    if (shotgunNum > 5 && shotgunNum <= 10) { this.model = "Accurate"; this.InitialiseAccurate(this.RollX(20)); }
+    if (shotgunNum > 10 && shotgunNum <= 15) { this.model = "Double-barreled"; this.InitialiseDoubleBarreled(this.RollX(20)); }
+    if (shotgunNum > 15) { this.model = "Triple-Barreled"; this.InitialiseTripleBarreled(this.RollX(20)); }
+
+    if (manufacturerNum <= 4) { this.manufacturer = manufacturerArr[0];}
+    if (manufacturerNum > 4 && manufacturerNum <= 8) { this.manufacturer = manufacturerArr[1];}
+    if (manufacturerNum > 8 && manufacturerNum <= 12) { this.manufacturer = manufacturerArr[2];}
+    if (manufacturerNum > 12 && manufacturerNum <= 16) { this.manufacturer = manufacturerArr[3];}
+    if (manufacturerNum > 16) { this.manufacturer = manufacturerArr[4];}
+
+    this.prefix = prefixArr[shotgunTypeArr.indexOf(this.model)][manufacturerArr.indexOf(this.manufacturer)];
+
+    switch(this.model) {
+      case "Basic":  this.InitialiseBasicStats(); break;
+      case "Accurate": this.InitialiseAccurateStats(); break;
+      case "Double-Barreled": this.InitialiseDoubleBarreledStats(); break;
+      case "Triple-Barreled": this.InitialiseTripleBarreledStats(); break;
+      default: console.log("%cThere was an error initialising the gun", "color: red"); break;
+    }
   }
 
-  InitialiseBasic(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Skatergun"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Hyperion"; this.prefix = "Projectile Diversification"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Scattergun"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Home Security"; }
-      else { this.manufacturer = "Torgue"; this.prefix = "Bangstick"; }
-
-      this.InitialiseBasicStats();
-  }
   InitialiseBasicStats() {
       this.rangeLevel = 3;
       this.range = this.SetRange(this.rangeLevel);
@@ -56,15 +72,6 @@ class Shotgun extends Gun {
       this.barrels = 1;
       this.aimLevel = 0;
       this.aim = this.SetAim(this.aimLevel);
-  }
-  InitialiseAccurate(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Longer ragne kilier"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Hyperion"; this.prefix = "Thinking"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Longrider"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Sportsman"; }
-    else { this.manufacturer = "Torgue"; this.prefix = "Stalker"; }
-
-    this.InitialiseAccurateStats();
   }
   InitialiseAccurateStats() {
     this.rangeLevel = 4;
@@ -79,15 +86,6 @@ class Shotgun extends Gun {
     this.aimLevel = 1;
     this.aim = this.SetAim(this.aimLevel);
   }
-  InitialiseDoubleBarreled(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Stret Sweper"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Hyperion"; this.prefix = "Face Time"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Coach Gun"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Double Barrels!"; }
-    else { this.manufacturer = "Torgue"; this.prefix = "Double Lovin' Pounder"; }
-
-    this.InitialiseDoubleBarreledStats();
-  }
   InitialiseDoubleBarreledStats() {
     this.rangeLevel = 2;
     this.range = this.SetRange(this.rangeLevel);
@@ -101,16 +99,6 @@ class Shotgun extends Gun {
     this.aimLevel = 0;
     this.aim = this.SetAim(this.aimLevel);
   }
-
-  InitialiseTripleBarreled(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Room Clener"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Hyperion"; this.prefix = "Crowdsourcing"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Jakobs"; this.prefix = "Bushwack"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Tediore"; this.prefix = "Triple Barrels!"; }
-    else { this.manufacturer = "Torgue"; this.prefix = "Three Way Hulk"; }
-
-    this.InitialiseTripleBarreledStats();
-  }
   InitialiseTripleBarreledStats() {
     this.rangeLevel = 2;
     this.range = this.SetRange(this.rangeLevel);
@@ -123,17 +111,6 @@ class Shotgun extends Gun {
     this.barrels = 3;
     this.aimLevel = 0;
     this.aim = this.SetAim(this.aimLevel);
-  }
-
-  InitialiseManufacturer() {
-    switch (this.manufacturer) {
-      case "Bandit": this.SetBandit(); break;
-      case "Hyperion": this.SetHyperion(); break;
-      case "Jakobs": this.SetJakobs(); break;
-      case "Tediore": this.SetTediore(); break;
-      case "Torgue": this.SetTorgue(); break;
-      default: console.log("Manufacturer not found"); break;
-    }
   }
 
   Improvements(num) {
@@ -197,10 +174,10 @@ class Shotgun extends Gun {
 
   InitialiseSpecialDamageType(num) {
     if (num <= 12) { this.specialDamageType = "Explosive"; }
-    else if (num > 12 && num <= 14) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
-    else if (num > 14 && num <= 16) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
-    else if (num > 16 && num <= 18) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
-    else { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
+    if (num > 12 && num <= 14) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.AddSubPrefix("Corrosive"); }
+    if (num > 14 && num <= 16) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.AddSubPrefix("Shock"); }
+    if (num > 16 && num <= 18) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.AddSubPrefix("Incendiary"); }
+    if (num > 18) { this.specialDamageType = "Slag"; this.AddSubPrefix("Slag"); }
   }
 
   ShotgunStatBlock() {

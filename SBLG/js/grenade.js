@@ -44,15 +44,11 @@ class Grenade extends Item {
     }
 
     InitGrenade(num) {
-      if (num <= 4) {
-        var n = this.RollX(20);
-        this.manufacturer = n <= 10 ?  "Bandit" : "Torgue";
-        this.prefix = "MIRV";
-      }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Bouncing Betty"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Vladof"; this.prefix = "Area of Effect";  }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Hyperion"; this.prefix = "Singularity"; }
-      else { this.manufacturer = "Maliwan"; this.prefix = "Transfusion"; }
+      if (num <= 4) { let n = this.RollX(20); this.manufacturer = n <= 10 ?  "Bandit" : "Torgue"; this.prefix = "MIRV"; }
+      if (num > 4 && num <= 8) { this.manufacturer = "Dahl"; this.prefix = "Bouncing Betty"; }
+      if (num > 8 && num <= 12) { this.manufacturer = "Vladof"; this.prefix = "Area of Effect";  }
+      if (num > 12 && num <= 16) { this.manufacturer = "Hyperion"; this.prefix = "Singularity"; }
+      if (num > 16) { this.manufacturer = "Maliwan"; this.prefix = "Transfusion"; }
     }
 
     InitSpecialDamage(num) {
@@ -64,8 +60,8 @@ class Grenade extends Item {
 
     InitVladofSpecialDamage(num) {
         if (num <= 2) { this.specialDamageType = "Corrosive"; this.specialDamage = 1; this.fullname = "Cloud"; }
-        else if  (num > 2 && num <= 4) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.fullname = "Tesla"; }
-        else { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.fullname = "Fire Burst"; }
+        if  (num > 2 && num <= 4) { this.specialDamageType = "Shock"; this.specialDamage = 1; this.fullname = "Tesla"; }
+        if (num > 4) { this.specialDamageType = "Incendiary"; this.incendiaryDamageLevel = 1; this.specialDamage = this.SetIncendiaryDamage(this.incendiaryDamageLevel); this.fullname = "Fire Burst"; }
     }
 
     InitSpecialProperties() {

@@ -3,13 +3,12 @@ class RocketLauncher extends Gun {
     super(playerLevel, quality, "Rocket Launcher");
 
     this.InitialiseRocketLauncher(this.RollX(20));
+    this.SetManufacturer(this.manufacturer);
 
     //Universal Rocket Intialisers
     this.barrels = 1;
     this.specialProperties.push("Heavy Weapon", "This weapon can deal damage to vehicles and other devices with heavy armor.")
     this.specialProperties.push("Rockets", "Unless specified otherwise, damage is dealt in a Medium Burst Template. Targets can try to dive for cover by making an Agility test at -2. If they want to do this, their Pace must allow them to get out of the Burst Template.");
-
-    this.SetManufacturer(this.manufacturer);
 
     //Improvement Variables
     this.snapfire = -2;
@@ -125,17 +124,6 @@ class RocketLauncher extends Gun {
     this.specialProperties.push("Full turn to reload", "Reloading the Rocket Launcher takes a full round, during which the character can’t make another action or move at all.");
     this.aimLevel = 1;
     this.aim = this.SetAim(this.aimLevel);
-  }
-
-  InitialiseManufacturer() {
-      if (this.manufacturer == "Bandit") { this.SetBandit(); }
-      if (this.manufacturer == "Dahl") { this.SetDahl(); }
-      if (this.manufacturer == "Jakobs") { this.SetJakobs(); }
-      if (this.manufacturer == "Maliwan") { this.SetMaliwan(); }
-      if (this.manufacturer == "Tediore") { this.SetTediore(); }
-      if (this.manufacturer == "Hyperion") { this.SetHyperion(); }
-      if (this.manufacturer == "Torgue") { this.SetTorgue(); }
-      if (this.manufacturer == "Vladof") { this.SetVladof(); }
   }
 
   Improvements(num) {

@@ -3,7 +3,7 @@ class Pistol extends Gun {
     super(playerLevel, quality, "Pistol");
 
     console.log("%cRolling for Pistol Type...", consoleLogStyle);
-    this.InitialisePistol(this.RollX(20),this.RollX(20));
+    this.InitialisePistol(this.RollX(5),this.RollX(8));
     this.SetManufacturer(this.manufacturer);
     //Improvement Variables
     this.aimLevel = 0;
@@ -39,22 +39,9 @@ class Pistol extends Gun {
         ["Magamum!", "Magnum", "Impact", "Widow Maker", "Animosity", "Biggun", "Slapper", "Troublemaker"],
         ["Ratatater!", "Negotiator", "Synergy", "Wheelgun", "Umberage", "Quickshot", "Injector", "Anarchist"]
       ];
-      if (pistolNum <= 4) { this.model = pistolTypeArr[0]; }
-      if (pistolNum > 4 && pistolNum <= 8) { this.model = pistolTypeArr[1]; }
-      if (pistolNum > 8 && pistolNum <= 12) { this.model = pistolTypeArr[2]; }
-      if (pistolNum > 4 && pistolNum <= 16) { this.model = pistolTypeArr[3]; }
-      if (pistolNum > 16) { this.model = pistolTypeArr[4]; }
-
-      if (manufacturerNum <= 3) { this.manufacturer = manufacturerArr[0]; }
-      if (manufacturerNum > 3 && manufacturerNum <= 6) { this.manufacturer = manufacturerArr[1]; }
-      if (manufacturerNum > 6 && manufacturerNum <= 9) { this.manufacturer = manufacturerArr[2]; }
-      if (manufacturerNum > 9 && manufacturerNum <= 11) { this.manufacturer = manufacturerArr[3]; }
-      if (manufacturerNum > 11 && manufacturerNum <= 13) { this.manufacturer = manufacturerArr[4]; }
-      if (manufacturerNum > 13 && manufacturerNum <= 16) { this.manufacturer = manufacturerArr[5]; }
-      if (manufacturerNum > 16 && manufacturerNum <= 18) { this.manufacturer = manufacturerArr[6]; }
-      if (manufacturerNum > 18) { this.manufacturer = manufacturerArr[7]; }
-
-      this.prefix = prefixArr[pistolTypeArr.indexOf(this.model)][manufacturerArr.indexOf(this.manufacturer)];
+      this.model = pistolTypeArr[pistolNum-1];
+      this.manufacturer = manufacturerArr[manufacturerNum-1];
+      this.prefix = prefixArr[pistolNum-1][manufacturerNum-1];
 
       switch(this.model) {
         case "Handgun": this.InitialiseHandgunStats(); break;

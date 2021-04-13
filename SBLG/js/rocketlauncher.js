@@ -2,7 +2,7 @@ class RocketLauncher extends Gun {
   constructor(playerLevel, quality) {
     super(playerLevel, quality, "Rocket Launcher");
 
-    this.InitialiseRocketLauncher(this.RollX(20));
+    this.InitialiseRocketLauncher(this.RollX(4), this.RollX(5));
     this.SetManufacturer(this.manufacturer);
 
     //Universal Rocket Intialisers
@@ -32,21 +32,25 @@ class RocketLauncher extends Gun {
     this.AddItemBlock();
   }
 
-  InitialiseRocketLauncher(num) {
-      if (num <= 5) { this.model = "Basic"; this.InitialiseBasic(this.RollX(20)); }
-      else if (num > 5 && num <= 10) { this.model = "Basic 2"; this.InitialiseBasic2(this.RollX(20)); }
-      else if (num > 10 && num <= 15) { this.model = "Powerful"; this.InitialisePowerful(this.RollX(20)); }
-      else { this.model = "Accurate"; this.InitialiseAccurate(this.RollX(20)); }
-  }
-
-  InitialiseBasic(num) {
-      if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Launcher"; }
-      else if (num > 4 && num <= 8) { this.manufacturer = "Maliwan"; this.prefix = "Projectile"; }
-      else if (num > 8 && num <= 12) { this.manufacturer = "Tediore"; this.prefix = "Launcher"; }
-      else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Boom"; }
-      else { this.manufacturer = "Vladof"; this.prefix = "RPG"; }
-
-      this.InitialiseBasicStats();
+  InitialiseRocketLauncher(rocketlauncherNum, manufacturerNum) {
+    let rocketlauncherTypeArr = ["Basic", "Basic 2", "Powerful", "Accurate"];
+    let manufacturerArr = ["Bandit", "Maliwan", "Tediore", "Vladof"];
+    let prefixArr = [
+      ["Launcher", "Projectile", "Launcher", "Boom", "RPG"],
+      ["Bombabarbardeer", "Prowler", "Dispatch", "Dee", "Vanquisher"],
+      ["Zooka!", "Punishment", "Bazooka", "Duuurp!", "Hero"],
+      ["area efect", "Panorama", "Spread", "Blaa", "Glory"]
+    ];
+    this.model = rocketlauncherTypeArr[rocketlauncherNum-1];
+    this.manufacturer = manufacturerNum[manufacturerArr-1];
+    this.prefix = prefixArr[rocketlauncherNum-1][manufacturerNum-1];
+    switch(this.model) {
+      case "Basic": this.InitialiseBasicStats(); break;
+      case "Basic 2": this.InitialiseBasic2Stats(); break;
+      case "Powerful": this.InitialisePowerfulStats(); break;
+      case "Accurate": this.InitialiseAccurateStats(); break;
+      default: console.log("%cThere was an error initialising the gun", "color: red"); break;
+    }
   }
   InitialiseBasicStats() {
       this.rangeLevel = 8;
@@ -60,15 +64,6 @@ class RocketLauncher extends Gun {
       this.aimLevel = 1;
       this.specialProperties.push("Full turn to reload", "Reloading the Rocket Launcher takes a full round, during which the character can’t make another action or move at all.");
   }
-  InitialiseBasic2(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Bombabarbardeer"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Maliwan"; this.prefix = "Prowler"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Tediore"; this.prefix = "Dispatch"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Dee"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Vanquisher"; }
-
-    this.InitialiseBasic2Stats();
-  }
   InitialiseBasic2Stats() {
     this.rangeLevel = 8;
     this.range = this.SetRange(this.rangeLevel);
@@ -81,15 +76,6 @@ class RocketLauncher extends Gun {
     this.aimLevel = 1;
     this.specialProperties.push("Full turn to reload", "Reloading the Rocket Launcher takes a full round, during which the character can’t make another action or move at all.");
   }
-  InitialisePowerful(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "Zooka!"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Maliwan"; this.prefix = "Punishment"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Tediore"; this.prefix = "Bazooka"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Duuurp!"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Hero"; }
-
-    this.InitialisePowerfulStats();
-  }
   InitialisePowerfulStats() {
     this.rangeLevel = 8;
     this.range = this.SetRange(this.rangeLevel);
@@ -101,16 +87,6 @@ class RocketLauncher extends Gun {
     this.ap = 15;
     this.aimLevel = 0;
     this.specialProperties.push("Two full turns to reload", "Reloading the Rocket Launcher takes two full rounds, during which the character can’t make another action or move at all.");
-  }
-
-  InitialiseAccurate(num) {
-    if (num <= 4) { this.manufacturer = "Bandit"; this.prefix = "area efect"; }
-    else if (num > 4 && num <= 8) { this.manufacturer = "Maliwan"; this.prefix = "Panorama"; }
-    else if (num > 8 && num <= 12) { this.manufacturer = "Tediore"; this.prefix = "Spread"; }
-    else if (num > 12 && num <= 16) { this.manufacturer = "Torgue"; this.prefix = "Blaa"; }
-    else { this.manufacturer = "Vladof"; this.prefix = "Glory"; }
-
-    this.InitialiseAccurateStats();
   }
   InitialiseAccurateStats() {
     this.rangeLevel = 8;

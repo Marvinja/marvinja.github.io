@@ -357,4 +357,19 @@ canvas {
   border: 1px solid #EFE565;
 }
 
+#button {
+  fill:rgb(24,98,144);
+  transition: 0.05s all ease;
+}
+
+#button:hover {
+  fill: #DFCE2C;
+}
+
+svg {
+  transition: 0.05s all ease;
+}
+svg:hover {
+  transform: scale(1.05);
+}
 /*# sourceMappingURL=style.css.map */

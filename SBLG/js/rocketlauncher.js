@@ -34,7 +34,8 @@ class RocketLauncher extends Gun {
 
   InitialiseRocketLauncher(rocketlauncherNum, manufacturerNum) {
     let rocketlauncherTypeArr = ["Basic", "Basic 2", "Powerful", "Accurate"];
-    let manufacturerArr = ["Bandit", "Maliwan", "Tediore", "Vladof"];
+    let rocketlauncherStatArr = [this.InitialiseBasicStats(), this.InitialiseBasic2Stats(), this.InitialisePowerfulStats(), this.InitialiseAccurateStats()];
+    let manufacturerArr = ["Bandit", "Maliwan", "Tediore", "Torgue", "Vladof"];
     let prefixArr = [
       ["Launcher", "Projectile", "Launcher", "Boom", "RPG"],
       ["Bombabarbardeer", "Prowler", "Dispatch", "Dee", "Vanquisher"],
@@ -42,15 +43,10 @@ class RocketLauncher extends Gun {
       ["area efect", "Panorama", "Spread", "Blaa", "Glory"]
     ];
     this.model = rocketlauncherTypeArr[rocketlauncherNum-1];
-    this.manufacturer = manufacturerNum[manufacturerArr-1];
+    this.manufacturer = manufacturerArr[manufacturerNum-1];
     this.prefix = prefixArr[rocketlauncherNum-1][manufacturerNum-1];
-    switch(this.model) {
-      case "Basic": this.InitialiseBasicStats(); break;
-      case "Basic 2": this.InitialiseBasic2Stats(); break;
-      case "Powerful": this.InitialisePowerfulStats(); break;
-      case "Accurate": this.InitialiseAccurateStats(); break;
-      default: console.log("%cThere was an error initialising the gun", "color: red"); break;
-    }
+
+    rocketlauncherStatArr[rocketlauncherNum-1];
   }
   InitialiseBasicStats() {
       this.rangeLevel = 8;

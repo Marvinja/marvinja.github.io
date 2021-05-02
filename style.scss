@@ -26,35 +26,41 @@ body {
   h2 { font-size: 1em; font-weight: 700; }
   a {
     color: white;
-    transition: text-shadow 0.2s;
+    transition: text-shadow 100ms linear;
     &:hover {
-      text-shadow: 0 20px 0 rgba(255,255,255,0.5),
-               0 -20px 0 rgba(255,255,255,0.5);
+      text-shadow:
+        0 -18px 0 rgba(255,255,255,0.5),
+        0 -36px 0 rgba(255,255,255,0.2);
     }
   }
   img {
-      width: 75vh;
+    width: 75vh;
   }
   #arrow {
-      position: absolute;
-      bottom: 0px;
-      left: 50%;
-      transform: translateX(-50%);
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    transition: transform 100ms linear;
+    &:hover {
+      transform: translate(-50%, 20%);
+    }
   }
 }
 
 .content {
-  background: lighten($black, 0%);
-  h1 { font-size: 3.2em; font-weight: 700; border-bottom: 3px white solid; display: inline-block; }
+  &.personal-projects { background: lighten($black, 0%); }
+  &.icmsa { background: #142453; }
+  h1 { font-size: 3.2em; font-weight: 700; border-bottom: 3px white solid; display: inline-block; span { font-size: 1.1em; } }
   h2 { font-size: 2.0em; font-weight: 700; }
   img { animation-play-state: running; }
   .item {
     box-shadow: 0 1px 1px rgba(0,0,0,0.12),
-              0 2px 2px rgba(0,0,0,0.12),
-              0 4px 4px rgba(0,0,0,0.12),
-              0 8px 8px rgba(0,0,0,0.12),
-              0 16px 16px rgba(0,0,0,0.12),
-              0 32px 32px rgba(0,0,0,0.12);
+    0 2px 2px rgba(0,0,0,0.12),
+    0 4px 4px rgba(0,0,0,0.12),
+    0 8px 8px rgba(0,0,0,0.12),
+    0 16px 16px rgba(0,0,0,0.12),
+    0 32px 32px rgba(0,0,0,0.12);
   }
 
   #wave-brush:hover { content: url('./img/wave-brush.gif'); }
@@ -77,7 +83,7 @@ body {
 }
 
 .footer {
-    background: darken($black, 10%);
+  background: darken($black, 10%);
   p {
     font-size: 1.2em;
   }
@@ -86,7 +92,7 @@ body {
     transition: text-shadow 0.2s;
     &:hover {
       text-shadow: 5px 5px 10px rgba(255,255,255,0.50),
-                -5px -5px 10px rgba(255,255,255,0.50);
+      -5px -5px 10px rgba(255,255,255,0.50);
     }
   }
 
@@ -109,67 +115,68 @@ body {
     h2 { font-size: 1.6em; font-weight: 700; }
   }
   .content {
+    h1 { font-size: 2.8em; }
     h2 { font-size: 2.8em; font-weight: 700; }
   }
 }
 
 @media (max-height: 768px) {
-    .heading {
-        h1 { font-size: 5vh !important; font-weight: 700; }
-        h2 { font-size: 3vh !important; font-weight: 700; }
-        a {
-          color: white;
-          transition: text-shadow 0.2s;
-          &:hover {
-            text-shadow: 0 10px 0 rgba(255,255,255,0.5),
-                     0 -10px 0 rgba(255,255,255,0.5);
-          }
-        }
+  .heading {
+    h1 { font-size: 5vh !important; font-weight: 700; }
+    h2 { font-size: 3vh !important; font-weight: 700; }
+    a {
+      color: white;
+      transition: text-shadow 0.2s;
+      &:hover {
+        text-shadow: 0 10px 0 rgba(255,255,255,0.5),
+        0 -10px 0 rgba(255,255,255,0.5);
+      }
     }
+  }
 }
 
 .btn {
-    line-height: 50px;
-    height: 50px;
-    text-align: center;
-    width: 250px;
-    cursor: pointer;
-    color: #FFF !important;
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  color: #FFF !important;
 }
 
 .btn-three {
-    color: #FFF;
-    position: relative;
+  color: #FFF;
+  position: relative;
 }
 .btn-three::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(255,255,255,0.2);
-    transition: all 0.3s;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.2);
+  transition: all 0.3s;
 }
 .btn-three:hover::before {
-    opacity: 0;
-    transform: scale(1.1,1.1);
+  opacity: 0;
+  transform: scale(1.1,1.1);
 }
 .btn-three::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border: 1px solid rgba(255,255,255,0.5);
-    transform: scale(1,1);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: scale(1,1);
 }
 .btn-three:hover::after {
-    opacity: 1;
-    transform: scale(1.1,1.1);
+  opacity: 1;
+  transform: scale(1.1,1.1);
 }

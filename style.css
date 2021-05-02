@@ -2,173 +2,139 @@
 html,
 body {
   scroll-behavior: smooth;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: white;
   /* Handle */
-  /* Handle on hover */
-}
-html ::-webkit-scrollbar,
-body ::-webkit-scrollbar {
-  width: 5px;
-}
-html ::-webkit-scrollbar-thumb,
-body ::-webkit-scrollbar-thumb {
-  background: #888;
-}
-html ::-webkit-scrollbar-thumb:hover,
-body ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+  /* Handle on hover */ }
+  html ::-webkit-scrollbar,
+  body ::-webkit-scrollbar {
+    width: 5px; }
+  html ::-webkit-scrollbar-thumb,
+  body ::-webkit-scrollbar-thumb {
+    background: #888; }
+  html ::-webkit-scrollbar-thumb:hover,
+  body ::-webkit-scrollbar-thumb:hover {
+    background: #555; }
 
 .heading {
   height: 100vh;
-  background: #0b0b0b;
-}
-.heading h1 {
-  font-size: 2.4em;
-  font-weight: 700;
-}
-.heading h2 {
-  font-size: 1em;
-  font-weight: 700;
-}
-.heading a {
-  color: white;
-  transition: text-shadow 0.2s;
-}
-.heading a:hover {
-  text-shadow: 0 20px 0 rgba(255, 255, 255, 0.5), 0 -20px 0 rgba(255, 255, 255, 0.5);
-}
-.heading img {
-  width: 75vh;
-}
-.heading #arrow {
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  background: #0b0b0b; }
+  .heading h1 {
+    font-size: 2.4em;
+    font-weight: 700; }
+  .heading h2 {
+    font-size: 1em;
+    font-weight: 700; }
+  .heading a {
+    color: white;
+    transition: text-shadow 100ms linear; }
+    .heading a:hover {
+      text-shadow: 0 -18px 0 rgba(255, 255, 255, 0.5), 0 -36px 0 rgba(255, 255, 255, 0.2); }
+  .heading img {
+    width: 75vh; }
+  .heading #arrow {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    transition: transform 100ms linear; }
+    .heading #arrow:hover {
+      transform: translate(-50%, 20%); }
 
-.content {
-  background: #242424;
-}
+.content.personal-projects {
+  background: #242424; }
+.content.icmsa {
+  background: #142453; }
 .content h1 {
   font-size: 3.2em;
   font-weight: 700;
   border-bottom: 3px white solid;
-  display: inline-block;
-}
+  display: inline-block; }
+  .content h1 span {
+    font-size: 1.1em; }
 .content h2 {
-  font-size: 2em;
-  font-weight: 700;
-}
+  font-size: 2.0em;
+  font-weight: 700; }
 .content img {
-  animation-play-state: running;
-}
+  animation-play-state: running; }
 .content .item {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12), 0 32px 32px rgba(0, 0, 0, 0.12);
-}
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12), 0 32px 32px rgba(0, 0, 0, 0.12); }
 .content #wave-brush:hover {
-  content: url("./img/wave-brush.gif");
-}
+  content: url("./img/wave-brush.gif"); }
 .content #amber-rain:hover {
-  content: url("./img/amber-rain.gif");
-}
+  content: url("./img/amber-rain.gif"); }
 .content #rain-bow:hover {
-  content: url("./img/rain-bow.gif");
-}
+  content: url("./img/rain-bow.gif"); }
 .content #waterfall:hover {
-  content: url("./img/waterfall.gif");
-}
+  content: url("./img/waterfall.gif"); }
 .content .piece {
-  transition: transform 0.2s;
-}
-.content .piece .static {
-  position: absolute;
-  transition: opacity 0.2s;
-}
-.content .piece .static:hover {
-  opacity: 0;
-}
-.content .piece:hover {
-  transform: scale(1.04);
-}
+  transition: transform 0.2s; }
+  .content .piece .static {
+    position: absolute;
+    transition: opacity 0.2s; }
+    .content .piece .static:hover {
+      opacity: 0; }
+  .content .piece:hover {
+    transform: scale(1.04); }
 
 .footer {
-  background: #0b0b0b;
-}
-.footer p {
-  font-size: 1.2em;
-}
-.footer a {
-  color: white;
-  transition: text-shadow 0.2s;
-}
-.footer a:hover {
-  text-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.5);
-}
+  background: #0b0b0b; }
+  .footer p {
+    font-size: 1.2em; }
+  .footer a {
+    color: white;
+    transition: text-shadow 0.2s; }
+    .footer a:hover {
+      text-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.5); }
 
 @media (min-width: 576px) {
   .heading h1 {
     font-size: 2.4em;
-    font-weight: 700;
-  }
+    font-weight: 700; }
   .heading h2 {
     font-size: 1em;
-    font-weight: 700;
-  }
-}
+    font-weight: 700; } }
 @media (min-width: 768px) {
   .heading {
-    height: 100vh;
-  }
-  .heading h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-  }
-  .heading h2 {
-    font-size: 1.6em;
-    font-weight: 700;
-  }
+    height: 100vh; }
+    .heading h1 {
+      font-size: 3.5em;
+      font-weight: 700; }
+    .heading h2 {
+      font-size: 1.6em;
+      font-weight: 700; }
 
+  .content h1 {
+    font-size: 2.8em; }
   .content h2 {
     font-size: 2.8em;
-    font-weight: 700;
-  }
-}
+    font-weight: 700; } }
 @media (max-height: 768px) {
   .heading h1 {
     font-size: 5vh !important;
-    font-weight: 700;
-  }
+    font-weight: 700; }
   .heading h2 {
     font-size: 3vh !important;
-    font-weight: 700;
-  }
+    font-weight: 700; }
   .heading a {
     color: white;
-    transition: text-shadow 0.2s;
-  }
-  .heading a:hover {
-    text-shadow: 0 10px 0 rgba(255, 255, 255, 0.5), 0 -10px 0 rgba(255, 255, 255, 0.5);
-  }
-}
+    transition: text-shadow 0.2s; }
+    .heading a:hover {
+      text-shadow: 0 10px 0 rgba(255, 255, 255, 0.5), 0 -10px 0 rgba(255, 255, 255, 0.5); } }
 .btn {
   line-height: 50px;
   height: 50px;
   text-align: center;
   width: 250px;
   cursor: pointer;
-  color: #FFF !important;
-}
+  color: #FFF !important; }
 
 .btn-three {
   color: #FFF;
-  position: relative;
-}
+  position: relative; }
 
 .btn-three::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -176,16 +142,14 @@ body ::-webkit-scrollbar-thumb:hover {
   height: 100%;
   z-index: 1;
   background-color: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s;
-}
+  transition: all 0.3s; }
 
 .btn-three:hover::before {
   opacity: 0;
-  transform: scale(1.1, 1.1);
-}
+  transform: scale(1.1, 1.1); }
 
 .btn-three::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -195,12 +159,10 @@ body ::-webkit-scrollbar-thumb:hover {
   opacity: 0;
   transition: all 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  transform: scale(1, 1);
-}
+  transform: scale(1, 1); }
 
 .btn-three:hover::after {
   opacity: 1;
-  transform: scale(1.1, 1.1);
-}
+  transform: scale(1.1, 1.1); }
 
 /*# sourceMappingURL=style.css.map */

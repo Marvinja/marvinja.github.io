@@ -22,7 +22,7 @@ title: Marvin John Agbuya's Portfolio | Front-End Developer
 email: marvinjohnagbuya@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Hi, I'm Marvin Agbuya, a Front-End Developer. I make websites and play a lot of games.
-baseurl: "marvinja-github.io" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://marvinja.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  Marvinja
 

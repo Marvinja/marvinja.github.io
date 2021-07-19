@@ -13,49 +13,29 @@ canvas { position: absolute; top: 0; left: 0; z-index: -100; }
 ::-webkit-scrollbar-thumb:hover { background: #555; }
 
 .header { border-bottom: 3px solid #2867B2; margin: 1rem; }
-
 .header h1 { color: white; font-size: 1.7rem; font-weight: bold; }
-
 .header h2 { color: white; font-size: 1.2rem; }
-
 .header a { font-family: "Open Sans", sans-serif; font-size: 0.8rem; text-align: right; margin: 0 .5rem 0 0; color: white; text-decoration: none; display: inline-block; }
-
 .header .button { border: 1px solid #fff; padding: 1rem; margin-left: auto; margin-right: 0; }
 
 .footer { background-color: #30343b; }
-
 .footer a { color: white; }
 
 .page-content { font-family: "Open Sans", sans-serif; margin: 1rem 0; }
-
 .page-content .portfolio .project .project-image { position: relative; display: block; transition: transform 200ms ease; z-index: 2; }
-
 .page-content .portfolio .project .project-image img { width: 100%; }
-
 .page-content .portfolio .project .project-image:before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: -1; transition: transform 200ms ease; }
-
 .page-content .portfolio .project .project-image:hover { transform: translate(5px, -5px); }
-
 .page-content .portfolio .project .project-image:hover:before { transform: translate(-5px, 5px); }
-
 .page-content .portfolio .project .project-content { text-decoration: none; }
-
 .page-content .portfolio .project .project-content h1 { font-family: 'Open Sans', sans-serif; font-style: normal; font-weight: 600; font-size: 1.3rem; color: rgba(255, 255, 255, 0.84); }
-
 .page-content .portfolio .project .project-content h2 { font-family: Open Sans; font-style: normal; font-weight: 300; font-size: 1.1rem; color: rgba(255, 255, 255, 0.54); }
-
 .page-content .portfolio .project .project-content p { font-weight: 300; font-size: 0.9rem; color: rgba(255, 255, 255, 0.54); }
 
 .button { border: 1px solid #fff; display: block; color: white; font-family: "Open Sans", sans-serif; font-weight: 700; padding: 1rem; position: relative; text-align: center; text-decoration: none; transition: clip-path 500ms linear; }
-
 .button:before { content: ""; background-color: #2867B2; width: 100%; height: 100%; top: 0; left: 0; z-index: -2; position: absolute; clip-path: circle(0% at 50% 50%); transition: clip-path 500ms ease, opacity 250ms ease; opacity: 0; }
-
 .button:hover, .button:focus { color: white; }
-
 .button:hover:before, .button:focus:before { clip-path: circle(100% at 50% 50%); opacity: 1; }
 
 @media (min-width: 768px) { body { background: radial-gradient(farthest-corner at 0% 40%, #9207FF33 5%, #FF989833 20%, transparent 50%), radial-gradient(farthest-corner at 80% 45%, #5AE9FD33 20%, transparent 50%), radial-gradient(farthest-corner at 50% 55%, #FFFFFF33 10%, transparent 40%), #191B1F; } }
-
 @media (min-width: 992px) { body { background: radial-gradient(farthest-corner at 0% 40%, #9207FF33 5%, #FF989833 20%, transparent 50%), radial-gradient(farthest-corner at 80% 45%, #5AE9FD33 20%, transparent 50%), radial-gradient(farthest-corner at 50% 55%, #FFFFFF33 10%, transparent 40%), #191B1F; } }
-
-/*# sourceMappingURL=main.css.map */

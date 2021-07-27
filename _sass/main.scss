@@ -109,6 +109,14 @@ canvas {
           }
         }
       }
+      .project-sketch {
+        display: block;
+        position: relative;
+        width:100%;
+        canvas {
+          position: relative;
+        }
+      }
       .project-content {
         text-decoration: none;
         h1 { font-family: 'Open Sans', sans-serif;

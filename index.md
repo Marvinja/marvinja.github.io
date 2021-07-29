@@ -54,6 +54,22 @@ title: Portfolio
         <h2>Personal</h2>
       </div>
     </div>
+    <div class="col-12 col-sm-6 col-lg-4 project">
+      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></div>
+      <div class="project-content">
+        <p class="float-end mb-0">p5.js</p>
+        <h1 class="mb-1">Amber Rain</h1>
+        <h2>Personal</h2>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4 project">
+      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="watercolor"></div>
+      <div class="project-content">
+        <p class="float-end mb-0">p5.js</p>
+        <h1 class="mb-1">Watercolor</h1>
+        <h2>Personal</h2>
+      </div>
+    </div>
     <!-- <div class="col-12 col-sm-6 col-lg-4 project">
       <a href="https://mchappellart.github.io/" class="my-4 project-image center" target="_blank" style="--bg-color: #7D745EAF"><img src="assets/img/mchappellart.png" class="img-fluid"></a>
       <a href="" class="project-content">
@@ -72,3 +88,10 @@ title: Portfolio
     </div> -->
   </div>
 </div>
+
+<script defer>
+  let img = document.querySelector('img.img-fluid');
+  let dailycycle = new DailyCycle(img.clientWidth, img.clientHeight, 'daily-cycle');
+  let amberrain = new AmberRain(img.clientWidth, img.clientHeight, 'amber-rain');
+  let watercolor = new Watercolor(img.clientWidth, img.clientHeight, 'watercolor');
+</script>

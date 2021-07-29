@@ -33,7 +33,7 @@ class DailyCycle {
            starY[i] = dc.random(dc.height/2);
            radius[i] = 0;
            maxRadius[i] = dc.random(5, 15);
-           speed[i] = dc.random(0.05, 0.25);
+           speed[i] = dc.random(0.25, 0.5);
         }
 
         //Initialise cloud variables
@@ -100,8 +100,8 @@ class DailyCycle {
           dc.pop();
         }
         //clouds
-        let cloudCol = dc.constrain(dc.mouseY, 100, 255);
-        dc.fill(dc.map(cloudCol, 0, dc.height, 255, 100));
+        let cloudCol = dc.constrain(dc.mouseY, dc.height*0.1, dc.height*0.9);
+        dc.fill(dc.map(cloudCol, dc.height*0.1, dc.height*0.9, 255, 100));
         //drawing clouds
         for(var i = 0; i < 5; i ++){
           dc.clouds(cloudX[i], cloudY[i]);

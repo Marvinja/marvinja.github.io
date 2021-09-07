@@ -11,7 +11,7 @@ class AmberRain {
         a.colorMode(a.HSL, 360, 100, 100, 100);
         //URL Parameters Initialisation
         let param = a.getURLParams();
-        console.log(param);
+        // console.log(param);
         param.hasOwnProperty('bg') ? bground = param.bg.split(",") : bground = [0,0,0];
         param.hasOwnProperty('color1') ? color1 = param.color1.split(",") : color1 = [34, 35, 38];
         param.hasOwnProperty('color2') ?color2 = param.color2.split(",") : color2 = [35, 26, 14];
@@ -38,7 +38,7 @@ class AmberRain {
 
       a.windowResized = () => {
         let imgsize = document.querySelector('img.img-fluid');
-        a.resizeCanvas((imgsize.clientWidth, imgsize.clientHeight));
+        a.resizeCanvas(imgsize.clientWidth, imgsize.clientHeight);
       }
 
       class Diamond {

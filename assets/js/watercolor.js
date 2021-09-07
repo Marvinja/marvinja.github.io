@@ -22,14 +22,17 @@ class Watercolor {
           pd.forEach(p => {
             p.display();
           });
-        } else {
-          console.log("The sketch has stopped drawing.");
         }
       }
 
       w.windowResized = () => {
         let imgsize = document.querySelector('img.img-fluid');
         w.resizeCanvas(imgsize.clientWidth, imgsize.clientHeight);
+
+        pd = [];
+        w.background(250, 246, 235);
+        let randCol = Math.floor(w.random(4));
+        for (let i = 0; i < 30; i ++) { pd.push(new PaintDrop(cols[randCol])); }
       }
 
       w.mousePressed = () => {

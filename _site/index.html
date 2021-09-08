@@ -8,6 +8,7 @@
   <script type="text/javascript" src="assets/js/daily-cycles.js"></script>
   <script type="text/javascript" src="assets/js/amber-rain.js"></script>
   <script type="text/javascript" src="assets/js/watercolor.js"></script>
+  <script type="text/javascript" src="assets/js/lines-and-easing.js"></script>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet"></link>
   <link href="assets/css/main.css" rel="stylesheet"></link>
   <title>Portfolio | Marvin John Agbuya's Portfolio</title>
@@ -19,31 +20,31 @@
   </style>
 </head>
 <body class="p-2 p-md-5">
-  <div class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <h1>Marvin John Agbuya</h1>
-          <h2>Front End Developer</h2>
-        </div>
-        <div class="col-12">
-          <nav class="my-3 d-flex align-items-center justify-content-stretch">
-            <!-- <a href="">About</a>
-            <a href="">Portfolio</a> -->
-            <a href="./assets/downloads/Marvin-Resume.pdf" class="button">Download Resume</a>
-          </nav>
-        </div>
+  <div class="header mb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h1>Marvin John Agbuya</h1>
+        <h2>Front End Developer</h2>
+      </div>
+      <div class="col-12">
+        <nav class="my-3 d-flex align-items-center justify-content-stretch">
+          <a href="./about.html">About</a>
+          <a href="./" class="mx-4">Portfolio</a>
+          <a href="./assets/downloads/Marvin-Resume.pdf" class="button">Download Resume</a>
+        </nav>
       </div>
     </div>
   </div>
+</div>
+
   <div class="page-content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col">
-          <div class="portfolio my-4">
+        <div class="portfolio my-4">
   <div class="row">
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://icme15.com/" class="my-4 project-image top-right" target="_blank" style="--bg-color: #38A89CAF"><img src="assets/img/icme15.png" class="img-fluid"></a>
+      <a href="https://icme15.com/" class="mt-4 mb-3 project-image top-right" target="_blank" style="--bg-color: #38A89CAF"><img src="assets/img/icme15.png" class="img-fluid"></a>
       <a href="https://icme15.com/" target="_blank" class="project-content">
         <p class="float-end mb-0">Website</p>
         <h1 class="mb-1">ICME15</h1>
@@ -51,7 +52,7 @@
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://bettertogether2022.org/" class="my-4 project-image top-left" target="_blank" style="--bg-color: #008265AF"><img src="assets/img/bettertogether2022.png" class="img-fluid"></a>
+      <a href="https://bettertogether2022.org/" class="mt-4 mb-3 project-image top-left" target="_blank" style="--bg-color: #008265AF"><img src="assets/img/bettertogether2022.png" class="img-fluid"></a>
       <a href="https://bettertogether2022.org/" target="_blank" class="project-content">
         <p class="float-end mb-0">Website</p>
         <h1 class="mb-1">Better Together 2022</h1>
@@ -59,7 +60,7 @@
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://asba2021.com.au/" class="my-4 project-image bottom-left" target="_blank" style="--bg-color: #20809FAF"><img src="assets/img/asba2021.png" class="img-fluid"></a>
+      <a href="https://asba2021.com.au/" class="mt-4 mb-3 project-image bottom-left" target="_blank" style="--bg-color: #20809FAF"><img src="assets/img/asba2021.png" class="img-fluid"></a>
       <a href="https://asba2021.com.au/" target="_blank" class="project-content">
         <p class="float-end mb-0">Website</p>
         <h1 class="mb-1">ASBA2021</h1>
@@ -67,7 +68,7 @@
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://cospar2021.org/" class="my-4 project-image bottom-right" target="_blank" style="--bg-color: #112B5EAF"><img src="assets/img/cospar2021.png" class="img-fluid"></a>
+      <a href="https://cospar2021.org/" class="mt-4 mb-3 project-image bottom-right" target="_blank" style="--bg-color: #112B5EAF"><img src="assets/img/cospar2021.png" class="img-fluid"></a>
       <a href="https://cospar2021.org/" target="_blank" class="project-content">
         <p class="float-end mb-0">Website</p>
         <h1 class="mb-1">COSPAR2021</h1>
@@ -75,7 +76,7 @@
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://mchappellart.github.io/" class="my-4 project-image center" target="_blank" style="--bg-color: #7D745EAF"><img src="assets/img/mchappellart.png" class="img-fluid"></a>
+      <a href="https://mchappellart.github.io/" class="mt-4 mb-3 project-image center" target="_blank" style="--bg-color: #7D745EAF"><img src="assets/img/mchappellart.png" class="img-fluid"></a>
       <a href="https://mchappellart.github.io/" target="_blank" class="project-content">
         <p class="float-end mb-0">Website</p>
         <h1 class="mb-1">Madeleine Chappell Portfolio</h1>
@@ -83,7 +84,7 @@
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></div>
+      <div class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></div>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Daily Cycle</h1>
@@ -91,7 +92,7 @@
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></div>
+      <div class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></div>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Amber Rain</h1>
@@ -106,22 +107,14 @@
         <h2>Personal</h2>
       </div>
     </div>
-    <!-- <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://mchappellart.github.io/" class="my-4 project-image center" target="_blank" style="--bg-color: #7D745EAF"><img src="assets/img/mchappellart.png" class="img-fluid"></a>
-      <a href="" class="project-content">
-        <p class="float-end mb-0">p5.js</p>
-        <h1 class="mb-1">Amber Rain</h1>
-        <h2>Twitch.tv</h2>
-      </a>
-    </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="https://mchappellart.github.io/" class="my-4 project-image center" target="_blank" style="--bg-color: #7D745EAF"><img src="assets/img/mchappellart.png" class="img-fluid"></a>
-      <a href="" class="project-content">
+      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="linesandeasing"></div>
+      <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
-        <h1 class="mb-1">Watercolor</h1>
+        <h1 class="mb-1">Lines and Easing</h1>
         <h2>Personal</h2>
-      </a>
-    </div> -->
+      </div>
+    </div>
   </div>
 </div>
 
@@ -130,9 +123,9 @@
   let dailycycle = new DailyCycle(img.clientWidth, img.clientHeight, 'daily-cycle');
   let amberrain = new AmberRain(img.clientWidth, img.clientHeight, 'amber-rain');
   let watercolor = new Watercolor(img.clientWidth, img.clientHeight, 'watercolor');
+  let linesandeasing = new LinesAndEasing(img.clientWidth, img.clientHeight, 'linesandeasing');
 </script>
 
-        </div>
       </div>
     </div>
   </div>

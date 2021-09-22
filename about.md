@@ -25,7 +25,6 @@ title: About
     <li>PHP</li>
     <li>Node.js</li>
     <li>Shell</li>
-    <li>Regex</li>
   </ul>
   <ul>
     <li>UX Design</li>
@@ -53,8 +52,8 @@ title: About
       <p class="mb-4"><b>ICMS Australasia Pty Ltd</b></p>
     </div>
     <div class="col-lg-4">
-      <p>Executive Director</p>
-      <h3>SUELLEN HOLLAND</h3>
+      <p>Senior Event Manager</p>
+      <h3>EMMA CHALMERS</h3>
       <p class="mb-4"><b>ICMS Australasia Pty Ltd</b></p>
     </div>
   </div>

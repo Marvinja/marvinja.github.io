@@ -1,7 +1,7 @@
 ---
-layout: portfolio
+layout: main
 section: projects
-title: Portfolio
+title: Home
 ---
 
 <div class="portfolio my-4">
@@ -47,7 +47,7 @@ title: Portfolio
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></div>
+      <a href="" class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Daily Cycle</h1>
@@ -55,7 +55,7 @@ title: Portfolio
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></div>
+      <a href="" class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Amber Rain</h1>
@@ -63,7 +63,7 @@ title: Portfolio
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="watercolor"></div>
+      <a href="./watercolor.html" class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="watercolor"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Watercolor</h1>
@@ -71,7 +71,7 @@ title: Portfolio
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <div class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="linesandeasing"></div>
+      <a href="" class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="linesandeasing"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Lines and Easing</h1>

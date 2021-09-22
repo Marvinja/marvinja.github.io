@@ -14,7 +14,7 @@ class LinesAndEasing {
         point2 = f.createVector(f.width/2, f.height/2);
         targetPoint = f.createVector(f.width/2, f.height/2);
 
-        col = [f.random(255), f.random(255), f.random(255), f.random(10)];
+        col = [f.random(255), f.random(255), f.random(255), f.random(5)];
 
         f.background(0);
         f.filter(f.BLUR, 10);
@@ -25,7 +25,7 @@ class LinesAndEasing {
         if (resetNum >= 10) {
           resetNum = 0;
           f.background(0);
-          col = [f.random(255), f.random(255), f.random(255), f.random(10)];
+          col = [f.random(255), f.random(255), f.random(255), f.random(5)];
         }
 
         f.blendMode(f.ADD);

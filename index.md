@@ -47,7 +47,7 @@ title: Home
       </a>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="" class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></a>
+      <a class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="daily-cycle"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Daily Cycle</h1>
@@ -55,7 +55,7 @@ title: Home
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="" class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></a>
+      <a class="mt-4 mb-3 project-sketch center" style="--bg-color: #7D745EAF" id="amber-rain"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Amber Rain</h1>
@@ -63,7 +63,7 @@ title: Home
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="./watercolor.html" class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="watercolor"></a>
+      <a class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="watercolor"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Watercolor</h1>
@@ -71,7 +71,7 @@ title: Home
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4 project">
-      <a href="" class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="linesandeasing"></a>
+      <a class="my-4 project-sketch center" style="--bg-color: #7D745EAF" id="linesandeasing"></a>
       <div class="project-content">
         <p class="float-end mb-0">p5.js</p>
         <h1 class="mb-1">Lines and Easing</h1>

@@ -36,10 +36,12 @@ class Watercolor {
       }
 
       w.mousePressed = () => {
-        pd = [];
-        w.background(250, 246, 235);
-        let randCol = Math.floor(w.random(4));
-        for (let i = 0; i < 30; i ++) { pd.push(new PaintDrop(cols[randCol])); }
+        if (w.mouseX > 0 && w.mouseX < w.width && w.mouseY > 0 && w.mouseY < w.height) {
+          pd = [];
+          w.background(250, 246, 235);
+          let randCol = Math.floor(w.random(4));
+          for (let i = 0; i < 30; i ++) { pd.push(new PaintDrop(cols[randCol])); }
+        }
       }
 
       class PaintDrop {

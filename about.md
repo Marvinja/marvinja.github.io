@@ -31,7 +31,6 @@ title: About
     <li>Web Design</li>
     <li>Game Design</li>
     <li>Wireframing</li>
-    <li>Agile Methodologies</li>
     <li>Accessibility</li>
   </ul>
   <ul>
